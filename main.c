@@ -1,88 +1,71 @@
 #include "cub3d.h"
 
-char	*mapi[] = {
+char *mapi[] = {
 	"111111111111111",
-	"1000010000000000000000000001",
-	"1000110000000000000000010001",
-	"1000110000000000000000010001",
-	"1111111111111111111111111111",
-	NULL,
+	"100000000000001",
+	"101111110000001",
+	"100000000000001",
+	"100000001111111",
+	"100000000000001",
+	"100000100100001",
+	"100000000000001",
+	"100100001000001",
+	"100000000100001",
+	"111111111111111",
+   NULL,
 };
 
-int	get_pixel_index(t_data *data, int x, int y)
+
+
+
+int game_render(t_data *data)
 {
-	return (y * data->size_line) + (x * (data->bits_per_pixel / 8));
+	// printf("x: %d | y: %d | angle: %f\n", data->p.x, data->p.y, (float) data->p.ray.angle);
+   clear_image(data);
+	update_player_rotation(data);
+   update_player_position(data);
+   ground_draw(data);
+	player_draw(data);
+	// draw_line(data, data->p.x + (200 * cos(data->p.ray.angle)), data->p.y + (200 * sin(data->p.ray.angle)));
+
+	ray_draw(data);
+   mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img, 0, 0);
+
+   return (0);
 }
-
-void	fill_tail(t_data *data, int x, int y, int color)
+int game_init(t_data *data)
 {
-	int	pixel;
-	int	i;
-	int	j;
+	data->p.x = WINDOW_WIDTH / 2;
+	data->p.y = WINDOW_HEIGHT / 2;
+	data->p.r = 3;
+	data->p.speed = 0;
+	data->key.key_a = 0;
+	data->key.key_s = 0;
+	data->key.key_d = 0;
+	data->key.key_w = 0;
+	data->p.ray.angle = 45 * (M_PI / 180);
 
-	i = 0;
-	while (i < TILE_SIZE)
-	{
-		j = 0;
-		while (j < TILE_SIZE)
-		{
-			pixel = get_pixel_index(data, x + j, y + i);
-			data->img_data[pixel] = color & 0xFF;             // Blue component
-			data->img_data[pixel + 1] = (color >> 8) & 0xFF;  // Green component
-			data->img_data[pixel + 2] = (color >> 16) & 0xFF; // Red component
-			data->img_data[pixel + 3] = (color >> 24) & 0xFF;
-			j++;
-		}
-		i++;
-	}
-}
-
-void	image_draw(t_data *data)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	while (data->map[y])
-	{
-		x = 0;
-		while (data->map[y][x])
-		{
-			if (data->map[y][x] == '1')
-				fill_tail(data, x * TILE_SIZE, y * TILE_SIZE, COLOR_RED);
-			else
-				fill_tail(data, x * TILE_SIZE, y * TILE_SIZE, COLOR_WHITE);
-			x++;
-		}
-		y++;
-	}
-	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img, 0, 0);
-}
-
-/* Function to handle key press events */
-int	print_key_press(int keysym, t_data *data)
-{
-	if (keysym == XK_Escape)
-		exit(1);
-	printf("key pressed: %d\n", keysym);
-	return (0);
 }
 
 int	main(void)
 {
-	t_data	data;
+	t_data data;
 
 	data.map = mapi;
 	data.mlx_ptr = mlx_init();
-	data.mlx_win = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT,
-			"hello");
-	data.img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-	data.img_data = mlx_get_data_addr(data.img, &data.bits_per_pixel,
-			&data.size_line, &data.endian);
-	image_draw(&data);
-	mlx_key_hook(data.mlx_win, print_key_press, &data);
+	data.mlx_win = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "hello");
+	game_init(&data);
+	
+	data.img.img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	data.img.img_data = mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel, &data.img.size_line, &data.img.endian);
+
+	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, key_pressed, &data);
+	mlx_hook(data.mlx_win, KeyRelease, KeyReleaseMask, key_released, &data);
+
+	//  mlx_key_hook(data.mlx_win, print_key_press, &data);
 	mlx_loop_hook(data.mlx_ptr, game_render, &data);
 	mlx_loop(data.mlx_ptr);
+
 	return (0);
 }
+
