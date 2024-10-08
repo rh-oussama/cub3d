@@ -9,18 +9,28 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <math.h>
+#include <X11/X.h>
+#include <X11/keysym.h>
+#include <math.h>
+#include <mlx.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+
 
 /* Macros */
 #define FIELD_OF_VIEW_ANGLE (60 * (M_PI / 180.0)) 
-#define TILE_SIZE 64
+#define TILE_SIZE 32
 #define NUM_TILES_WIDTH 15
 #define NUM_TILES_HEIGHT 11
 #define WINDOW_WIDTH (NUM_TILES_WIDTH * TILE_SIZE)
 #define WINDOW_HEIGHT (NUM_TILES_HEIGHT * TILE_SIZE)
 
+#define SCALE 1
 // SPEED
-#define PLAYER_SPEED 1
-#define ROTATION_SPEED 1
+#define PLAYER_SPEED 0.2
+#define ROTATION_SPEED 0.2
 
 // PI
 #define PI_180 3.141592653589793 // 180 degree
@@ -83,7 +93,6 @@ typedef struct s_data
    void 	*mlx_ptr;
    void 	*mlx_win;
    char 	**map;
-	int	SCALE;
    t_key key;
    t_img img;
    t_player p;

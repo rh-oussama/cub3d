@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_move.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/08 17:27:38 by oussama           #+#    #+#             */
+/*   Updated: 2024/10/08 17:28:46 by oussama          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	key_pressed(int keysym, t_data *data)
@@ -13,10 +25,9 @@ int	key_pressed(int keysym, t_data *data)
 	else if (keysym == XK_d)
 		data->key.key_d = 1;
 	else if (keysym == XK_Left)
-		data->key.key_left = 1; // Rotate left
+		data->key.key_left = 1;
 	else if (keysym == XK_Right)
-		data->key.key_right = 1; // Rotate right
-	// printf("key pressed: %d\n", keysym);
+		data->key.key_right = 1;
 	return (0);
 }
 
@@ -34,7 +45,6 @@ int	key_released(int keysym, t_data *data)
 		data->key.key_left = 0;
 	else if (keysym == XK_Right)
 		data->key.key_right = 0;
-	// printf("key released: %d\n", keysym);
 	return (0);
 }
 
@@ -52,27 +62,27 @@ void	update_player_position(t_data *data)
 	}
 	if (data->key.key_a)
 	{
-		data->p.x += cos(data->p.ray.angle + PI_90) * PLAYER_SPEED;
-		data->p.y += sin(data->p.ray.angle + PI_90) * PLAYER_SPEED;
+		data->p.x += cos(data->p.ray.angle - PI_90) * PLAYER_SPEED;
+		data->p.y += sin(data->p.ray.angle - PI_90) * PLAYER_SPEED;
 	}
 	if (data->key.key_d)
 	{
-		data->p.x += cos(data->p.ray.angle - PI_90) * PLAYER_SPEED;
-		data->p.y += sin(data->p.ray.angle - PI_90) * PLAYER_SPEED;
+		data->p.x += cos(data->p.ray.angle + PI_90) * PLAYER_SPEED;
+		data->p.y += sin(data->p.ray.angle + PI_90) * PLAYER_SPEED;
 	}
 }
 
 void	update_player_rotation(t_data *data)
 {
-	const double angle_increment = (PI_180 / 180) * ROTATION_SPEED;
+	double	angle_increment;
 
+	angle_increment = (PI_180 / 180) * ROTATION_SPEED;
 	if (data->key.key_left == 1)
 	{
 		data->p.ray.angle -= angle_increment;
 		if (data->p.ray.angle < 0)
 			data->p.ray.angle += 2 * PI_180;
 	}
-
 	if (data->key.key_right == 1)
 	{
 		data->p.ray.angle += angle_increment;

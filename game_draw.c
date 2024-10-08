@@ -1,11 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_draw.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/08 17:29:31 by oussama           #+#    #+#             */
+/*   Updated: 2024/10/08 22:24:53 by oussama          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
-#include <X11/X.h>
-#include <X11/keysym.h>
-#include <math.h>
-#include <mlx.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+
 
 void	clear_image(t_data *data)
 {
@@ -30,12 +36,15 @@ void	fill_tail(t_data *data, int x, int y, int color)
 {
 	int	i;
 	int	j;
-
+	int 	border_size;
 	i = 0;
-	while (i < TILE_SIZE - 1) // i did -1 to not drow last pixel so the cub show
+	
+	border_size = (1 / SCALE);
+	// border_size = 3;
+	while (i < TILE_SIZE - border_size)
 	{
 		j = 0;
-		while (j < TILE_SIZE - 1)
+		while (j < TILE_SIZE - border_size)
 		{
 			set_pixel_color(data, x + j, y + i, color);
 			j++;
@@ -166,6 +175,11 @@ void	ray_draw(t_data *data)
 	degree_increment = (FIELD_OF_VIEW_ANGLE / WINDOW_WIDTH);
 	start_angle = data->p.ray.angle - (FIELD_OF_VIEW_ANGLE / 2);
 	end_angle = data->p.ray.angle + (FIELD_OF_VIEW_ANGLE / 2);
+
+	// xyd = best_intersaction(data, data->p.ray.angle);
+	// draw_line(data, (int)xyd[0], (int)xyd[1]);
+	// free(xyd);
+	// return;
 	if (start_angle < 0)
 		start_angle += PI_360;
 	if (end_angle >= PI_360)
@@ -240,38 +254,38 @@ void	ray_draw(t_data *data)
 
 // ===================================
 
-void	bresenham_line(t_data *data, int x0, int y0, int x1, int y1, int color)
-{
-	x0 = data->p.x;
-	y0 = data->p.y;
-	int dx;
-	int dy;
-	int sx;
-	int sy;
-	int err;
-	int e2;
+// void	bresenham_line(t_data *data, int x0, int y0, int x1, int y1, int color)
+// {
+// 	x0 = data->p.x;
+// 	y0 = data->p.y;
+// 	int dx;
+// 	int dy;
+// 	int sx;
+// 	int sy;
+// 	int err;
+// 	int e2;
 
-	dx = abs(x1 - x0);
-	dy = abs(y1 - y0);
-	sx = (x0 < x1) ? 1 : -1;
-	sy = (y0 < y1) ? 1 : -1;
-	err = dx - dy;
-	while (1)
-	{
-		printf("x0: %d | y0: %d\n", x0, y0);
-		set_pixel_color(data, x0, y0, color);
-		if (x0 == x1 && y0 == y1)
-			break ;
-		e2 = 2 * err;
-		if (e2 > -dy)
-		{
-			err -= dy;
-			x0 += sx;
-		}
-		if (e2 < dx)
-		{
-			err += dx;
-			y0 += sy;
-		}
-	}
-}
+// 	dx = abs(x1 - x0);
+// 	dy = abs(y1 - y0);
+// 	sx = (x0 < x1) ? 1 : -1;
+// 	sy = (y0 < y1) ? 1 : -1;
+// 	err = dx - dy;
+// 	while (1)
+// 	{
+// 		printf("x0: %d | y0: %d\n", x0, y0);
+// 		set_pixel_color(data, x0, y0, color);
+// 		if (x0 == x1 && y0 == y1)
+// 			break ;
+// 		e2 = 2 * err;
+// 		if (e2 > -dy)
+// 		{
+// 			err -= dy;
+// 			x0 += sx;
+// 		}
+// 		if (e2 < dx)
+// 		{
+// 			err += dx;
+// 			y0 += sy;
+// 		}
+// 	}
+// }

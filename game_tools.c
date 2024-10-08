@@ -14,6 +14,8 @@ void	set_pixel_color(t_data *data, int x, int y, int color)
 {
 	int pixel;
 
+	x = x * SCALE;
+	y = y * SCALE;
 	if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
 		return ;
 
@@ -29,8 +31,9 @@ char	get_type(t_data *data, int pixel_x, int pixel_y)
 	int	map_x;
 	int	map_y;
 
-	map_x = floor(pixel_x / TILE_SIZE);
-	map_y = floor(pixel_y / TILE_SIZE);
+	map_x = floor(pixel_x / (TILE_SIZE));
+	map_y = floor(pixel_y / (TILE_SIZE));
+	// printf("")
 
 	// return ('1');
 	if (map_y < 0 || map_x < 0 || map_x >= WINDOW_WIDTH / TILE_SIZE || map_y >= WINDOW_HEIGHT / TILE_SIZE)
