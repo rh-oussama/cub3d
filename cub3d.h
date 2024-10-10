@@ -9,34 +9,26 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <math.h>
-#include <X11/X.h>
-#include <X11/keysym.h>
-#include <math.h>
-#include <mlx.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-
-
-/* Macros */
-#define FIELD_OF_VIEW_ANGLE (60 * (M_PI / 180.0)) 
-#define TILE_SIZE 32
-#define NUM_TILES_WIDTH 15
-#define NUM_TILES_HEIGHT 11
-#define WINDOW_WIDTH (NUM_TILES_WIDTH * TILE_SIZE)
-#define WINDOW_HEIGHT (NUM_TILES_HEIGHT * TILE_SIZE)
-
-#define SCALE 1
-// SPEED
-#define PLAYER_SPEED 0.2
-#define ROTATION_SPEED 0.2
 
 // PI
 #define PI_180 3.141592653589793 // 180 degree
 #define PI_90 (PI_180 / 2) // 90 degree
 #define PI_270 (3 * PI_90) // 270 degree
 #define PI_360 (2 * PI_180) // 360 DEGREE
+
+/* Macros */
+#define FIELD_OF_VIEW_ANGLE (60 * (PI_180 / 180.0)) 
+#define TILE_SIZE 64
+#define NUM_TILES_WIDTH 15
+#define NUM_TILES_HEIGHT 11
+#define WINDOW_WIDTH (NUM_TILES_WIDTH * TILE_SIZE)
+#define WINDOW_HEIGHT (NUM_TILES_HEIGHT * TILE_SIZE)
+
+// SPEED
+#define PLAYER_SPEED 1
+#define ROTATION_SPEED 1
+
+
 
 /* Colors */
 #define COLOR_RED 0xFF0000
@@ -93,6 +85,7 @@ typedef struct s_data
    void 	*mlx_ptr;
    void 	*mlx_win;
    char 	**map;
+	int	SCALE;
    t_key key;
    t_img img;
    t_player p;
@@ -113,7 +106,7 @@ int key_pressed(int keysym, t_data *data);
 int key_released(int keysym, t_data *data);
 void update_player_rotation(t_data *data);
 void	draw_line(t_data *data, int x2, int y2);
-char	get_type(t_data *data, int pixel_x, int pixel_y);
+char	get_type(t_data *data, double pixel_x, double pixel_y);
 
 void	bresenham_line(t_data *data, int x0, int y0, int x1, int y1, int color);
 
