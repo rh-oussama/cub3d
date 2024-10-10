@@ -10,8 +10,14 @@
 #include <unistd.h>
 #include <math.h>
 
+// PI
+#define PI_180 3.141592653589793 // 180 degree
+#define PI_90 (PI_180 / 2) // 90 degree
+#define PI_270 (3 * PI_90) // 270 degree
+#define PI_360 (2 * PI_180) // 360 DEGREE
+
 /* Macros */
-#define FIELD_OF_VIEW_ANGLE (60 * (M_PI / 180.0)) 
+#define FIELD_OF_VIEW_ANGLE (60 * (PI_180 / 180.0)) 
 #define TILE_SIZE 64
 #define NUM_TILES_WIDTH 15
 #define NUM_TILES_HEIGHT 11
@@ -22,11 +28,7 @@
 #define PLAYER_SPEED 1
 #define ROTATION_SPEED 1
 
-// PI
-#define PI_180 3.141592653589793 // 180 degree
-#define PI_90 (PI_180 / 2) // 90 degree
-#define PI_270 (3 * PI_90) // 270 degree
-#define PI_360 (2 * PI_180) // 360 DEGREE
+
 
 /* Colors */
 #define COLOR_RED 0xFF0000
@@ -104,7 +106,7 @@ int key_pressed(int keysym, t_data *data);
 int key_released(int keysym, t_data *data);
 void update_player_rotation(t_data *data);
 void	draw_line(t_data *data, int x2, int y2);
-char	get_type(t_data *data, int pixel_x, int pixel_y);
+char	get_type(t_data *data, double pixel_x, double pixel_y);
 
 void	bresenham_line(t_data *data, int x0, int y0, int x1, int y1, int color);
 

@@ -20,17 +20,13 @@ char *mapi[] = {
 
 int game_render(t_data *data)
 {
-	// printf("x: %d | y: %d | angle: %f\n", data->p.x, data->p.y, (float) data->p.ray.angle);
    clear_image(data);
 	update_player_rotation(data);
    update_player_position(data);
    ground_draw(data);
 	player_draw(data);
-	// draw_line(data, data->p.x + (200 * cos(data->p.ray.angle)), data->p.y + (200 * sin(data->p.ray.angle)));
-
 	ray_draw(data);
    mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img, 0, 0);
-
    return (0);
 }
 int game_init(t_data *data)

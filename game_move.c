@@ -52,13 +52,13 @@ void	update_player_position(t_data *data)
 	}
 	if (data->key.key_a)
 	{
-		data->p.x += cos(data->p.ray.angle + PI_90) * PLAYER_SPEED;
-		data->p.y += sin(data->p.ray.angle + PI_90) * PLAYER_SPEED;
+		data->p.x += cos(data->p.ray.angle - PI_90) * PLAYER_SPEED;
+		data->p.y += sin(data->p.ray.angle - PI_90) * PLAYER_SPEED;
 	}
 	if (data->key.key_d)
 	{
-		data->p.x += cos(data->p.ray.angle - PI_90) * PLAYER_SPEED;
-		data->p.y += sin(data->p.ray.angle - PI_90) * PLAYER_SPEED;
+		data->p.x += cos(data->p.ray.angle + PI_90) * PLAYER_SPEED;
+		data->p.y += sin(data->p.ray.angle + PI_90) * PLAYER_SPEED;
 	}
 }
 

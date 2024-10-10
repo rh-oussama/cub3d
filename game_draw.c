@@ -159,60 +159,24 @@ void	ray_draw(t_data *data)
 {
 	double	*xyd;
 	double	degree_increment;
-	double	start_angle;
-	double	end_angle;
-	double	angle;
+	double	start;
+	double	end;
 
-	degree_increment = (FIELD_OF_VIEW_ANGLE / WINDOW_WIDTH);
-	start_angle = data->p.ray.angle - (FIELD_OF_VIEW_ANGLE / 2);
-	end_angle = data->p.ray.angle + (FIELD_OF_VIEW_ANGLE / 2);
-	if (start_angle < 0)
-		start_angle += PI_360;
-	if (end_angle >= PI_360)
-		end_angle -= PI_360;
-	angle = start_angle;
-	if (start_angle > end_angle)
+	degree_increment = FIELD_OF_VIEW_ANGLE / WINDOW_WIDTH;
+	start = data->p.ray.angle - FIELD_OF_VIEW_ANGLE / 2;
+	end = data->p.ray.angle + FIELD_OF_VIEW_ANGLE / 2;
+	while (start <= end)
 	{
-		while (angle < PI_360)
+		xyd = best_intersaction(data, start);
+		if (xyd != NULL)
 		{
-			xyd = best_intersaction(data, angle);
 			draw_line(data, (int)xyd[0], (int)xyd[1]);
 			free(xyd);
-			angle += degree_increment;
 		}
-		angle = 0;
-	}
-	while (angle <= end_angle)
-	{
-		xyd = best_intersaction(data, angle);
-		draw_line(data, (int)xyd[0], (int)xyd[1]);
-		free(xyd);
-		angle += degree_increment;
+		start += degree_increment;
 	}
 }
 
-// if (data->p.ray.angle == M_PI_2 || data->p.ray.angle == 3 * M_PI_2)
-// {
-// 	xstep = 0;
-// 	ystep = (data->p.ray.angle == M_PI_2) ? TILE_SIZE : -TILE_SIZE;
-// }
-// else
-// {
-// 	xstep = (data->p.ray.angle > M_PI_2 && data->p.ray.angle < 3 * M_PI_2) ?
-// 		-tile_size : tile_size;
-// 	ystep = xstep * tan(data->p.ray.angle);
-// }
-// // Print the first intersection
-// printf("Intersection 1: x = %d, y = %d | angle = %f\n", (int)x, (int)y,
-// 	data->p.ray.angle);
-// // Calculate and print the next intersection
-// for (int i = 0; i < 1; i++)
-// {
-// 	x += xstep;
-// 	y += ystep;
-// 	printf("Intersection %d: x = %d, y = %d | angle = %f\n", i + 2, (int)x,
-// 		(int)y, data->p.ray.angle);
-// }
 // Draw the line if within the threshold
 // ===================================
 
