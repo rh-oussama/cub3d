@@ -27,7 +27,7 @@ int game_render(t_data *data)
    ground_draw(data);
 	player_draw(data);
 	ray_draw(data);
-	draw_line(data, (data->p.x + 20 * cos(data->p.angle)), (data->p.y + 20 * sin(data->p.angle)));
+	// draw_line(data, (data->p.x + 20 * cos(data->p.angle)), (data->p.y + 20 * sin(data->p.angle)));
    mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img_3d.img, 0, 0);
    mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img_2d.img, 0, 0);
 

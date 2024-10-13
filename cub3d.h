@@ -50,7 +50,8 @@ typedef struct s_ray
 	double x;
 	double y;
 	double distance;
-	int hit_horizontal;
+	int		angle;
+	int		hit_horizontal;
 	int looking_down;
 	int looking_left;
 	struct s_ray *next;
@@ -124,11 +125,10 @@ int		is_wall(t_data *data, double *xyd, double angle, char type);
 // RACYCASTING //
 double distance(double x1 , double y1, double x2, double y2);
 void get_horizonntal(t_data *data, double angle, double *xy_step, double *xy_xintercept);
-double *get_horizontal_xyd(t_data *data, double angle);
 void get_vertical(t_data *data, double angle, double *xy_step, double *xy_xintercept);
-double *get_vertical_xyd(t_data *data, double angle);
 void	best_intersaction(t_data *data, double angle);
-
+void	get_horizontal_xyd(t_data *data, double angle, double *xyd);
+void	get_vertical_xyd(t_data *data, double angle, double *xyd);
 
 
 void add_ray(t_data *data, double angle, double *xyd, char type);

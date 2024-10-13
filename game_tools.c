@@ -6,7 +6,7 @@
 /*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:24:56 by oussama           #+#    #+#             */
-/*   Updated: 2024/10/13 15:26:36 by oussama          ###   ########.fr       */
+/*   Updated: 2024/10/13 16:48:27 by oussama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ t_ray	*add_ray_helper(double angle, double *xyd, char type)
 		return NULL;
 	new_ray->x = xyd[0];
 	new_ray->y = xyd[1];
+	new_ray->angle = angle;
 	new_ray->distance = xyd[2];
 	new_ray->hit_horizontal = 0;
 	if (type == 'h')

@@ -6,7 +6,7 @@
 /*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:31:04 by oussama           #+#    #+#             */
-/*   Updated: 2024/10/13 15:01:14 by oussama          ###   ########.fr       */
+/*   Updated: 2024/10/13 18:19:13 by oussama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,12 @@ void get_horizonntal(t_data *data, double angle, double *xy_step, double *xy_xin
 }
 
 /* GET X AND Y FO THE RAY AND DISTANCE */
-double *get_horizontal_xyd(t_data *data, double angle)
+void	get_horizontal_xyd(t_data *data, double angle, double *xyd)
 {
 	/// xyd[0]: x cordonitae, xyd[1]: y cordonite, xyd[2]: distance
-	double *xyd;
 	double xy_step[2];
 	double xy_intercept[2];
 
-	xyd = (double *) malloc(3 * sizeof(double));
-	if (xyd == NULL)
-		return NULL;
 	xyd[0] = -1;
 	xyd[1] = -1;
 	xyd[2] = -1;
@@ -69,7 +65,6 @@ double *get_horizontal_xyd(t_data *data, double angle)
 		}
 		xyd[2] = sqrt(pow(xyd[0] - data->p.x, 2) + pow(xyd[1] - data->p.y, 2));
 	}
-	return (xyd);
 }
 
 
@@ -106,19 +101,15 @@ void get_vertical(t_data *data, double angle, double *xy_step, double *xy_xinter
 
 
 /* GET X AND Y FO THE RAY AND DISTANCE */
-double *get_vertical_xyd(t_data *data, double angle)
+void	get_vertical_xyd(t_data *data, double angle, double *xyd)
 {
-	double *xyd;
 	double xy_step[2];
 	double xy_intercept[2];
-	
-	xyd = (double *) malloc(3 * sizeof(double));
-	if (!xyd)
-		return (NULL);
+
 	xyd[0] = -1;
 	xyd[1] = -1;
 	xyd[2] = -1;
-	if (data->p.angle != PI_270 && data->p.angle != PI_90)
+	if (angle != PI_270 && angle != PI_90)
 	{
 		get_vertical(data, angle, xy_step, xy_intercept);
 		xyd[0] = xy_intercept[0];
@@ -130,7 +121,6 @@ double *get_vertical_xyd(t_data *data, double angle)
 		}
 		xyd[2] = sqrt(pow(xyd[0] - data->p.x, 2) + pow(xyd[1] - data->p.y, 2));
 	}
-	return (xyd);
 }
 
 
@@ -138,12 +128,13 @@ double *get_vertical_xyd(t_data *data, double angle)
 /* GET THE XY FOR THE LESS DISTANCE RAY */
 void	best_intersaction(t_data *data, double angle)
 {
-	double *xyd_h;
-	double *xyd_v;
+	double xyd_h[3];
+	double xyd_v[3];
 
-	angle = normalize_angle(angle);
-	xyd_h = get_horizontal_xyd(data, angle);
-	xyd_v = get_vertical_xyd(data, angle);
+	angle = normalize_angle(angle);	
+	get_horizontal_xyd(data, angle, xyd_h);
+	get_vertical_xyd(data, angle, xyd_v);
+
 	if (xyd_h[2] < 0)
 		add_ray(data, angle, xyd_v, 'v');
 	else if (xyd_v[2] < 0)
@@ -152,26 +143,4 @@ void	best_intersaction(t_data *data, double angle)
 		add_ray(data, angle, xyd_h, 'h');
 	else
 		add_ray(data, angle, xyd_v, 'v');
-	free(xyd_v);
-	free(xyd_h);
 }
-
-// /* GET THE XY FOR THE LESS DISTANCE RAY */
-// double *best_intersaction(t_data *data, double angle)
-// {
-// 	double *xyd_h;
-// 	double *xyd_v;
-
-// 	angle = normalize_angle(angle);
-// 	xyd_h = get_horizontal_xyd(data, angle);
-// 	xyd_v = get_vertical_xyd(data, angle);
-
-// 	if (xyd_h[2] < 0)
-// 		return (free(xyd_h), xyd_v);
-// 	else if (xyd_v[2] < 0)
-// 		return (free(xyd_v), xyd_h);
-// 	else if (xyd_h[2] < xyd_v[2])
-// 		return (free(xyd_v), xyd_h);
-// 	else
-// 		return (free(xyd_h), xyd_v);
-// }

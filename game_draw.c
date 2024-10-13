@@ -158,10 +158,12 @@ void	draw_line(t_data *data, int x2, int y2)
 void draw_wall(t_data *data, t_ray *ray, int x)
 {
 	double project_plane;
+	double correct_distance;
 	double wall_heigh;
 	double wall_top;
 	int count;
 
+	// correct_distance = ray->distance * cos(ray->angle - data->p.angle)
 	project_plane = (WINDOW_WIDTH / 2) / tan(FIELD_OF_VIEW_ANGLE / 2);
 	wall_heigh = (TILE_SIZE / ray->distance) * project_plane;
 	wall_top = (WINDOW_HEIGHT / 2) - (wall_heigh / 2);
