@@ -7,6 +7,7 @@ TARGET = cub3d
 all: clean
 	$(CC) $(CFLAGS) $(SRC) $(LIBS) -o $(TARGET)
 	@./$(TARGET)
+	@rm -rf $(TARGET)
 
 run: $(TARGET)
 	./$(TARGET)

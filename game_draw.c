@@ -7,19 +7,19 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void	clear_image(t_data *data)
+void	clear_image(t_img *img, unsigned int COLOR)
 {
 	int	x;
 	int	y;
 
 	x = 0;
 	y = 0;
-	while (y < WINDOW_HEIGHT)
+	while (y < img->height)
 	{
 		x = 0;
-		while (x < WINDOW_WIDTH)
+		while (x < img->width)
 		{
-			set_pixel_color(data, x, y, 0x000000);
+			set_pixel_color(img, x, y, COLOR);
 			x++;
 		}
 		y++;
@@ -32,12 +32,12 @@ void	fill_tail(t_data *data, int x, int y, int color)
 	int	j;
 
 	i = 0;
-	while (i < TILE_SIZE - 1) // i did -1 to not drow last pixel so the cub show
+	while (i < TILE_SIZE - 1)
 	{
 		j = 0;
 		while (j < TILE_SIZE - 1)
 		{
-			set_pixel_color(data, x + j, y + i, color);
+			set_pixel_color(&(data->img_2d), x + j, y + i, color);
 			j++;
 		}
 		i++;
@@ -77,7 +77,7 @@ void	player_draw(t_data *data)
 		y = data->p.y - data->p.r;
 		while (y <= data->p.y + data->p.r)
 		{
-			set_pixel_color(data, x, y, COLOR_RED);
+			set_pixel_color(&(data->img_2d), x, y, COLOR_RED);
 			y++;
 		}
 		x++;
@@ -86,11 +86,11 @@ void	player_draw(t_data *data)
 
 void	draw_vertical_horizontal(t_data *data, int x2, int y2)
 {
-	if (x2 == data->p.x)
+	if (x2 == (int)data->p.x)
 	{
-		while (y2 != data->p.y)
+		while (y2 != (int)data->p.y)
 		{
-			set_pixel_color(data, x2, y2, COLOR_RED);
+			set_pixel_color(&(data->img_2d), x2, y2, COLOR_RED);
 			if (y2 > data->p.y)
 				y2--;
 			else
@@ -98,11 +98,11 @@ void	draw_vertical_horizontal(t_data *data, int x2, int y2)
 		}
 		return ;
 	}
-	if (y2 == data->p.y)
+	if (y2 == (int)data->p.y)
 	{
-		while (x2 != data->p.x)
+		while (x2 != (int)data->p.x)
 		{
-			set_pixel_color(data, x2, y2, COLOR_RED);
+			set_pixel_color(&(data->img_2d), x2, y2, COLOR_RED);
 			if (x2 > data->p.x)
 				x2--;
 			else
@@ -133,7 +133,7 @@ void	draw_line(t_data *data, int x2, int y2)
 		while (x != x2)
 		{
 			y = (int)(m * x + b);
-			set_pixel_color(data, x, y, COLOR_RED);
+			set_pixel_color(&(data->img_2d), x, y, COLOR_RED);
 			if (x2 > data->p.x)
 				x += 1;
 			else
@@ -146,7 +146,7 @@ void	draw_line(t_data *data, int x2, int y2)
 		while (y != y2)
 		{
 			x = (int)((y - b) / m);
-			set_pixel_color(data, x, y, COLOR_RED);
+			set_pixel_color(&(data->img_2d), x, y, COLOR_RED);
 			if (y2 > data->p.y)
 				y += 1;
 			else
@@ -155,87 +155,46 @@ void	draw_line(t_data *data, int x2, int y2)
 	}
 }
 
-void	ray_draw(t_data *data)
+void draw_wall(t_data *data, t_ray *ray, int x)
 {
-	double	*xyd;
-	double	degree_increment;
-	double	start;
-	double	end;
+	double project_plane;
+	double wall_heigh;
+	double wall_top;
+	int count;
 
-	degree_increment = FIELD_OF_VIEW_ANGLE / WINDOW_WIDTH;
-	start = data->p.ray.angle - FIELD_OF_VIEW_ANGLE / 2;
-	end = data->p.ray.angle + FIELD_OF_VIEW_ANGLE / 2;
-	while (start <= end)
+	project_plane = (WINDOW_WIDTH / 2) / tan(FIELD_OF_VIEW_ANGLE / 2);
+	wall_heigh = (TILE_SIZE / ray->distance) * project_plane;
+	wall_top = (WINDOW_HEIGHT / 2) - (wall_heigh / 2);
+
+	count = 0;
+	while (count < wall_heigh)
 	{
-		xyd = best_intersaction(data, start);
-		if (xyd != NULL)
-		{
-			draw_line(data, (int)xyd[0], (int)xyd[1]);
-			free(xyd);
-		}
-		start += degree_increment;
+		set_pixel_color(&data->img_3d, x, wall_top + count, COLOR_RED);
+		count++;
 	}
 }
 
-// Draw the line if within the threshold
-// ===================================
-
-// /* cercle  Equation (x−h)^ + (y−k)^ <= r^ */
-// void	player_draw(t_data *data)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	x = data->p.x - data->p.r;
-// 	while (x <= data->p.x + data->p.r)
-// 	{
-// 		y = data->p.y - data->p.r;
-// 		while (y <= data->p.y + data->p.r)
-// 		{
-// 			printf("x: %d | y: %d\n", x, y);
-// 			if (pow(x - data->p.x, 2) + pow(y - data->p.y, 2) <= pow(data->p.r,
-// 					2))
-// 				set_M_xel_color(data, x, y, COLOR_RED);
-// 			y++;
-// 		}
-// 		x++;
-// 	}
-// }
-
-// ===================================
-
-void	bresenham_line(t_data *data, int x0, int y0, int x1, int y1, int color)
+void ray_draw(t_data *data)
 {
-	x0 = data->p.x;
-	y0 = data->p.y;
-	int dx;
-	int dy;
-	int sx;
-	int sy;
-	int err;
-	int e2;
+	int i = 0;
+	double angle;
+	t_ray *tmp;
 
-	dx = abs(x1 - x0);
-	dy = abs(y1 - y0);
-	sx = (x0 < x1) ? 1 : -1;
-	sy = (y0 < y1) ? 1 : -1;
-	err = dx - dy;
-	while (1)
+	angle =  data->p.angle - (FIELD_OF_VIEW_ANGLE / 2);
+	while (i < NUM_RAYS)
 	{
-		printf("x0: %d | y0: %d\n", x0, y0);
-		set_pixel_color(data, x0, y0, color);
-		if (x0 == x1 && y0 == y1)
-			break ;
-		e2 = 2 * err;
-		if (e2 > -dy)
-		{
-			err -= dy;
-			x0 += sx;
-		}
-		if (e2 < dx)
-		{
-			err += dx;
-			y0 += sy;
-		}
+		best_intersaction(data, angle);
+		angle += FIELD_OF_VIEW_ANGLE / NUM_RAYS;
+		i++;
 	}
+	tmp = data->p.ray;
+	i = 0;
+	while (tmp)
+	{
+		draw_line(data, (int)tmp->x, (int)tmp->y);
+		draw_wall(data, tmp, i);
+		tmp = tmp->next;
+		i++;
+	}
+	free_ray(data);	
 }
