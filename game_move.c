@@ -6,7 +6,7 @@
 /*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:26:53 by oussama           #+#    #+#             */
-/*   Updated: 2024/10/13 00:11:43 by oussama          ###   ########.fr       */
+/*   Updated: 2024/10/13 20:33:29 by oussama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	key_released(int keysym, t_data *data)
 	return (0);
 }
 
+// TODO: make 3 pixel form the wall + wall colision
 void	move_player(t_data *data, double angle)
 {
 	double	next_x;
@@ -55,16 +56,13 @@ void	move_player(t_data *data, double angle)
 
 	next_x = data->p.x + cos(angle) * PLAYER_SPEED;
 	next_y = data->p.y + sin(angle) * PLAYER_SPEED;
-	if (get_type(data, next_x, next_y) != '1')
+
+	if (get_type_v2(data, next_x, next_y) != '1')
 	{
 		data->p.x = next_x;
 		data->p.y = next_y;
 	}
-	// else if (angle != 0 && angle != PI_90 && angle != PI_180 && angle != PI_270)
-	// {
-	// 	if (angle >= PI_90 && angle <= PI_270)
-	// 		move_player(data, data->p.angle - PI_90);
-	// }
+
 }
 
 void	update_player_position(t_data *data)

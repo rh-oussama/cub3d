@@ -40,11 +40,10 @@ int game_init(t_data *data)
 	// image deminsion
 	data->img_3d.width = WINDOW_WIDTH;
 	data->img_3d.height = WINDOW_HEIGHT;
-	// // mini map
+	// mini map
 	data->mini_map.width =  320;
 	data->mini_map.height = 180;
 	// 
-	data->p.ray = NULL;
 	data->p.x = data->img_2d.width / 2;
 	data->p.y = data->img_2d.height / 2;
 	data->p.r = 2;
@@ -53,7 +52,7 @@ int game_init(t_data *data)
 	data->key.key_s = 0;
 	data->key.key_d = 0;
 	data->key.key_w = 0;
-	data->p.angle = 270 * (PI_180 / 180 );
+	data->p.angle = 180 * (PI_180 / 180 );
 
 }
 

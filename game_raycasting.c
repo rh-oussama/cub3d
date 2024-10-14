@@ -6,7 +6,7 @@
 /*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:31:04 by oussama           #+#    #+#             */
-/*   Updated: 2024/10/13 18:19:13 by oussama          ###   ########.fr       */
+/*   Updated: 2024/10/14 13:23:28 by oussama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,21 +126,21 @@ void	get_vertical_xyd(t_data *data, double angle, double *xyd)
 
 
 /* GET THE XY FOR THE LESS DISTANCE RAY */
-void	best_intersaction(t_data *data, double angle)
+void	best_intersaction(t_data *data, double angle, int i)
 {
 	double xyd_h[3];
 	double xyd_v[3];
 
-	angle = normalize_angle(angle);	
+	angle = normalize_angle(angle);
 	get_horizontal_xyd(data, angle, xyd_h);
 	get_vertical_xyd(data, angle, xyd_v);
 
 	if (xyd_h[2] < 0)
-		add_ray(data, angle, xyd_v, 'v');
+		add_ray(&(data->p.ray[i]), angle, xyd_v, 'v');
 	else if (xyd_v[2] < 0)
-		add_ray(data, angle, xyd_h, 'h');
+		add_ray(&(data->p.ray[i]), angle, xyd_h, 'h');
 	else if (xyd_h[2] < xyd_v[2])
-		add_ray(data, angle, xyd_h, 'h');
+		add_ray(&(data->p.ray[i]), angle, xyd_h, 'h');
 	else
-		add_ray(data, angle, xyd_v, 'v');
+		add_ray(&(data->p.ray[i]), angle, xyd_v, 'v');
 }

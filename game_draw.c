@@ -163,9 +163,10 @@ void draw_wall(t_data *data, t_ray *ray, int x)
 	double wall_top;
 	int count;
 
-	// correct_distance = ray->distance * cos(ray->angle - data->p.angle)
+	correct_distance = ray->distance * cos(ray->angle - data->p.angle);
+
 	project_plane = (WINDOW_WIDTH / 2) / tan(FIELD_OF_VIEW_ANGLE / 2);
-	wall_heigh = (TILE_SIZE / ray->distance) * project_plane;
+	wall_heigh = (TILE_SIZE / correct_distance) * project_plane;
 	wall_top = (WINDOW_HEIGHT / 2) - (wall_heigh / 2);
 
 	count = 0;
@@ -180,23 +181,14 @@ void ray_draw(t_data *data)
 {
 	int i = 0;
 	double angle;
-	t_ray *tmp;
 
 	angle =  data->p.angle - (FIELD_OF_VIEW_ANGLE / 2);
 	while (i < NUM_RAYS)
 	{
-		best_intersaction(data, angle);
+		best_intersaction(data, angle, i);
+		draw_line(data, (int)(data->p.ray[i].x) , (int)(data->p.ray[i].y));
+		draw_wall(data, &(data->p.ray[i]), i);
 		angle += FIELD_OF_VIEW_ANGLE / NUM_RAYS;
 		i++;
 	}
-	tmp = data->p.ray;
-	i = 0;
-	while (tmp)
-	{
-		draw_line(data, (int)tmp->x, (int)tmp->y);
-		draw_wall(data, tmp, i);
-		tmp = tmp->next;
-		i++;
-	}
-	free_ray(data);	
 }
