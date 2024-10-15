@@ -6,7 +6,7 @@
 /*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:26:53 by oussama           #+#    #+#             */
-/*   Updated: 2024/10/13 20:33:29 by oussama          ###   ########.fr       */
+/*   Updated: 2024/10/14 14:11:54 by oussama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	key_released(int keysym, t_data *data)
 	return (0);
 }
 
-// TODO: make 3 pixel form the wall + wall colision
 void	move_player(t_data *data, double angle)
 {
 	double	next_x;
@@ -61,6 +60,10 @@ void	move_player(t_data *data, double angle)
 	{
 		data->p.x = next_x;
 		data->p.y = next_y;
+	}
+	else
+	{
+		// TODO: MAKE COLLISION WITH WALL
 	}
 
 }
@@ -81,6 +84,7 @@ void	update_player_rotation(t_data *data)
 {
 	double	angle_increment;
 
+	// TODO: Rotate the point of view with the mouse.
 	angle_increment = (PI_180 / 180) * ROTATION_SPEED;
 	if (data->key.key_left == 1)
 		data->p.angle -= angle_increment;

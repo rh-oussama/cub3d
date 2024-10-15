@@ -155,6 +155,7 @@ void	draw_line(t_data *data, int x2, int y2)
 	}
 }
 
+
 void draw_wall(t_data *data, t_ray *ray, int x)
 {
 	double project_plane;
