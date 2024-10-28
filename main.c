@@ -8,13 +8,13 @@ int game_render(t_data *data)
 	draw_floor(&(data->img_3d), COLOR_BLACK);
 	clear_image(&(data->img_2d), COLOR_BLACK);
 	update_player_rotation(data);
-   	update_player_position(data);
-   	ground_draw(data);
+   update_player_position(data);
+   ground_draw(data);
 	player_draw(data);
 	ray_draw(data);
 	draw_line(data, (data->p.x + 20 * cos(data->p.angle)), (data->p.y + 20 * sin(data->p.angle)));
-   	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img_3d.img, 0, 0);
-   	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img_2d.img, 0, 0);
+	draw_mini_map(data, 0, 0);
+   mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img_3d.img, 0, 0);
    return (0);
 }
 
@@ -98,18 +98,17 @@ int	main(int ac, char **av)
 	get_player_position(&data);
 	data.mlx_ptr = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
+	
 	///// MAP 2D IMAGE 
 	data.img_2d.img = mlx_new_image(data.mlx_ptr, data.img_2d.width, data.img_2d.height);
 	data.img_2d.img_data = mlx_get_data_addr(data.img_2d.img, &data.img_2d.bits_per_pixel, &data.img_2d.size_line, &data.img_2d.endian);
 	//// MAP 3D IMAGE
 	data.img_3d.img = mlx_new_image(data.mlx_ptr, data.img_3d.width, data.img_3d.height);
 	data.img_3d.img_data = mlx_get_data_addr(data.img_3d.img, &data.img_3d.bits_per_pixel, &data.img_3d.size_line, &data.img_3d.endian);
-	/// MINI MAP
-	data.mini_map.img = mlx_new_image(data.mlx_ptr, data.mini_map.width, data.mini_map.height);
-	data.mini_map.img_data = mlx_get_data_addr(data.mini_map.img, &data.mini_map.bits_per_pixel, &data.mini_map.size_line, &data.mini_map.endian);
+
 	// TODO: MINI MAP
 
-	// //// KEY_PRESS AND KEY_RELEASE
+	//// KEY_PRESS AND KEY_RELEASE
 	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, key_pressed, &data);
 	mlx_hook(data.mlx_win, KeyRelease, KeyReleaseMask, key_released, &data);
 	//  mlx_key_hook(data.mlx_win, print_key_press, &data);

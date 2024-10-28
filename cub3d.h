@@ -3,44 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/10/14 13:22:18 by oussama          ###   ########.fr       */
+/*   Updated: 2024/10/28 08:31:17 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-// for Mac
-# include "mlx_library/mlx.h"
+/*______ For Mac _______*/
+
+// # include "mlx_library/mlx.h"
+
+// #define WINDOW_WIDTH 1680
+// #define WINDOW_HEIGHT 1050
+// # define MINI_WIDTH 320
+// # define MINI_HEIGHT 180
+
+// #define XK_Escape      53
+// #define XK_w           13
+// #define XK_a           0
+// #define XK_s           1
+// #define XK_d           2
+// #define XK_Left        123
+// #define XK_Right       124
+// #define XK_Up          126
+// #define XK_Down        125
+// #define KeyPress          2
+// #define KeyRelease        3
+// #define KeyPressMask      (1L<<0)
+// #define KeyReleaseMask    (1L<<1)
+
+/*_______________________*/
+
+/*______ For Linux _______*/
+
+# include <X11/keysym.h>
+# include <X11/X.h>
+# include <mlx.h>
+
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 720
+# define MINI_WIDTH 320
+# define MINI_HEIGHT 180
+
+/*_______________________*/
+
+
+
 
 /* Libraries */
-// # include <X11/keysym.h>
-// # include <X11/X.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
 # include <fcntl.h>
-
-// from here
-#define XK_Escape      53
-#define XK_w           13
-#define XK_a           0
-#define XK_s           1
-#define XK_d           2
-#define XK_Left        123
-#define XK_Right       124
-#define XK_Up          126
-#define XK_Down        125
-#define KeyPress          2
-#define KeyRelease        3
-#define KeyPressMask      (1L<<0)
-#define KeyReleaseMask    (1L<<1)
-// to here dyal l Mac
-
 
 // PI
 # define PI_180 3.141592653589793
@@ -55,8 +74,11 @@
 # define TILE_SIZE 32
 
 /* WINDOW */
-#define WINDOW_WIDTH 1680
-#define WINDOW_HEIGHT 1050
+// #define WINDOW_WIDTH 1680
+// #define WINDOW_HEIGHT 1050
+
+
+
 
 
 /* FOV && RAYS */
@@ -136,8 +158,9 @@ typedef struct s_data
 	char		*we_texture;
 	char		*ea_texture;
 	char		**map;
-	int			width;
-	int			height;
+	int		width;
+	int		height;
+	
 	t_key		key;
 	t_img		img_2d;
 	t_img		img_3d;
@@ -174,9 +197,13 @@ void get_vertical(t_data *data, double angle, double *xy_step, double *xy_xinter
 void	best_intersaction(t_data *data, double angle, int i);
 void	get_horizontal_xyd(t_data *data, double angle, double *xyd);
 void	get_vertical_xyd(t_data *data, double angle, double *xyd);
-char	get_type_v2(t_data *data, double pixel_x, double pixel_y);
 
+char	get_type_v2(t_data *data, double pixel_x, double pixel_y);
 void add_ray(t_ray *ray, double angle, double *xyd, char type);
+
+// MINI MAP
+void draw_mini_map(t_data *data, int x, int y);
+int get_pixel_color(t_data *data, int x, int y);
 
 //gnl
 
