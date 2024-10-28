@@ -204,3 +204,26 @@ void ray_draw(t_data *data)
 		i++;
 	}
 }
+
+
+void draw_mini_map(t_data *data, int x, int y)
+{
+	int	start_x;
+	int	start_y;
+	int	color;
+
+	start_x = (int) data->p.x - (MINI_WIDTH / 2);
+	start_y = (int) data->p.y - (MINI_HEIGHT / 2);
+	y = 0;
+	while (y < MINI_HEIGHT)
+	{
+		x = 0;
+		while (x < MINI_WIDTH)
+		{
+			color = get_pixel_color(data, start_x + x, start_y + y);
+			set_pixel_color(&data->img_3d,x, y, color);
+			x++;
+		}
+		y++;
+	}
+}

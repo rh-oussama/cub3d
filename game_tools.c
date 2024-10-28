@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:24:56 by oussama           #+#    #+#             */
-/*   Updated: 2024/10/14 13:21:29 by oussama          ###   ########.fr       */
+/*   Updated: 2024/10/28 08:30:48 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,19 @@ double distance(double x1 , double y1, double x2, double y2)
 	distance = sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
 	return (distance);
 	
+}
+
+int get_pixel_color(t_data *data, int x, int y)
+{
+	int	index;
+	int	*buffer;
+   if (x < 0 || x >= data->img_2d.width || y < 0 || y >= data->img_2d.height)
+      return COLOR_BLACK;
+
+	index = get_pixel_index(&data->img_2d, x, y);
+   buffer = (int *)data->img_2d.img_data;
+   
+	return buffer[index / 4];
 }
 
 void	error_msg(char *str)
