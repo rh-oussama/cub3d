@@ -134,3 +134,10 @@ double distance(double x1 , double y1, double x2, double y2)
 	return (distance);
 	
 }
+
+void	error_msg(char *str)
+{
+	write(1, str, ft_strlen(str));
+	write(1, "\n", 1);
+	exit(1);
+}
