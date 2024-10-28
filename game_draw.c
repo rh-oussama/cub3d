@@ -1,11 +1,4 @@
 #include "cub3d.h"
-#include <X11/X.h>
-#include <X11/keysym.h>
-#include <math.h>
-#include <mlx.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 void	clear_image(t_img *img, unsigned int COLOR)
 {
@@ -14,6 +7,24 @@ void	clear_image(t_img *img, unsigned int COLOR)
 
 	x = 0;
 	y = 0;
+	while (y < img->height)
+	{
+		x = 0;
+		while (x < img->width)
+		{
+			set_pixel_color(img, x, y, COLOR);
+			x++;
+		}
+		y++;
+	}
+}
+void	draw_floor(t_img *img, unsigned int COLOR)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = img->height / 2;
 	while (y < img->height)
 	{
 		x = 0;
@@ -57,7 +68,7 @@ void	ground_draw(t_data *data)
 		while (data->map[y][x])
 		{
 			if (data->map[y][x] == '1')
-				fill_tail(data, x * TILE_SIZE, y * TILE_SIZE, COLOR_BLACK);
+				fill_tail(data, x * TILE_SIZE, y * TILE_SIZE, COLOR_GREEN);
 			else
 				fill_tail(data, x * TILE_SIZE, y * TILE_SIZE, COLOR_WHITE);
 			x++;
@@ -77,7 +88,7 @@ void	player_draw(t_data *data)
 		y = data->p.y - data->p.r;
 		while (y <= data->p.y + data->p.r)
 		{
-			set_pixel_color(&(data->img_2d), x, y, COLOR_RED);
+			set_pixel_color(&(data->img_2d), x, y, COLOR_BLUE);
 			y++;
 		}
 		x++;
@@ -127,13 +138,13 @@ void	draw_line(t_data *data, int x2, int y2)
 	}
 	m = (float)(y2 - data->p.y) / (float)(x2 - data->p.x);
 	b = data->p.y - m * data->p.x;
-	if (abs(x2 - data->p.x) > abs(y2 - data->p.y))
+	if (fabs(x2 - data->p.x) > fabs(y2 - data->p.y))
 	{
 		x = data->p.x;
 		while (x != x2)
 		{
 			y = (int)(m * x + b);
-			set_pixel_color(&(data->img_2d), x, y, COLOR_RED);
+			set_pixel_color(&(data->img_2d), x, y, COLOR_MAGENTA);
 			if (x2 > data->p.x)
 				x += 1;
 			else
@@ -146,7 +157,7 @@ void	draw_line(t_data *data, int x2, int y2)
 		while (y != y2)
 		{
 			x = (int)((y - b) / m);
-			set_pixel_color(&(data->img_2d), x, y, COLOR_RED);
+			set_pixel_color(&(data->img_2d), x, y, COLOR_MAGENTA);
 			if (y2 > data->p.y)
 				y += 1;
 			else
@@ -187,7 +198,7 @@ void ray_draw(t_data *data)
 	while (i < NUM_RAYS)
 	{
 		best_intersaction(data, angle, i);
-		draw_line(data, (int)(data->p.ray[i].x) , (int)(data->p.ray[i].y));
+		// draw_line(data, (int)(data->p.ray[i].x) , (int)(data->p.ray[i].y));
 		draw_wall(data, &(data->p.ray[i]), i);
 		angle += FIELD_OF_VIEW_ANGLE / NUM_RAYS;
 		i++;
