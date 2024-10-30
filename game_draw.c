@@ -168,13 +168,13 @@ void	draw_line(t_data *data, int x2, int y2)
 	}
 }
 
-int get_pixel_color_1(t_texture *texture, int x, int y)
+int get_pixel_drawer(t_texture *texture, int x, int y)
 {
     int color;
     char *pixel;
 
     if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
-        return 0; // Return a default color or handle the error as needed
+        return 0;
 
     pixel = texture->data + (y * texture->size_line + x * (texture->bpp / 8));
     color = *(int *)pixel;
@@ -210,7 +210,7 @@ void draw_wall(t_data *data, t_ray *ray, int x)
     {
         int y = wall_top + count;
 		texture_y = ((count * TILE_SIZE) / wall_heigh);
-		color = get_pixel_color_1((t_texture *)&(data->textures[0]), texture_x, texture_y);
+		color = get_pixel_drawer((t_texture *)&(data->textures[0]), texture_x, texture_y);
 		set_pixel_color(&data->img_3d, x, y, color);
         count++;
     }
