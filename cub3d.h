@@ -15,39 +15,39 @@
 
 /*______ For Mac _______*/
 
-// # include "mlx_library/mlx.h"
+# include "mlx_library/mlx.h"
 
-// #define WINDOW_WIDTH 1680
-// #define WINDOW_HEIGHT 1050
-// # define MINI_WIDTH 320
-// # define MINI_HEIGHT 180
+#define WINDOW_WIDTH 1680
+#define WINDOW_HEIGHT 1050
+# define MINI_WIDTH 320
+# define MINI_HEIGHT 180
 
-// #define XK_Escape      53
-// #define XK_w           13
-// #define XK_a           0
-// #define XK_s           1
-// #define XK_d           2
-// #define XK_Left        123
-// #define XK_Right       124
-// #define XK_Up          126
-// #define XK_Down        125
-// #define KeyPress          2
-// #define KeyRelease        3
-// #define KeyPressMask      (1L<<0)
-// #define KeyReleaseMask    (1L<<1)
+#define XK_Escape      53
+#define XK_w           13
+#define XK_a           0
+#define XK_s           1
+#define XK_d           2
+#define XK_Left        123
+#define XK_Right       124
+#define XK_Up          126
+#define XK_Down        125
+#define KeyPress          2
+#define KeyRelease        3
+#define KeyPressMask      (1L<<0)
+#define KeyReleaseMask    (1L<<1)
 
 /*_______________________*/
 
 /*______ For Linux _______*/
 
-# include <X11/keysym.h>
-# include <X11/X.h>
-# include <mlx.h>
+// # include <X11/keysym.h>
+// # include <X11/X.h>
+// # include <mlx.h>
 
-# define WINDOW_WIDTH 1280
-# define WINDOW_HEIGHT 720
-# define MINI_WIDTH 320
-# define MINI_HEIGHT 180
+// # define WINDOW_WIDTH 1280
+// # define WINDOW_HEIGHT 720
+// # define MINI_WIDTH 320
+// # define MINI_HEIGHT 180
 
 /*_______________________*/
 
@@ -59,6 +59,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
+# include <ctype.h>
+# include <string.h>
 # include <fcntl.h>
 
 // PI
@@ -87,7 +89,7 @@
 
 // SPEED
 # define PLAYER_SPEED 3
-# define ROTATION_SPEED 3
+# define ROTATION_SPEED 5
 
 /* Colors */
 # define COLOR_RED 0xFF0000
@@ -147,25 +149,45 @@ typedef struct s_key
 	int	key_right;
 }	t_key;
 
+typedef struct s_texture
+{
+	void		*img;
+	int			width;
+	int			height;
+	char 		*data;
+	int			size_line;
+	int			endian;
+	int			bpp;
+
+}				t_texture;
+
 typedef struct s_data
 {
 	void		*mlx_ptr;
 	void		*mlx_win;
+
 	char		*floor;
 	char		*ceiling;
+	int			floor_color;
+	int			ceiling_color;
 	char		*no_texture;
 	char		*so_texture;
 	char		*we_texture;
 	char		*ea_texture;
 	char		**map;
-	int		width;
-	int		height;
-	
+	char		**map_checker;
+	char		**new_map;
+	int			widht;
+	int			height;
+
+	int			player_x;
+	int			player_y;
 	t_key		key;
 	t_img		img_2d;
 	t_img		img_3d;
 	t_img		mini_map;
 	t_player	p;
+	t_texture	textures[4];
 }	t_data;
 
 /* Function Prototypes */
@@ -179,6 +201,7 @@ int		key_pressed(int keysym, t_data *data);
 int		key_released(int keysym, t_data *data);
 void		update_player_rotation(t_data *data);
 void		draw_line(t_data *data, int x2, int y2);
+void	draw_floor(t_img *img, unsigned int COLOR);
 char		get_type(t_data *data, double pixel_x, double pixel_y);
 void		clear_image(t_img *img, unsigned int COLOR);
 int		get_pixel_index(t_img *img, int x, int y);
@@ -186,9 +209,10 @@ void		set_pixel_color(t_img *img, int x, int y, int color);
 double	normalize_angle(double angle);
 int		is_wall(t_data *data, double *xyd, double angle, char type);
 
-void	draw_floor(t_img *img, unsigned int COLOR);
+// PARSING //
 void	map_parsing(t_data *game, char **av);
 void	error_msg(char *str);
+void	textures_check(t_data *game);
 
 // RACYCASTING //
 double distance(double x1 , double y1, double x2, double y2);

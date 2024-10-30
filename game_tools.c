@@ -43,6 +43,8 @@ int	get_pixel_index(t_img *img, int x, int y)
 	int	byte_in_pixel;
 	int	byte_in_line;
 
+	if (x < 0 || x >= img->width || y < 0 || y >= img->height)
+		return (0);
 	byte_in_pixel = img->bits_per_pixel / 8;
 	byte_in_line = img->size_line;
 	return ((y * byte_in_line) + (x * byte_in_pixel));
@@ -52,8 +54,7 @@ void	set_pixel_color(t_img *img, int x, int y, int color)
 {
 	int	pixel;
 
-
-	if (x < 0 || x > img->width || y < 0 || y > img->height)
+	if (x < 0 || x >= img->width || y < 0 || y >= img->height)
 		return ;
 	pixel = get_pixel_index(img, x, y);
 	img->img_data[pixel] = color & 0xFF;
@@ -146,11 +147,4 @@ int get_pixel_color(t_data *data, int x, int y)
    buffer = (int *)data->img_2d.img_data;
    
 	return buffer[index / 4];
-}
-
-void	error_msg(char *str)
-{
-	write(1, str, ft_strlen(str));
-	write(1, "\n", 1);
-	exit(1);
 }

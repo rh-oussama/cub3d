@@ -69,8 +69,10 @@ void	ground_draw(t_data *data)
 		{
 			if (data->map[y][x] == '1')
 				fill_tail(data, x * TILE_SIZE, y * TILE_SIZE, COLOR_GREEN);
-			else
+			else if (data->map[y][x] == '0' || data->map[y][x] == 'W' || data->map[y][x] == 'N' || data->map[y][x] == 'E' || data->map[y][x] == 'S')
 				fill_tail(data, x * TILE_SIZE, y * TILE_SIZE, COLOR_WHITE);
+			else if (data->map[y][x] == 'D')
+				fill_tail(data, x * TILE_SIZE, y * TILE_SIZE, COLOR_MAGENTA);
 			x++;
 		}
 		y++;
@@ -166,27 +168,52 @@ void	draw_line(t_data *data, int x2, int y2)
 	}
 }
 
+int get_pixel_color_1(t_texture *texture, int x, int y)
+{
+    int color;
+    char *pixel;
+
+    if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
+        return 0; // Return a default color or handle the error as needed
+
+    pixel = texture->data + (y * texture->size_line + x * (texture->bpp / 8));
+    color = *(int *)pixel;
+    return color;
+}
 
 void draw_wall(t_data *data, t_ray *ray, int x)
 {
-	double project_plane;
-	double correct_distance;
-	double wall_heigh;
-	double wall_top;
-	int count;
+    double project_plane;
+    double correct_distance;
+    double wall_heigh;
+    double wall_top;
+    int count;
+    int texture_x;
+    int texture_y;
+    int color;
 
-	correct_distance = ray->distance * cos(ray->angle - data->p.angle);
+    correct_distance = ray->distance * cos(ray->angle - data->p.angle);
 
-	project_plane = (WINDOW_WIDTH / 2) / tan(FIELD_OF_VIEW_ANGLE / 2);
-	wall_heigh = (TILE_SIZE / correct_distance) * project_plane;
-	wall_top = (WINDOW_HEIGHT / 2) - (wall_heigh / 2);
+    project_plane = (WINDOW_WIDTH / 2) / tan(FIELD_OF_VIEW_ANGLE / 2);
+    wall_heigh = (TILE_SIZE / correct_distance) * project_plane;
+    wall_top = (WINDOW_HEIGHT / 2) - (wall_heigh / 2);
 
-	count = 0;
-	while (count < wall_heigh)
-	{
-		set_pixel_color(&data->img_3d, x, wall_top + count, COLOR_RED);
-		count++;
-	}
+	double hit_point = 0;
+	if (ray->hit_horizontal == 0)
+		hit_point = ray->y;
+	else
+		hit_point = ray->x;
+    texture_x = ((int)hit_point) % TILE_SIZE;
+
+    count = 0;
+    while (count < wall_heigh)
+    {
+        int y = wall_top + count;
+		texture_y = ((count * TILE_SIZE) / wall_heigh);
+		color = get_pixel_color_1((t_texture *)&(data->textures[0]), texture_x, texture_y);
+		set_pixel_color(&data->img_3d, x, y, color);
+        count++;
+    }
 }
 
 void ray_draw(t_data *data)
