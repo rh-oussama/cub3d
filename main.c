@@ -4,23 +4,23 @@ int game_render(t_data *data)
 {
 	// TODO: animated sprite
 	// TODO: Doors which can open and close.
-	clear_image(&(data->img_3d), COLOR_CYAN);
-	draw_floor(&(data->img_3d), COLOR_BLACK);
+	clear_image(&(data->img_3d), data->ceiling_color);
+	draw_floor(&(data->img_3d), data->floor_color);
 	clear_image(&(data->img_2d), COLOR_BLACK);
 	update_player_rotation(data);
-   update_player_position(data);
-   ground_draw(data);
+   	update_player_position(data);
+   	ground_draw(data);
 	player_draw(data);
 	ray_draw(data);
 	draw_line(data, (data->p.x + 20 * cos(data->p.angle)), (data->p.y + 20 * sin(data->p.angle)));
 	draw_mini_map(data, 0, 0);
-   mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img_3d.img, 0, 0);
+   	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img_3d.img, 0, 0);
    return (0);
 }
 
 int game_init(t_data *data)
 {
-	data->img_2d.width = (data->width * TILE_SIZE);
+	data->img_2d.width = (data->widht * TILE_SIZE);
 	data->img_2d.height = (data->height * TILE_SIZE);
 	// image deminsion
 	data->img_3d.width = WINDOW_WIDTH;
@@ -85,6 +85,14 @@ void	get_player_position(t_data *game)
 	}
 }
 
+t_data	initialize_variables()
+{
+	t_data	game;
+
+	game = (t_data){0};
+	return (game);
+}
+
 int	main(int ac, char **av)
 {
 	if (ac != 2)
@@ -92,21 +100,21 @@ int	main(int ac, char **av)
 
 	t_data data;
 
+	data = initialize_variables();
 	// TODO: PARSING
 	map_parsing(&data, av);
 	game_init(&data);
 	get_player_position(&data);
 	data.mlx_ptr = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
-	
+	textures_check(&data);
+
 	///// MAP 2D IMAGE 
 	data.img_2d.img = mlx_new_image(data.mlx_ptr, data.img_2d.width, data.img_2d.height);
 	data.img_2d.img_data = mlx_get_data_addr(data.img_2d.img, &data.img_2d.bits_per_pixel, &data.img_2d.size_line, &data.img_2d.endian);
 	//// MAP 3D IMAGE
 	data.img_3d.img = mlx_new_image(data.mlx_ptr, data.img_3d.width, data.img_3d.height);
 	data.img_3d.img_data = mlx_get_data_addr(data.img_3d.img, &data.img_3d.bits_per_pixel, &data.img_3d.size_line, &data.img_3d.endian);
-
-	// TODO: MINI MAP
 
 	//// KEY_PRESS AND KEY_RELEASE
 	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, key_pressed, &data);
