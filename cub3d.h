@@ -59,8 +59,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
-# include <ctype.h>
-# include <string.h>
 # include <fcntl.h>
 
 // PI
@@ -75,21 +73,14 @@
 /* TILE  */
 # define TILE_SIZE 32
 
-/* WINDOW */
-// #define WINDOW_WIDTH 1680
-// #define WINDOW_HEIGHT 1050
-
-
-
-
 
 /* FOV && RAYS */
 # define FIELD_OF_VIEW_ANGLE (60 * (PI_180 / 180.0))
 # define NUM_RAYS WINDOW_WIDTH
 
 // SPEED
-# define PLAYER_SPEED 3
-# define ROTATION_SPEED 5
+# define PLAYER_SPEED 6
+# define ROTATION_SPEED 9
 
 /* Colors */
 # define COLOR_RED 0xFF0000
@@ -170,6 +161,9 @@ typedef struct s_data
 	char		*ceiling;
 	int			floor_color;
 	int			ceiling_color;
+	char		**floor_parse;
+	char		**ceiling_parse;
+
 	char		*no_texture;
 	char		*so_texture;
 	char		*we_texture;
@@ -177,8 +171,12 @@ typedef struct s_data
 	char		**map;
 	char		**map_checker;
 	char		**new_map;
-	int			widht;
+	int			width;
 	int			height;
+
+	int			r;
+	int			g;
+	int			b;
 
 	int			player_x;
 	int			player_y;
@@ -210,9 +208,17 @@ double	normalize_angle(double angle);
 int		is_wall(t_data *data, double *xyd, double angle, char type);
 
 // PARSING //
-void	map_parsing(t_data *game, char **av);
 void	error_msg(char *str);
+char	*ft_strstr(char *str, char *to_find);
+int	ft_atoi(const char *str);
+int	ft_isalpha_num(int i);
+int ft_is_num(int i);
+char	**ft_split(char *s, char c);
+void	get_color(t_data *game);
+void	get_textures(t_data *game);
 void	textures_check(t_data *game);
+void	check_map(t_data *game);
+void	map_parsing(t_data *game, char **av);
 
 // RACYCASTING //
 double distance(double x1 , double y1, double x2, double y2);

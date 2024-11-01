@@ -20,7 +20,7 @@ int game_render(t_data *data)
 
 int game_init(t_data *data)
 {
-	data->img_2d.width = (data->widht * TILE_SIZE);
+	data->img_2d.width = (data->width * TILE_SIZE);
 	data->img_2d.height = (data->height * TILE_SIZE);
 	// image deminsion
 	data->img_3d.width = WINDOW_WIDTH;
@@ -87,10 +87,21 @@ void	get_player_position(t_data *game)
 
 t_data	initialize_variables()
 {
-	t_data	game;
+	t_data	data;
 
-	game = (t_data){0};
-	return (game);
+	data = (t_data){0};
+	data.map_checker = NULL;
+	data.map = NULL;
+	data.new_map = NULL;
+	data.floor = NULL;
+	data.ceiling = NULL;
+	data.no_texture = NULL;
+	data.so_texture = NULL;
+	data.we_texture = NULL;
+	data.ea_texture = NULL;
+	data.floor_parse = NULL;
+	data.ceiling_parse = NULL;
+	return (data);
 }
 
 int	main(int ac, char **av)

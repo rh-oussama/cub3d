@@ -6,7 +6,11 @@ RM = rm -rf
 SRC = 	game_draw.c \
 		game_move.c \
 		game_raycasting.c \
-		game_parsing.c \
+		game_parsing_map.c \
+		game_parsing_colors.c \
+		game_parsing_textures.c \
+		game_parsing_tools.c \
+		game_path_checker.c \
 		game_tools.c \
 		gnl/get_next_line.c \
      	gnl/get_next_line_utils.c \

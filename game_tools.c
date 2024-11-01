@@ -70,6 +70,9 @@ char	get_type(t_data *data, double pixel_x, double pixel_y)
 
 	map_x = floor(pixel_x / TILE_SIZE);
 	map_y = floor(pixel_y / TILE_SIZE);
+	if (map_y < 0 || map_x < 0 || map_y >= data->height || 
+		map_x >= (int)ft_strlen(data->map[map_y]))
+    		return ('1');
 	if (map_y < 0 || map_x < 0 || map_x >= data->img_2d.width / TILE_SIZE
 		|| map_y >= data->img_2d.height / TILE_SIZE)
 		return ('1');
@@ -140,11 +143,11 @@ int get_pixel_color(t_data *data, int x, int y)
 {
 	int	index;
 	int	*buffer;
-   if (x < 0 || x >= data->img_2d.width || y < 0 || y >= data->img_2d.height)
+   	if (x < 0 || x >= data->img_2d.width || y < 0 || y >= data->img_2d.height)
       return COLOR_BLACK;
 
 	index = get_pixel_index(&data->img_2d, x, y);
-   buffer = (int *)data->img_2d.img_data;
+   	buffer = (int *)data->img_2d.img_data;
    
 	return buffer[index / 4];
 }
