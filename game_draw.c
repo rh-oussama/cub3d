@@ -203,13 +203,13 @@ void draw_wall(t_data *data, t_ray *ray, int x)
 		hit_point = ray->y;
 	else
 		hit_point = ray->x;
-    texture_x = ((int)hit_point) % TILE_SIZE;
+    texture_x = ((int)hit_point) % (TILE_SIZE * 1280);
 
     count = 0;
     while (count < wall_heigh)
     {
         int y = wall_top + count;
-		texture_y = ((count * TILE_SIZE) / wall_heigh);
+		texture_y = ((count * (853)) / wall_heigh);
 		color = get_pixel_drawer((t_texture *)&(data->textures[0]), texture_x, texture_y);
 		set_pixel_color(&data->img_3d, x, y, color);
         count++;
