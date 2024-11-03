@@ -1,22 +1,24 @@
 #include "cub3d.h"
-
+#include "unistd.h"
 
 int game_render(t_data *data)
 {
+	double old_x;
+	double old_y;
+	double old_angle;
+
 	// TODO: animated sprite
 	// TODO: Doors which can open and close.
-	clear_image(&(data->img_3d), data->ceiling_color);
-	draw_floor(&(data->img_3d), data->floor_color);
-	clear_image(&(data->img_2d), COLOR_BLACK);
+	old_x = data->p.x;
+	old_y = data->p.y;
+	old_angle = data->p.angle;
 	update_player_rotation(data);
-   update_player_position(data);
-   ground_draw(data);
-	player_draw(data);
-	draw_line(data);
-	ray_draw(data);
+	update_player_position(data);
+	if (!(old_x == data->p.x && old_y == data->p.y && old_angle == data->p.angle))
+		ray_draw(data); 
 	// draw_mini_map(data, 0, 0);
-   mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img_3d.img, 0, 0);
-   return (0);
+	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img_3d.img, 0, 0);
+	return (0);
 }
 
 int game_init(t_data *data)
@@ -110,9 +112,11 @@ int	main(int ac, char **av)
 	///// MAP 2D IMAGE 
 	data.img_2d.img = mlx_new_image(data.mlx_ptr, data.img_2d.width, data.img_2d.height);
 	data.img_2d.img_data = mlx_get_data_addr(data.img_2d.img, &data.img_2d.bits_per_pixel, &data.img_2d.size_line, &data.img_2d.endian);
+	ground_draw(&data);
 	//// MAP 3D IMAGE
 	data.img_3d.img = mlx_new_image(data.mlx_ptr, data.img_3d.width, data.img_3d.height);
 	data.img_3d.img_data = mlx_get_data_addr(data.img_3d.img, &data.img_3d.bits_per_pixel, &data.img_3d.size_line, &data.img_3d.endian);
+	ray_draw(&data);
 
 	//// KEY_PRESS AND KEY_RELEASE
 	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, key_pressed, &data);

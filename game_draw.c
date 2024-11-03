@@ -79,38 +79,34 @@ void	ground_draw(t_data *data)
 	}
 }
 
-void	player_draw(t_data *data)
+void	player_draw(t_data *data, int xpos, int ypos)
 {
 	int	x;
 	int	y;
 
-	x = data->p.x - data->p.r;
-	while (x <= data->p.x + data->p.r)
+	x = xpos - data->p.r;
+	while (x <= xpos + data->p.r)
 	{
-		y = data->p.y - data->p.r;
-		while (y <= data->p.y + data->p.r)
+		y = ypos - data->p.r;
+		while (y <= ypos + data->p.r)
 		{
-			set_pixel_color(&(data->img_2d), x, y, COLOR_BLUE);
+			set_pixel_color(&(data->img_3d), x, y, COLOR_BLUE);
 			y++;
 		}
 		x++;
 	}
 }
 
-void draw_line(t_data *data)
+void draw_line(t_data *data, double xpos, double ypos)
 {
-	double x;
-	double y;
 	int i;
-	
+
 	i = 0;
-	x = data->p.x;
-	y = data->p.y;
 	while (i < RAW_SIZE)
 	{
-		x += cos(data->p.angle);
-		y += sin(data->p.angle);
-		set_pixel_color(&data->img_2d, (int)x, (int)y, COLOR_RED);
+		xpos += cos(data->p.angle);
+		ypos += sin(data->p.angle);
+		set_pixel_color(&data->img_3d, (int)xpos, (int)ypos, COLOR_RED);
 		i++;
 	}
 }
@@ -135,4 +131,7 @@ void draw_mini_map(t_data *data, int x, int y)
 		}
 		y++;
 	}
+	player_draw(data, MINI_WIDTH / 2, MINI_HEIGHT / 2);
+	draw_line(data, MINI_WIDTH / 2, MINI_HEIGHT / 2);
 }
+
