@@ -6,48 +6,49 @@
 /*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/10/28 08:31:17 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/02 23:01:54 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+// #include <string.h>
 /*______ For Mac _______*/
 
-# include "mlx_library/mlx.h"
+// # include "mlx_library/mlx.h"
 
-#define WINDOW_WIDTH 1680
-#define WINDOW_HEIGHT 1050
-# define MINI_WIDTH 320
-# define MINI_HEIGHT 180
+// #define WINDOW_WIDTH 1680
+// #define WINDOW_HEIGHT 1050
+// # define MINI_WIDTH 320
+// # define MINI_HEIGHT 180
 
-#define XK_Escape      53
-#define XK_w           13
-#define XK_a           0
-#define XK_s           1
-#define XK_d           2
-#define XK_Left        123
-#define XK_Right       124
-#define XK_Up          126
-#define XK_Down        125
-#define KeyPress          2
-#define KeyRelease        3
-#define KeyPressMask      (1L<<0)
-#define KeyReleaseMask    (1L<<1)
+// #define XK_Escape      53
+// #define XK_w           13
+// #define XK_a           0
+// #define XK_s           1
+// #define XK_d           2
+// #define XK_Left        123
+// #define XK_Right       124
+// #define XK_Up          126
+// #define XK_Down        125
+// #define KeyPress          2
+// #define KeyRelease        3
+// #define KeyPressMask      (1L<<0)
+// #define KeyReleaseMask    (1L<<1)
 
 /*_______________________*/
 
 /*______ For Linux _______*/
 
-// # include <X11/keysym.h>
-// # include <X11/X.h>
-// # include <mlx.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
+# include <mlx.h>
 
-// # define WINDOW_WIDTH 1280
-// # define WINDOW_HEIGHT 720
-// # define MINI_WIDTH 320
-// # define MINI_HEIGHT 180
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 720
+# define MINI_WIDTH 320
+# define MINI_HEIGHT 180
 
 /*_______________________*/
 
@@ -68,7 +69,7 @@
 # define PI_360 (2 * PI_180)
 
 # define SCALE 0.5
-# define PIXELS_AHEAD 3
+# define PIXELS_AHEAD 0
 
 /* TILE  */
 # define TILE_SIZE 32
@@ -79,7 +80,7 @@
 # define NUM_RAYS WINDOW_WIDTH
 
 // SPEED
-# define PLAYER_SPEED 6
+# define PLAYER_SPEED 3
 # define ROTATION_SPEED 9
 
 /* Colors */
@@ -97,6 +98,7 @@
 #  define BUFFER_SIZE 1000
 # endif
 
+# define RAW_SIZE 20
 /* Structs */
 typedef struct s_ray
 {
@@ -143,14 +145,31 @@ typedef struct s_key
 typedef struct s_texture
 {
 	void		*img;
-	int			width;
-	int			height;
+	int		width;
+	int		height;
 	char 		*data;
-	int			size_line;
-	int			endian;
-	int			bpp;
+	int		size_line;
+	int		endian;
+	int		bpp;
 
 }				t_texture;
+
+typedef struct s_project
+{
+	double proj_plane;
+	double wall_height;
+	double wall_top;
+	double hit_point;
+	int tex_x;
+	int tex_y;
+	int tex_size;
+	t_texture	*textures;
+} t_project;
+
+typedef struct s_config
+{
+	/* data */
+} t_config;
 
 typedef struct s_data
 {
@@ -168,18 +187,20 @@ typedef struct s_data
 	char		*so_texture;
 	char		*we_texture;
 	char		*ea_texture;
+	
 	char		**map;
 	char		**map_checker;
 	char		**new_map;
+	
 	int			width;
 	int			height;
-
 	int			r;
 	int			g;
 	int			b;
 
 	int			player_x;
 	int			player_y;
+	t_project pr_info;
 	t_key		key;
 	t_img		img_2d;
 	t_img		img_3d;
@@ -194,11 +215,11 @@ void		ground_draw(t_data *data);
 void		player_draw(t_data *data);
 int		game_render(t_data *data);
 void		update_player_position(t_data *data);
-void		ray_draw(t_data *data);
+// void		ray_draw(t_data *data);
 int		key_pressed(int keysym, t_data *data);
 int		key_released(int keysym, t_data *data);
 void		update_player_rotation(t_data *data);
-void		draw_line(t_data *data, int x2, int y2);
+void		draw_line(t_data *data);
 void	draw_floor(t_img *img, unsigned int COLOR);
 char		get_type(t_data *data, double pixel_x, double pixel_y);
 void		clear_image(t_img *img, unsigned int COLOR);
@@ -228,7 +249,6 @@ void	best_intersaction(t_data *data, double angle, int i);
 void	get_horizontal_xyd(t_data *data, double angle, double *xyd);
 void	get_vertical_xyd(t_data *data, double angle, double *xyd);
 
-char	get_type_v2(t_data *data, double pixel_x, double pixel_y);
 void add_ray(t_ray *ray, double angle, double *xyd, char type);
 
 // MINI MAP
@@ -243,6 +263,15 @@ char			*ft_strchr(char *s, int c);
 char			*ft_substr(char *s, unsigned int start, size_t len);
 char			*ft_strdup(char *s1);
 char			*get_next_line(int fd);
+//
 
+int	get_pixel_drawer(t_texture *texture, int x, int y);
+void	draw_wall_helper(t_data *data, t_ray *ray);
+void	draw_wall(t_data *data, t_ray *ray, int x);
+void	ray_draw(t_data *data);
+
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+int	ft_isspace(int c);
 
 #endif
