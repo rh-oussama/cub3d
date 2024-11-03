@@ -6,7 +6,7 @@
 /*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/02 23:01:54 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/03 11:11:38 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,9 +194,6 @@ typedef struct s_data
 	
 	int			width;
 	int			height;
-	int			r;
-	int			g;
-	int			b;
 
 	int			player_x;
 	int			player_y;
@@ -212,15 +209,15 @@ typedef struct s_data
 /* Function Prototypes */
 void		fill_tail(t_data *data, int x, int y, int color);
 void		ground_draw(t_data *data);
-void		player_draw(t_data *data);
+void		player_draw(t_data *data, int xpos, int ypos);
 int		game_render(t_data *data);
 void		update_player_position(t_data *data);
 // void		ray_draw(t_data *data);
 int		key_pressed(int keysym, t_data *data);
 int		key_released(int keysym, t_data *data);
 void		update_player_rotation(t_data *data);
-void		draw_line(t_data *data);
-void	draw_floor(t_img *img, unsigned int COLOR);
+void 		draw_line(t_data *data, double xpos, double ypos);
+void		draw_floor(t_img *img, unsigned int COLOR);
 char		get_type(t_data *data, double pixel_x, double pixel_y);
 void		clear_image(t_img *img, unsigned int COLOR);
 int		get_pixel_index(t_img *img, int x, int y);
