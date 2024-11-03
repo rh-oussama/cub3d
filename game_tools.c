@@ -6,7 +6,7 @@
 /*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:24:56 by oussama           #+#    #+#             */
-/*   Updated: 2024/10/28 08:30:48 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/01 20:30:08 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ void add_ray(t_ray *ray, double angle, double *xyd, char type)
 {
 	ray->x = xyd[0];
 	ray->y = xyd[1];
-	ray->angle = angle;
 	ray->distance = xyd[2];
+	ray->angle = angle;
 	ray->hit_horizontal = 0;
 	if (type == 'h')
 		ray->hit_horizontal = 1;

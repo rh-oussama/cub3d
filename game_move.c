@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_move.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:26:53 by oussama           #+#    #+#             */
-/*   Updated: 2024/10/14 14:11:54 by oussama          ###   ########.fr       */
+/*   Updated: 2024/11/02 13:50:44 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	move_player(t_data *data, double angle)
 	next_x = data->p.x + cos(angle) * PLAYER_SPEED;
 	next_y = data->p.y + sin(angle) * PLAYER_SPEED;
 
-	if (get_type_v2(data, next_x, next_y) != '1')
+	if (get_type(data, next_x, next_y) != '1')
 	{
 		data->p.x = next_x;
 		data->p.y = next_y;

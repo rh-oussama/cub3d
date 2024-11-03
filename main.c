@@ -1,5 +1,6 @@
 #include "cub3d.h"
 
+
 int game_render(t_data *data)
 {
 	// TODO: animated sprite
@@ -8,13 +9,13 @@ int game_render(t_data *data)
 	draw_floor(&(data->img_3d), data->floor_color);
 	clear_image(&(data->img_2d), COLOR_BLACK);
 	update_player_rotation(data);
-   	update_player_position(data);
-   	ground_draw(data);
+   update_player_position(data);
+   ground_draw(data);
 	player_draw(data);
+	draw_line(data);
 	ray_draw(data);
-	draw_line(data, (data->p.x + 20 * cos(data->p.angle)), (data->p.y + 20 * sin(data->p.angle)));
-	draw_mini_map(data, 0, 0);
-   	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img_3d.img, 0, 0);
+	// draw_mini_map(data, 0, 0);
+   mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img_3d.img, 0, 0);
    return (0);
 }
 
@@ -39,7 +40,14 @@ int game_init(t_data *data)
 	return (0);
 }
 
-void	get_player_position(t_data *game)
+void set_player_position(t_data *game, int row, int col, double angle)
+{
+	game->p.x = col *TILE_SIZE + TILE_SIZE / 2;
+	game->p.y = row *TILE_SIZE + TILE_SIZE / 2;
+	game->p.angle = angle;
+}
+
+void get_player_position(t_data *game)
 {
 	int row;
 	int col;
@@ -50,37 +58,16 @@ void	get_player_position(t_data *game)
 		col = 0;
 		while (game->map[row][col])
 		{
-			if (game->map[row][col] == 'W' || game->map[row][col] == 'N' || game->map[row][col] == 'E' || game->map[row][col] == 'S')
-			{
-				if (game->map[row][col] == 'W')
-				{
-					game->p.x = (col * TILE_SIZE) + (TILE_SIZE / 2);
-					game->p.y = (row * TILE_SIZE)+ (TILE_SIZE / 2);
-					game->p.angle -= PI_90;
-				}
-				else if (game->map[row][col] == 'N')
-				{
-					game->p.x = (col * TILE_SIZE) + (TILE_SIZE / 2);
-					game->p.y = (row * TILE_SIZE)+ (TILE_SIZE / 2);
-					game->p.angle = 270 * (PI_180 / 180);
-				}
-				else if (game->map[row][col] == 'E')
-				{
-					game->p.x = (col * TILE_SIZE) + (TILE_SIZE / 2);
-					game->p.y = (row * TILE_SIZE)+ (TILE_SIZE / 2);
-					game->p.angle += PI_90;
-				}
-				else if (game->map[row][col] == 'S')
-				{
-					game->p.x = (col * TILE_SIZE) + (TILE_SIZE / 2);
-					game->p.y = (row * TILE_SIZE)+ (TILE_SIZE / 2);
-					game->p.angle += PI_180;
-				}
-				return ;
-			}
+			if (game->map[row][col] == 'W')
+				set_player_position(game, row, col, PI_180);
+			else if (game->map[row][col] == 'N')
+				set_player_position(game, row, col, PI_270);
+			else if (game->map[row][col] == 'E')
+				set_player_position(game, row, col, 0);
+			else if (game->map[row][col] == 'S')
+				set_player_position(game, row, col, PI_90);
 			col++;
 		}
-		col = 0;
 		row++;
 	}
 }
@@ -117,8 +104,8 @@ int	main(int ac, char **av)
 	game_init(&data);
 	get_player_position(&data);
 	data.mlx_ptr = mlx_init();
-	data.mlx_win = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
 	textures_check(&data);
+	data.mlx_win = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
 
 	///// MAP 2D IMAGE 
 	data.img_2d.img = mlx_new_image(data.mlx_ptr, data.img_2d.width, data.img_2d.height);
