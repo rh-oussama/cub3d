@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:24:56 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/01 20:30:08 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/04 10:02:26 by rh               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,36 +80,6 @@ char	get_type(t_data *data, double pixel_x, double pixel_y)
 		return ('1');
 	else
 		return ('0');
-}
-
-char	get_type_v2(t_data *data, double pixel_x, double pixel_y)
-{
-   int	map_x;
-   int	map_y;
-	double new_pixel_x;
-	double new_pixel_y;
-   double angle;
-   double radian;
-
-	angle = 0;
-   while (angle < 360)
-   {
-		radian = angle * PI_180 / 180.0;
-		new_pixel_x = pixel_x + PIXELS_AHEAD * cos(radian);
-		new_pixel_y = pixel_y + PIXELS_AHEAD * sin(radian);
-      map_x = floor(new_pixel_x / TILE_SIZE);
-      map_y = floor(new_pixel_y / TILE_SIZE);
-      if (map_y < 0 || map_x < 0 || map_x >= data->img_2d.width / TILE_SIZE
-            || map_y >= data->img_2d.height / TILE_SIZE)
-      {
-			angle += 1;
-			return ('1');
-		}
-		if (data->map[map_y][map_x] == '1')
-			return ('1');
-		angle += 1;
-   }
-   return ('0');
 }
 
 
