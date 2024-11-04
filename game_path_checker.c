@@ -103,10 +103,9 @@ void	check_map(t_data *game)
 {
 	get_player_position(game);
 	copy_map(game);
-	flood(game->new_map, game->player_x, game->player_y, game);
+	flood(game->new_map, floor(game->p.x / TILE_SIZE), floor(game->p.x / TILE_SIZE), game);
 	if (check_path(game->new_map))
 	{
-		// free_map(game->new_map);
 		error_msg("invalid path in the map");
 	}
 }
