@@ -61,7 +61,6 @@ void	init_image(t_data *data)
 	data->img_3d.img_data = mlx_get_data_addr(data->img_3d.img,
 			&data->img_3d.bits_per_pixel, &data->img_3d.size_line,
 			&data->img_3d.endian);
-	ground_draw(data);
 	ray_draw(data);
 }
 

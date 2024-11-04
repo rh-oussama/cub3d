@@ -10,8 +10,8 @@ ifeq ($(shell uname), Linux)
 endif
 ##
 
-SRC =		game_draw.c \
-			game_libft.c \
+SRC =		game_libft.c \
+			game_tools_2.c \
 			game_move.c \
 			game_parsing_map.c \
 			game_parsing_textures.c \

@@ -6,37 +6,11 @@
 /*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:24:56 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/04 10:02:26 by rh               ###   ########.fr       */
+/*   Updated: 2024/11/04 17:57:16 by rh               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-double	normalize_angle(double angle)
-{
-	double	result;
-
-	result = fmod(angle, PI_360);
-	if (result < 0)
-		result += PI_360;
-	return (result);
-}
-
-int	is_wall(t_data *data, double *xyd, double angle, char type)
-{
-	double	x;
-	double	y;
-
-	x = xyd[0];
-	y = xyd[1];
-	if ((type == 'H') && (angle >= PI_180 && angle <= 2 * PI_180))
-		y -= 1;
-	if ((type == 'V') && (angle >= PI_90 && angle <= PI_270))
-		x -= 1;
-	if (get_type(data, x, y) == '1')
-		return (1);
-	return (0);
-}
 
 int	get_pixel_index(t_img *img, int x, int y)
 {
@@ -57,10 +31,7 @@ void	set_pixel_color(t_img *img, int x, int y, int color)
 	if (x < 0 || x >= img->width || y < 0 || y >= img->height)
 		return ;
 	pixel = get_pixel_index(img, x, y);
-	img->img_data[pixel] = color & 0xFF;
-	img->img_data[pixel + 1] = (color >> 8) & 0xFF;
-	img->img_data[pixel + 2] = (color >> 16) & 0xFF;
-	img->img_data[pixel + 3] = (color >> 24) & 0xFF;
+	((int *)(img->img_data))[pixel / 4] = color;
 }
 
 char	get_type(t_data *data, double pixel_x, double pixel_y)
@@ -70,9 +41,9 @@ char	get_type(t_data *data, double pixel_x, double pixel_y)
 
 	map_x = floor(pixel_x / TILE_SIZE);
 	map_y = floor(pixel_y / TILE_SIZE);
-	if (map_y < 0 || map_x < 0 || map_y >= data->height || 
-		map_x >= (int)ft_strlen(data->map[map_y]))
-    		return ('1');
+	if (map_y < 0 || map_x < 0 || map_y >= data->height
+		|| map_x >= (int)ft_strlen(data->map[map_y]))
+		return ('1');
 	if (map_y < 0 || map_x < 0 || map_x >= data->img_2d.width / TILE_SIZE
 		|| map_y >= data->img_2d.height / TILE_SIZE)
 		return ('1');
@@ -82,8 +53,7 @@ char	get_type(t_data *data, double pixel_x, double pixel_y)
 		return ('0');
 }
 
-
-void add_ray(t_ray *ray, double angle, double *xyd, char type)
+void	add_ray(t_ray *ray, double angle, double *xyd, char type)
 {
 	ray->x = xyd[0];
 	ray->y = xyd[1];
@@ -97,27 +67,17 @@ void add_ray(t_ray *ray, double angle, double *xyd, char type)
 		ray->looking_down = 1;
 	ray->looking_left = 0;
 	if (angle >= PI_90 && angle <= PI_270)
-		ray->looking_left = 1;	
+		ray->looking_left = 1;
 }
 
-double distance(double x1 , double y1, double x2, double y2)
-{
-	double distance;
-	
-	distance = sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
-	return (distance);
-	
-}
-
-int get_pixel_color(t_data *data, int x, int y)
+int	get_pixel_color(t_data *data, int x, int y)
 {
 	int	index;
 	int	*buffer;
-   	if (x < 0 || x >= data->img_2d.width || y < 0 || y >= data->img_2d.height)
-      return COLOR_BLACK;
 
+	if (x < 0 || x >= data->img_2d.width || y < 0 || y >= data->img_2d.height)
+		return (COLOR_BLACK);
 	index = get_pixel_index(&data->img_2d, x, y);
-   	buffer = (int *)data->img_2d.img_data;
-   
-	return buffer[index / 4];
+	buffer = (int *)data->img_2d.img_data;
+	return (buffer[index / 4]);
 }
