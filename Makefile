@@ -13,7 +13,6 @@ endif
 SRC =		game_draw.c \
 			game_libft.c \
 			game_move.c \
-			game_parsing_colors.c \
 			game_parsing_map.c \
 			game_parsing_textures.c \
 			game_parsing_tools.c \

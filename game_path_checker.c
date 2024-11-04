@@ -14,10 +14,17 @@ void	copy_map(t_data *game)
 	game->new_map[i] = NULL;
 }
 
-void	get_p_pos(t_data *game)
+void	set_player_position(t_data *game, int row, int col, double angle)
 {
-	int row;
-	int col;
+	game->p.x = col * TILE_SIZE + TILE_SIZE / 2;
+	game->p.y = row * TILE_SIZE + TILE_SIZE / 2;
+	game->p.angle = angle;
+}
+
+void	get_player_position(t_data *game)
+{
+	int	row;
+	int	col;
 
 	row = 0;
 	while (game->map[row])
@@ -25,15 +32,16 @@ void	get_p_pos(t_data *game)
 		col = 0;
 		while (game->map[row][col])
 		{
-			if (game->map[row][col] == 'W' || game->map[row][col] == 'N' || game->map[row][col] == 'E' || game->map[row][col] == 'S')
-			{
-				game->player_x = col;
-				game->player_y = row;
-				return ;
-			}
+			if (game->map[row][col] == 'W')
+				set_player_position(game, row, col, PI_180);
+			else if (game->map[row][col] == 'N')
+				set_player_position(game, row, col, PI_270);
+			else if (game->map[row][col] == 'E')
+				set_player_position(game, row, col, 0);
+			else if (game->map[row][col] == 'S')
+				set_player_position(game, row, col, PI_90);
 			col++;
 		}
-		col = 0;
 		row++;
 	}
 }
@@ -42,7 +50,8 @@ void	flood(char **str, int x, int y, t_data *game)
 {
 	if (x < 0 || y < 0 || y >= game->height || x >= (int)ft_strlen(str[y]))
 		return ;
-	if (str[y][x] == '1' || str[y][x] == 'F' || str[y][x] == 'D' || str[y][x] == 'X')
+	if (str[y][x] == '1' || str[y][x] == 'F' || str[y][x] == 'D'
+		|| str[y][x] == 'X')
 		return ;
 	else
 	{
@@ -67,17 +76,20 @@ int	check_path(char **map)
 		{
 			if (map[i][j] == 'F' || map[i][j] == '0')
 			{
-				if (map[i - 1][j] == 'X' || map[i + 1][j] == 'X' || map[i][j - 1] == 'X' || map[i][j + 1] == 'X')
+				if (map[i - 1][j] == 'X' || map[i + 1][j] == 'X' || map[i][j
+					- 1] == 'X' || map[i][j + 1] == 'X')
 					return (1);
 			}
 			if (map[i][j] == 'D')
 			{
-				if (map[i - 1][j] == '1' && map[i + 1][j] == '1' && map[i][j - 1] == '1' && map[i][j + 1] == '1')
+				if (map[i - 1][j] == '1' && map[i + 1][j] == '1' && map[i][j
+					- 1] == '1' && map[i][j + 1] == '1')
 					return (1);
 			}
 			if (map[i][j] == 'D')
 			{
-				if (map[i - 1][j] == 'X' || map[i + 1][j] == 'X' || map[i][j - 1] == 'X' || map[i][j + 1] == 'X')
+				if (map[i - 1][j] == 'X' || map[i + 1][j] == 'X' || map[i][j
+					- 1] == 'X' || map[i][j + 1] == 'X')
 					return (1);
 			}
 			j++;
@@ -89,12 +101,12 @@ int	check_path(char **map)
 
 void	check_map(t_data *game)
 {
-	get_p_pos(game);
+	get_player_position(game);
 	copy_map(game);
 	flood(game->new_map, game->player_x, game->player_y, game);
 	if (check_path(game->new_map))
 	{
-		//free_map(game->new_map);
+		// free_map(game->new_map);
 		error_msg("invalid path in the map");
 	}
 }

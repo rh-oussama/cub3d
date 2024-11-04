@@ -6,7 +6,7 @@
 /*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/04 10:02:10 by rh               ###   ########.fr       */
+/*   Updated: 2024/11/04 13:09:05 by rh               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,5 +270,6 @@ void	ray_draw(t_data *data);
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 int	ft_isspace(int c);
+void	get_player_position(t_data *game);
 
 #endif
