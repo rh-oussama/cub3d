@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/03 11:11:38 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/04 10:02:10 by rh               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@
 # define PI_360 (2 * PI_180)
 
 # define SCALE 0.5
-# define PIXELS_AHEAD 0
+# define SAFE_DISTANCE 5
 
 /* TILE  */
 # define TILE_SIZE 32

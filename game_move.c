@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_move.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:26:53 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/02 13:50:44 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/04 10:01:54 by rh               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,24 @@ int	key_released(int keysym, t_data *data)
 	return (0);
 }
 
+int is_safe(t_data *data, double x, double y)
+{
+	double check_x;
+	double check_y;
+   double angle;
+	
+	angle = 0;
+	while (angle <= PI_360)
+	{
+		check_x = x + cos(angle) * SAFE_DISTANCE;
+      check_y = y + sin(angle) * SAFE_DISTANCE;
+      if (get_type(data, check_x, check_y) == '1')
+			return 0;
+      angle += PI_90;
+   }
+   return 1;
+}
+
 void	move_player(t_data *data, double angle)
 {
 	double	next_x;
@@ -56,7 +74,7 @@ void	move_player(t_data *data, double angle)
 	next_x = data->p.x + cos(angle) * PLAYER_SPEED;
 	next_y = data->p.y + sin(angle) * PLAYER_SPEED;
 
-	if (get_type(data, next_x, next_y) != '1')
+	if (is_safe(data, next_x, next_y))
 	{
 		data->p.x = next_x;
 		data->p.y = next_y;
