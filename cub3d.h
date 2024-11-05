@@ -6,7 +6,7 @@
 /*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/05 11:09:50 by rh               ###   ########.fr       */
+/*   Updated: 2024/11/05 12:10:06 by rh               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@
 
 /* TILE  */
 # define TILE_SIZE 32
-hello
 
 /* FOV && RAYS */
 # define FIELD_OF_VIEW_ANGLE (60 * (PI_180 / 180.0))
@@ -261,5 +260,15 @@ char			get_type(t_data *data, double pixel_x, double pixel_y);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_isspace(int c);
 void			get_player_position(t_data *game);
+
+// Mini Map
+
+void clear_image(t_img *img, unsigned int COLOR);
+void draw_floor(t_img *img, unsigned int COLOR);
+void draw_line(t_data *data, double xpos, double ypos);
+void draw_mini_map(t_data *data, int x, int y);
+void fill_tail(t_data *data, int x, int y, int color);
+void ground_draw(t_data *data);
+void player_draw(t_data *data, int xpos, int ypos);
 
 #endif

@@ -14,7 +14,11 @@ int	game_render(t_data *data)
 	update_player_position(data);
 	if (!(old_x == data->p.x && old_y == data->p.y
 			&& old_angle == data->p.angle))
+	{
 		ray_draw(data);
+		draw_mini_map(data, 0 , 0);
+	}
+		
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img_3d.img, 0,
 		0);
 	return (0);
@@ -61,7 +65,9 @@ void	init_image(t_data *data)
 	data->img_3d.img_data = mlx_get_data_addr(data->img_3d.img,
 			&data->img_3d.bits_per_pixel, &data->img_3d.size_line,
 			&data->img_3d.endian);
+	ground_draw(data);
 	ray_draw(data);
+	draw_mini_map(data, 0 , 0);
 }
 
 int	main(int ac, char **av)

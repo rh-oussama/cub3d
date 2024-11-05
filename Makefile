@@ -11,6 +11,7 @@ endif
 ##
 
 SRC =		game_libft.c \
+			game_mini_map.c \
 			game_tools_2.c \
 			game_move.c \
 			game_parsing_map.c \
