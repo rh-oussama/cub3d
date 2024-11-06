@@ -6,7 +6,7 @@
 /*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:26:53 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/04 17:50:45 by rh               ###   ########.fr       */
+/*   Updated: 2024/11/05 19:29:20 by rh               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ int	key_pressed(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
 		exit(0);
+	
+	else if (keysym == XK_e)
+		door_mechanism(data);
 	else if (keysym == XK_w)
 		data->key.key_w = 1;
 	else if (keysym == XK_s)

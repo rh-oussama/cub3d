@@ -5,15 +5,17 @@ int	is_safe(t_data *data, double x, double y)
 	double	check_x;
 	double	check_y;
 	double	angle;
+	char	type;
 
 	angle = 0;
 	while (angle <= PI_360)
 	{
 		check_x = x + cos(angle) * SAFE_DISTANCE;
 		check_y = y + sin(angle) * SAFE_DISTANCE;
-		if (get_type(data, check_x, check_y) == '1')
+		type = get_type(data, check_x, check_y);
+		if (type == '1' || type == 'D')
 			return (0);
-		angle += PI_90;
+		angle += PI_90 / 4;
 	}
 	return (1);
 }
@@ -46,6 +48,7 @@ int	is_wall(t_data *data, double *xyd, double angle, char type)
 {
 	double	x;
 	double	y;
+	char	wall_type;
 
 	x = xyd[0];
 	y = xyd[1];
@@ -53,7 +56,11 @@ int	is_wall(t_data *data, double *xyd, double angle, char type)
 		y -= 1;
 	if ((type == 'V') && (angle >= PI_90 && angle <= PI_270))
 		x -= 1;
-	if (get_type(data, x, y) == '1')
+	wall_type = get_type(data, x, y);
+	if (wall_type == '1' || wall_type == 'D')
+	{
+		xyd[3] = (double)wall_type;
 		return (1);
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/05 12:10:06 by rh               ###   ########.fr       */
+/*   Updated: 2024/11/05 20:41:39 by rh               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_ray
 {
 	double		x;
 	double		y;
+	double		type;
 	double		angle;
 	double		distance;
 	int			hit_horizontal;
@@ -188,6 +189,8 @@ typedef struct s_data
 	char		**map_checker;
 	char		**new_map;
 
+	char		**door;
+
 	int			width;
 	int			height;
 	t_project	pr_info;
@@ -195,7 +198,7 @@ typedef struct s_data
 	t_img		img_2d;
 	t_img		img_3d;
 	t_player	p;
-	t_texture	textures[4];
+	t_texture	textures[5];
 }				t_data;
 
 /* Function Prototypes */
@@ -263,12 +266,17 @@ void			get_player_position(t_data *game);
 
 // Mini Map
 
-void clear_image(t_img *img, unsigned int COLOR);
-void draw_floor(t_img *img, unsigned int COLOR);
 void draw_line(t_data *data, double xpos, double ypos);
 void draw_mini_map(t_data *data, int x, int y);
 void fill_tail(t_data *data, int x, int y, int color);
 void ground_draw(t_data *data);
 void player_draw(t_data *data, int xpos, int ypos);
+
+// door
+char	**new_array(char **array);
+void	door_mechanism(t_data *data);
+void	door_mechanism(t_data *data);
+int	handle_door_interaction(t_data *data, int x, int y, char type);
+
 
 #endif

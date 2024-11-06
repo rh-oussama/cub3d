@@ -44,6 +44,7 @@ void	game_init(t_data *data)
 	data->ea_texture = NULL;
 	data->floor_parse = NULL;
 	data->ceiling_parse = NULL;
+	data->door = NULL;
 }
 
 void	init_image(t_data *data)

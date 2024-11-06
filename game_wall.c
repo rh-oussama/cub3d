@@ -24,7 +24,10 @@ void	draw_wall_helper(t_data *data, t_ray *ray)
 		pro->hit_point = ray->x;
 	else
 		pro->hit_point = ray->y;
-	if (ray->looking_down && ray->hit_horizontal)
+
+	if (ray->type == 'D')
+		pro->textures = &data->textures[4];
+	else if (ray->looking_down && ray->hit_horizontal)
 		pro->textures = &data->textures[2];
 	else if (!ray->looking_down && ray->hit_horizontal)
 		pro->textures = &data->textures[0];

@@ -6,7 +6,7 @@
 /*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:31:04 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/04 17:58:36 by rh               ###   ########.fr       */
+/*   Updated: 2024/11/05 18:58:46 by rh               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ void	get_vertical_xyd(t_data *data, double angle, double *xyd)
 /* GET THE XY FOR THE LESS DISTANCE RAY */
 void	best_intersaction(t_data *data, double angle, int i)
 {
-	double	xyd_h[3];
-	double	xyd_v[3];
+	double	xyd_h[4];
+	double	xyd_v[4];
 
 	angle = normalize_angle(angle);
 	get_horizontal_xyd(data, angle, xyd_h);
@@ -135,4 +135,5 @@ void	best_intersaction(t_data *data, double angle, int i)
 		add_ray(&(data->p.ray[i]), angle, xyd_h, 'h');
 	else
 		add_ray(&(data->p.ray[i]), angle, xyd_v, 'v');
+   
 }

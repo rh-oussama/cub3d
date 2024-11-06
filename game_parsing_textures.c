@@ -75,6 +75,14 @@ void	textures_check(t_data *game)
 		error_msg("No texture found");
 	t[3].data = mlx_get_data_addr(t[3].img, &t[3].bpp, &t[3].size_line,
 			&t[3].endian);
+	
+	// door texture
+	t[4].img = mlx_xpm_file_to_image(game->mlx_ptr, "textures/door.xpm",
+			&t[4].width, &t[4].height);
+	if (!t[4].img)
+		error_msg("No texture found");
+	t[4].data = mlx_get_data_addr(t[4].img, &t[4].bpp, &t[4].size_line,
+			&t[4].endian);
 }
 
 char	*validate_path(char *str)

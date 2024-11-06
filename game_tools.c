@@ -6,7 +6,7 @@
 /*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:24:56 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/04 17:57:16 by rh               ###   ########.fr       */
+/*   Updated: 2024/11/05 18:56:38 by rh               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,14 @@ char	get_type(t_data *data, double pixel_x, double pixel_y)
 	if (map_y < 0 || map_x < 0 || map_x >= data->img_2d.width / TILE_SIZE
 		|| map_y >= data->img_2d.height / TILE_SIZE)
 		return ('1');
-	if (data->map[map_y][map_x] == '1')
-		return ('1');
-	else
-		return ('0');
+	return (data->map[map_y][map_x]);
 }
 
 void	add_ray(t_ray *ray, double angle, double *xyd, char type)
 {
 	ray->x = xyd[0];
 	ray->y = xyd[1];
+	ray->type = (char)(int)xyd[3];
 	ray->distance = xyd[2];
 	ray->angle = angle;
 	ray->hit_horizontal = 0;
