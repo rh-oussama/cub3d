@@ -20,19 +20,6 @@ int	is_safe(t_data *data, double x, double y)
 	return (1);
 }
 
-void	move_player(t_data *data, double angle)
-{
-	double	next_x;
-	double	next_y;
-
-	next_x = data->p.x + cos(angle) * PLAYER_SPEED;
-	next_y = data->p.y + sin(angle) * PLAYER_SPEED;
-	if (is_safe(data, next_x, next_y))
-	{
-		data->p.x = next_x;
-		data->p.y = next_y;
-	}
-}
 
 double	normalize_angle(double angle)
 {

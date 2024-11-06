@@ -6,7 +6,7 @@
 /*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 20:36:39 by rh                #+#    #+#             */
-/*   Updated: 2024/11/05 20:58:43 by rh               ###   ########.fr       */
+/*   Updated: 2024/11/06 12:55:59 by rh               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	handle_door_interaction(t_data *data, int x, int y, char type)
 	return (0);
 }
 
-/* TODO: change color if door is open  */
 void	door_mechanism(t_data *data)
 {
 	char	type;
@@ -89,4 +88,45 @@ void	door_mechanism(t_data *data)
 		}
 		dist--;
 	}
+}
+
+void	handle_horizontal_wall_collision(t_data *data, double angle, t_ray *ray)
+{
+	double	next_x;
+	double	speed;
+
+	if (!ray->looking_down)
+		speed = -((angle / PI_270) - 1) * 10;
+	else
+		speed = (((angle / PI_90) - 1) * 10);
+	next_x = data->p.x + cos(PI_180) * speed;
+	if (is_safe(data, next_x, data->p.y))
+		data->p.x = next_x;
+}
+
+void	handle_vertical_wall_collision(t_data *data, double angle, t_ray *ray)
+{
+	double	next_y;
+	double	speed;
+
+	if (!ray->looking_left)
+		speed = -((angle / PI_180) - 1) * 5;
+	else
+		speed = -(((angle / PI_180) - 1) * 5);
+	next_y = data->p.y + sin(PI_90) * speed;
+	if (is_safe(data, data->p.x, next_y))
+		data->p.y = next_y;
+}
+
+
+void	process_wall_collision(t_data *data, double angle)
+{
+	t_ray *tmp;
+
+	tmp = &data->p.ray[0];
+	best_intersaction(data, angle, 0);
+	if (tmp->hit_horizontal)
+		handle_horizontal_wall_collision(data, angle, tmp);
+	else
+		handle_vertical_wall_collision(data, angle, tmp);
 }

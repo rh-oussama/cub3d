@@ -6,7 +6,7 @@
 /*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/05 20:41:39 by rh               ###   ########.fr       */
+/*   Updated: 2024/11/06 13:25:18 by rh               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ void			set_pixel_color(t_img *img, int x, int y, int color);
 double			normalize_angle(double angle);
 int				is_wall(t_data *data, double *xyd, double angle, char type);
 void			move_player(t_data *data, double angle);
+int				is_safe(t_data *data, double x, double y);
 
 // Event Handling
 int				key_pressed(int keysym, t_data *data);
@@ -266,17 +267,23 @@ void			get_player_position(t_data *game);
 
 // Mini Map
 
-void draw_line(t_data *data, double xpos, double ypos);
-void draw_mini_map(t_data *data, int x, int y);
-void fill_tail(t_data *data, int x, int y, int color);
-void ground_draw(t_data *data);
-void player_draw(t_data *data, int xpos, int ypos);
+void			draw_line(t_data *data, double xpos, double ypos);
+void			draw_mini_map(t_data *data, int x, int y);
+void			fill_tail(t_data *data, int x, int y, int color);
+void			ground_draw(t_data *data);
+void			player_draw(t_data *data, int xpos, int ypos);
 
 // door
-char	**new_array(char **array);
-void	door_mechanism(t_data *data);
-void	door_mechanism(t_data *data);
-int	handle_door_interaction(t_data *data, int x, int y, char type);
+char			**new_array(char **array);
+void			door_mechanism(t_data *data);
+void			door_mechanism(t_data *data);
+int				handle_door_interaction(t_data *data, int x, int y, char type);
 
+// Collision System
+void			process_wall_collision(t_data *data, double angle);
+void			handle_vertical_wall_collision(t_data *data, double angle,
+					t_ray *ray);
+void			handle_horizontal_wall_collision(t_data *data, double angle,
+					t_ray *ray);
 
 #endif
