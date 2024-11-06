@@ -6,13 +6,11 @@
 /*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 20:36:39 by rh                #+#    #+#             */
-/*   Updated: 2024/11/05 20:38:46 by rh               ###   ########.fr       */
+/*   Updated: 2024/11/05 20:58:43 by rh               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdlib.h>
-#include <string.h>
 
 char	**new_array(char **array)
 {
@@ -29,7 +27,7 @@ char	**new_array(char **array)
 	i = 0;
 	while (i < count)
 	{
-		n_arr[i] = strdup(array[i]);
+		n_arr[i] = ft_strdup(array[i]);
 		if (!n_arr[i])
 		{
 			while (i > 0)
@@ -85,7 +83,7 @@ void	door_mechanism(t_data *data)
 		if (handle_door_interaction(data, x, y, type))
 		{
 			ray_draw(data);
-			// TODO: draw mini map another time to change the color of door
+			ground_draw(data);
 			draw_mini_map(data, 0, 0);
 			return ;
 		}

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_draw.c                                        :+:      :+:    :+:   */
+/*   game_mini_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:23:16 by rh                #+#    #+#             */
-/*   Updated: 2024/11/05 12:25:37 by rh               ###   ########.fr       */
+/*   Updated: 2024/11/05 20:58:10 by rh               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	ground_draw(t_data *data)
 		{
 			if (data->map[y][x] == '1')
 				fill_tail(data, x * TILE_SIZE, y * TILE_SIZE, COLOR_GREEN);
+			else if (data->door && data->door[y][x] == 'O')
+				fill_tail(data, x * TILE_SIZE, y * TILE_SIZE, COLOR_CYAN);
 			else if (data->map[y][x] == '0' || data->map[y][x] == 'W'
 				|| data->map[y][x] == 'N' || data->map[y][x] == 'E'
 				|| data->map[y][x] == 'S')
