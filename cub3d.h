@@ -6,38 +6,12 @@
 /*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/04 18:13:26 by rh               ###   ########.fr       */
+/*   Updated: 2024/11/07 15:37:07 by rh               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-
-// #include <string.h>
-/*______ For Mac _______*/
-
-// # include "mlx_library/mlx.h"
-
-// #define WINDOW_WIDTH 1680
-// #define WINDOW_HEIGHT 1050
-// # define MINI_WIDTH 320
-// # define MINI_HEIGHT 180
-
-// #define XK_Escape      53
-// #define XK_w           13
-// #define XK_a           0
-// #define XK_s           1
-// #define XK_d           2
-// #define XK_Left        123
-// #define XK_Right       124
-// #define XK_Up          126
-// #define XK_Down        125
-// #define KeyPress          2
-// #define KeyRelease        3
-// #define KeyPressMask      (1L<<0)
-// #define KeyReleaseMask    (1L<<1)
-
-/*_______________________*/
 
 /*______ For Linux _______*/
 
