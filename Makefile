@@ -1,14 +1,8 @@
 NAME = cub3d
 CC = cc
 RM = rm -rf
-CFLAGS =  -pg # -Wall -Wextra -Werror
-
-## LINUX MAC LIB ##
-CLIBS = mlx_library/libmlx.a -framework OpenGL -framework AppKit -lmlx
-ifeq ($(shell uname), Linux)
-   CLIBS = -lXext -lX11 -lm -lmlx -pg
-endif
-##
+CFLAGS =  # -Wall -Wextra -Werror
+CLIBS = -lXext -lX11 -lm -lmlx
 
 SRC =		game_libft.c \
 			game_tools_2.c \
