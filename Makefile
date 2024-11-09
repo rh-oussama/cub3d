@@ -1,42 +1,44 @@
-NAME = cub3d
+NAME = cub3D
 CC = cc
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+LIBS = -lmlx -lXext -lX11 -lm
 RM = rm -rf
-CFLAGS =  # -Wall -Wextra -Werror
-CLIBS = -lXext -lX11 -lm -lmlx
-
-SRC =		game_libft.c \
-			game_tools_2.c \
-			game_move.c \
-			game_parsing_map.c \
-			game_parsing_textures.c \
-			game_parsing_tools.c \
-			game_path_checker.c \
-			game_raycasting.c \
-			game_tools.c \
-			game_wall.c \
-			main.c \
-			gnl/get_next_line.c \
-			gnl/get_next_line_utils.c \
+SRC = 	mandatory/gnl/get_next_line.c \
+		mandatory/gnl/get_next_line_utils.c \
+		mandatory/game_libft.c \
+		mandatory/game_tools_2.c \
+		mandatory/game_move.c \
+		mandatory/game_parsing_map.c \
+		mandatory/game_parsing_map_helper.c \
+		mandatory/game_parsing_map_helper2.c \
+		mandatory/game_parsing_map_helper3.c \
+		mandatory/game_parsing_map2.c \
+		mandatory/game_parsing_textures.c \
+		mandatory/game_parsing_colors.c \
+		mandatory/game_parsing_tools.c \
+		mandatory/game_parsing_tools2.c \
+		mandatory/game_path_checker.c \
+		mandatory/game_raycasting.c \
+		mandatory/game_tools.c \
+		mandatory/game_wall.c \
+		mandatory/exit_and_free.c \
+		mandatory/exit_and_free2.c \
+		mandatory/main.c \
 
 OBJS = $(SRC:.c=.o)
 
 all: $(NAME)
-	make clean
 
-$(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(CLIBS) -o $(NAME)
-
-%.o: %.c
-	$(CC) $(CFLAGS) $(CLIBS) -c $< -o $@
-
-run: $(NAME)
-	./$(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBS)
 
 clean:
-	rm -f $(OBJS)
+	$(RM) $(OBJS)
 
 fclean: clean
 	$(RM) $(NAME)
 
-re: fclean all
+re: fclean
+	make all
 
+.SECONDARY:

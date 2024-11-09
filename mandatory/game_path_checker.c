@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_path_checker.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/07 22:06:24 by alamaoui          #+#    #+#             */
+/*   Updated: 2024/11/09 23:02:01 by alamaoui         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	copy_map(t_data *game)
@@ -18,6 +30,8 @@ void	set_player_position(t_data *game, int row, int col, double angle)
 {
 	game->p.x = col * TILE_SIZE + TILE_SIZE / 2;
 	game->p.y = row * TILE_SIZE + TILE_SIZE / 2;
+	game->co_x = col;
+	game->co_y = row;
 	game->p.angle = angle;
 }
 
@@ -63,49 +77,11 @@ void	flood(char **str, int x, int y, t_data *game)
 	}
 }
 
-int	check_path(char **map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == 'F' || map[i][j] == '0')
-			{
-				if (map[i - 1][j] == 'X' || map[i + 1][j] == 'X' || map[i][j
-					- 1] == 'X' || map[i][j + 1] == 'X')
-					return (1);
-			}
-			if (map[i][j] == 'D')
-			{
-				if (map[i - 1][j] == '1' && map[i + 1][j] == '1' && map[i][j
-					- 1] == '1' && map[i][j + 1] == '1')
-					return (1);
-			}
-			if (map[i][j] == 'D')
-			{
-				if (map[i - 1][j] == 'X' || map[i + 1][j] == 'X' || map[i][j
-					- 1] == 'X' || map[i][j + 1] == 'X')
-					return (1);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
-
 void	check_map(t_data *game)
 {
 	get_player_position(game);
 	copy_map(game);
-	flood(game->new_map, floor(game->p.x / TILE_SIZE), floor(game->p.x / TILE_SIZE), game);
+	flood(game->new_map, game->co_x, game->co_y, game);
 	if (check_path(game->new_map))
-	{
-		error_msg("invalid path in the map");
-	}
+		error_msg_2("invalid path in the map", game);
 }
