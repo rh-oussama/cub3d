@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_move.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:26:53 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/04 17:50:45 by rh               ###   ########.fr       */
+/*   Updated: 2024/11/08 04:22:31 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	key_pressed(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
-		exit(0);
+		exit_game(data);
 	else if (keysym == XK_w)
 		data->key.key_w = 1;
 	else if (keysym == XK_s)

@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int	get_pixel_drawer(t_texture *texture, int x, int y)
+int	pixel_color(t_texture *texture, int x, int y)
 {
 	int		color;
 	char	*pixel;
@@ -68,7 +68,7 @@ void	draw_wall(t_data *data, t_ray *ray, int x)
 		if (y >= 0)
 		{
 			pro->tex_y = (count * pro->tex_size) / pro->wall_height;
-			color = get_pixel_drawer(pro->textures, pro->tex_x, pro->tex_y);
+			color = pixel_color(pro->textures, pro->tex_x, pro->tex_y);
 			set_pixel_color(&data->img_3d, x, y, color);
 		}
 		count++;

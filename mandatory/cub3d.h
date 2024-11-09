@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/07 15:37:07 by rh               ###   ########.fr       */
+/*   Updated: 2024/11/09 23:52:24 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 /*______ For Linux _______*/
 
+# include "../minilibx-linux/mlx.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
-# include <mlx.h>
 
 # define WINDOW_WIDTH 1280
 # define WINDOW_HEIGHT 720
@@ -50,8 +50,8 @@
 # define NUM_RAYS WINDOW_WIDTH
 
 // SPEED
-# define PLAYER_SPEED 3
-# define ROTATION_SPEED 9
+# define PLAYER_SPEED 1
+# define ROTATION_SPEED 2
 
 /* Colors */
 # define COLOR_RED 0xFF0000
@@ -148,22 +148,27 @@ typedef struct s_data
 
 	char		*floor;
 	char		*ceiling;
-	int			floor_color;
-	int			ceiling_color;
-	char		**floor_parse;
-	char		**ceiling_parse;
-
 	char		*no_texture;
 	char		*so_texture;
 	char		*we_texture;
 	char		*ea_texture;
 
+	char		**floor_parse;
+	char		**ceiling_parse;
 	char		**map;
 	char		**map_checker;
 	char		**new_map;
 
+	int			floor_color;
+	int			ceiling_color;
 	int			width;
 	int			height;
+	int			co_x;
+	int			co_y;
+	int			r;
+	int			g;
+	int			b;
+
 	t_project	pr_info;
 	t_key		key;
 	t_img		img_2d;
@@ -190,17 +195,42 @@ int				key_pressed(int keysym, t_data *data);
 int				key_released(int keysym, t_data *data);
 
 // Parsing
-void			error_msg(char *str);
-char			*ft_strstr(char *str, char *to_find);
-int				ft_atoi(const char *str);
+void			error_msg(char *str, t_data *game);
+void			error(char *str);
+void			error_msg_2(char *str, t_data *game);
+int				ft_atoi(char *str, t_data *game);
 int				ft_isalpha_num(int i);
 int				ft_is_num(int i);
 char			**ft_split(char *s, char c);
+char			*ft_strtrim(char *s1);
+char			*ft_copy(char *s1, int len);
+void			line_check(char *game, t_data *data, char *trimmed);
+void			checker(char *game, char c, t_data *data);
 void			get_color(t_data *game);
 void			get_textures(t_data *game);
 void			textures_check(t_data *game);
 void			check_map(t_data *game);
+void			get_width(t_data *data, int x);
 void			map_parsing(t_data *game, char **av);
+void			map_configure(t_data *data, int x, int flag, char *trimmed);
+void			is_map_closed(t_data *game);
+void			get_map(t_data *data, char **av);
+int				check_path(char **map);
+void			first_and_last_row(t_data *game);
+void			no(char *trimmed, t_data *data, int *flag);
+void			so(char *trimmed, t_data *data, int *flag);
+void			we(char *trimmed, t_data *data, int *flag);
+void			ea(char *trimmed, t_data *data, int *flag);
+char			*trim(t_data *data, int flag, int x, char *trimmed);
+
+// free
+void			free_images(t_data *game);
+void			free_new_map(t_data *game);
+void			free_map_checker(t_data *game);
+void			free_map(t_data *game);
+void			free_ceiling(t_data *game);
+void			free_floor(t_data *game);
+int				exit_game(t_data *game);
 
 // Raycasting
 void			get_horizonntal(t_data *data, double angle, double *xy_step,
