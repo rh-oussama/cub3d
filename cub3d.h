@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/10 02:59:22 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/10 09:39:17 by rh               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@
 
 // PI
 # define PI_180 3.141592653589793
-# define PI_90 (PI_180 / 2)
-# define PI_270 (3 * PI_90)
-# define PI_360 (2 * PI_180)
+# define PI_90 1.5707963268
+# define PI_270 4.7123889804
+# define PI_360 6.2831853072
 
 # define SCALE 0.5
 # define SAFE_DISTANCE 5
@@ -46,7 +46,7 @@
 # define TILE_SIZE 32
 
 /* FOV && RAYS */
-# define FIELD_OF_VIEW_ANGLE (60 * (PI_180 / 180.0))
+# define FIELD_OF_VIEW_ANGLE 1.04719755
 # define NUM_RAYS WINDOW_WIDTH
 
 // SPEED

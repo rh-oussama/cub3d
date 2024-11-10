@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:45 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/10 02:19:04 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/10 09:34:35 by rh               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ void	init_image(t_data *data)
 	data->img_3d.img_data = mlx_get_data_addr(data->img_3d.img,
 			&data->img_3d.bits_per_pixel, &data->img_3d.size_line,
 			&data->img_3d.endian);
+	data->door = new_array(data->map);
+	if (!data->door)
+		error_msg("No enough memory", data);
 	ground_draw(data);
 	ray_draw(data);
 	draw_mini_map(data, 0, 0);

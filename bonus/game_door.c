@@ -3,43 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   game_door.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 20:36:39 by rh                #+#    #+#             */
-/*   Updated: 2024/11/10 02:48:17 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/10 09:36:09 by rh               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-char	**new_array(char **array)
-{
-	int		i;
-	int		count;
-	char	**n_arr;
-
-	count = 0;
-	while (array[count])
-		count++;
-	n_arr = (char **)malloc((count + 1) * sizeof(char *));
-	if (!n_arr)
-		return (NULL);
-	i = 0;
-	while (i < count)
-	{
-		n_arr[i] = ft_strdup(array[i]);
-		if (!n_arr[i])
-		{
-			while (i > 0)
-				free(n_arr[--i]);
-			free(n_arr);
-			return (NULL);
-		}
-		i++;
-	}
-	n_arr[i] = NULL;
-	return (n_arr);
-}
 
 int	handle_door_interaction(t_data *data, int x, int y, char type)
 {
@@ -67,13 +38,6 @@ void	door_mechanism(t_data *data)
 	int		y;
 
 	dist = 35;
-	/// TODO: delete this when merge do it in init
-	if (!data->door)
-	{
-		data->door = new_array(data->map);
-		if (!data->door)
-			error_msg("No enough memory", data);
-	}
 	while (dist > 0)
 	{
 		x = floor((data->p.x + cos(data->p.angle) * dist) / TILE_SIZE);
@@ -118,10 +82,9 @@ void	handle_vertical_wall_collision(t_data *data, double angle, t_ray *ray)
 		data->p.y = next_y;
 }
 
-
 void	process_wall_collision(t_data *data, double angle)
 {
-	t_ray *tmp;
+	t_ray	*tmp;
 
 	tmp = &data->p.ray[0];
 	best_intersaction(data, angle, 0);
