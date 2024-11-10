@@ -64,7 +64,8 @@ void	flood(char **str, int x, int y, t_data *game)
 {
 	if (x < 0 || y < 0 || y >= game->height || x >= (int)ft_strlen(str[y]))
 		return ;
-	if (str[y][x] == '1' || str[y][x] == 'F' || str[y][x] == 'X')
+	if (str[y][x] == '1' || str[y][x] == 'F' || str[y][x] == 'D'
+		|| str[y][x] == 'X')
 		return ;
 	else
 	{

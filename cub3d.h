@@ -6,7 +6,7 @@
 /*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/09 23:52:24 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/10 02:59:22 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /*______ For Linux _______*/
 
-# include "../minilibx-linux/mlx.h"
+# include <mlx.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
 
@@ -74,6 +74,7 @@ typedef struct s_ray
 {
 	double		x;
 	double		y;
+	double		type;
 	double		angle;
 	double		distance;
 	int			hit_horizontal;
@@ -158,6 +159,7 @@ typedef struct s_data
 	char		**map;
 	char		**map_checker;
 	char		**new_map;
+	char		**door;
 
 	int			floor_color;
 	int			ceiling_color;
@@ -174,7 +176,7 @@ typedef struct s_data
 	t_img		img_2d;
 	t_img		img_3d;
 	t_player	p;
-	t_texture	textures[4];
+	t_texture	textures[5];
 }				t_data;
 
 /* Function Prototypes */
@@ -189,6 +191,7 @@ void			set_pixel_color(t_img *img, int x, int y, int color);
 double			normalize_angle(double angle);
 int				is_wall(t_data *data, double *xyd, double angle, char type);
 void			move_player(t_data *data, double angle);
+int				is_safe(t_data *data, double x, double y);
 
 // Event Handling
 int				key_pressed(int keysym, t_data *data);
@@ -230,6 +233,7 @@ void			free_map_checker(t_data *game);
 void			free_map(t_data *game);
 void			free_ceiling(t_data *game);
 void			free_floor(t_data *game);
+void			free_door(t_data *game);
 int				exit_game(t_data *game);
 
 // Raycasting
@@ -264,5 +268,26 @@ char			get_type(t_data *data, double pixel_x, double pixel_y);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_isspace(int c);
 void			get_player_position(t_data *game);
+
+// Mini Map
+
+void			draw_line(t_data *data, double xpos, double ypos);
+void			draw_mini_map(t_data *data, int x, int y);
+void			fill_tail(t_data *data, int x, int y, int color);
+void			ground_draw(t_data *data);
+void			player_draw(t_data *data, int xpos, int ypos);
+
+// door
+char			**new_array(char **array);
+void			door_mechanism(t_data *data);
+void			door_mechanism(t_data *data);
+int				handle_door_interaction(t_data *data, int x, int y, char type);
+
+// Collision System
+void			process_wall_collision(t_data *data, double angle);
+void			handle_vertical_wall_collision(t_data *data, double angle,
+					t_ray *ray);
+void			handle_horizontal_wall_collision(t_data *data, double angle,
+					t_ray *ray);
 
 #endif

@@ -81,6 +81,18 @@ int	flood_checker(char **map, int i, int j)
 			|| map[i][j + 1] == 'X')
 			return (1);
 	}
+	if (map[i][j] == 'D')
+	{
+		if (map[i - 1][j] == '1' && map[i + 1][j] == '1' && map[i][j - 1] == '1'
+			&& map[i][j + 1] == '1')
+			return (1);
+	}
+	if (map[i][j] == 'D')
+	{
+		if (map[i - 1][j] == 'X' || map[i + 1][j] == 'X' || map[i][j - 1] == 'X'
+			|| map[i][j + 1] == 'X')
+			return (1);
+	}
 	return (0);
 }
 
