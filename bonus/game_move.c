@@ -16,6 +16,8 @@ int	key_pressed(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
 		exit_game(data);
+	else if (keysym == XK_e)
+		door_mechanism(data);
 	else if (keysym == XK_w)
 		data->key.key_w = 1;
 	else if (keysym == XK_s)
@@ -46,6 +48,25 @@ int	key_released(int keysym, t_data *data)
 	else if (keysym == XK_Right)
 		data->key.key_right = 0;
 	return (0);
+}
+
+void	move_player(t_data *data, double angle)
+{
+	double	next_x;
+	double	next_y;
+
+	next_x = data->p.x + cos(angle) * PLAYER_SPEED;
+	next_y = data->p.y + sin(angle) * PLAYER_SPEED;
+	if (is_safe(data, next_x, next_y))
+	{
+		data->p.x = next_x;
+		data->p.y = next_y;
+	}
+	else
+	{
+		if (angle == data->p.angle)
+			process_wall_collision(data, angle);
+	}
 }
 
 void	update_player_position(t_data *data)

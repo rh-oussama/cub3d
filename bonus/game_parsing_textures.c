@@ -54,12 +54,12 @@ void	no_image(t_data *game)
 	int	j;
 
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	{
 		if (game->textures[i].img == NULL)
 		{
 			j = 0;
-			while (j < 4)
+			while (j < 5)
 			{
 				if (j != i)
 					mlx_destroy_image(game->mlx_ptr, game->textures[j].img);
@@ -87,6 +87,8 @@ void	textures_check(t_data *game)
 			&t[2].width, &t[2].height);
 	t[3].img = mlx_xpm_file_to_image(game->mlx_ptr, game->we_texture,
 			&t[3].width, &t[3].height);
+	t[4].img = mlx_xpm_file_to_image(game->mlx_ptr, "./textures/door.xpm",
+			&t[4].width, &t[4].height);
 	no_image(game);
 	t[0].data = mlx_get_data_addr(t[0].img, &t[0].bpp, &t[0].size_line,
 			&t[0].endian);
@@ -96,4 +98,6 @@ void	textures_check(t_data *game)
 			&t[2].endian);
 	t[3].data = mlx_get_data_addr(t[3].img, &t[3].bpp, &t[3].size_line,
 			&t[3].endian);
+	t[4].data = mlx_get_data_addr(t[4].img, &t[4].bpp, &t[4].size_line,
+			&t[4].endian);
 }

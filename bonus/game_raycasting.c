@@ -119,8 +119,8 @@ void	get_vertical_xyd(t_data *data, double angle, double *xyd)
 /* GET THE XY FOR THE LESS DISTANCE RAY */
 void	best_intersaction(t_data *data, double angle, int i)
 {
-	double	xyd_h[3];
-	double	xyd_v[3];
+	double	xyd_h[4];
+	double	xyd_v[4];
 
 	angle = normalize_angle(angle);
 	get_horizontal_xyd(data, angle, xyd_h);

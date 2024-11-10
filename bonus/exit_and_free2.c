@@ -6,7 +6,7 @@
 /*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 18:17:11 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/10 03:02:54 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/10 03:06:39 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,19 @@ void	free_floor(t_data *game)
 		i++;
 	}
 	free(game->floor_parse);
+}
+
+void	free_door(t_data *game)
+{
+	int	i;
+
+	i = 0;
+	if (!game->door)
+		return ;
+	while (game->door[i] != NULL)
+	{
+		free(game->door[i]);
+		i++;
+	}
+	free(game->door);
 }

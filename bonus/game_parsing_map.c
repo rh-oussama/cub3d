@@ -6,7 +6,7 @@
 /*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:01 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/10 02:36:42 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/10 02:39:01 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	check_cub(char **av)
 int	is_valid_character(char c)
 {
 	return (c == '\n' || c == '1' || c == '0' || c == 'S' || c == 'N'
-		|| c == 'E' || c == 'W' || c == ' ');
+		|| c == 'E' || c == 'W' || c == ' ' || c == 'D');
 }
 
 void	validate_map_characters(t_data *game)

@@ -38,7 +38,7 @@ void	line_check(char *game, t_data *data, char *trimmed)
 	{
 		if (game[i] != ' ' && game[i] != '1' && game[i] != '0' && game[i] != 'S'
 			&& game[i] != 'N' && game[i] != 'E' && game[i] != 'W'
-			&& game[i] != '\n')
+			&& game[i] != 'D' && game[i] != '\n')
 		{
 			free(trimmed);
 			error_msg_2("Error", data);

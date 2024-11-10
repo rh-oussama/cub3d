@@ -6,7 +6,7 @@
 /*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 02:01:06 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/10 03:03:15 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/10 03:07:02 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	free_images(t_data *game)
 	int	i;
 
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 		mlx_destroy_image(game->mlx_ptr, game->textures[i++].img);
 	if (game->img_2d.img)
 		mlx_destroy_image(game->mlx_ptr, game->img_2d.img);
@@ -75,6 +75,7 @@ int	exit_game(t_data *game)
 	free_map(game);
 	free_new_map(game);
 	free_map_checker(game);
+	free_door(game);
 	free_ceiling(game);
 	free_floor(game);
 	free_images(game);
