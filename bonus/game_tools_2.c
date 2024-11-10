@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_tools_2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/10 09:32:08 by rh                #+#    #+#             */
+/*   Updated: 2024/11/10 09:35:53 by rh               ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	is_safe(t_data *data, double x, double y)
@@ -49,4 +61,33 @@ int	is_wall(t_data *data, double *xyd, double angle, char type)
 		return (1);
 	}
 	return (0);
+}
+
+char	**new_array(char **array)
+{
+	int		i;
+	int		count;
+	char	**n_arr;
+
+	count = 0;
+	while (array[count])
+		count++;
+	n_arr = (char **)malloc((count + 1) * sizeof(char *));
+	if (!n_arr)
+		return (NULL);
+	i = 0;
+	while (i < count)
+	{
+		n_arr[i] = ft_strdup(array[i]);
+		if (!n_arr[i])
+		{
+			while (i > 0)
+				free(n_arr[--i]);
+			free(n_arr);
+			return (NULL);
+		}
+		i++;
+	}
+	n_arr[i] = NULL;
+	return (n_arr);
 }
