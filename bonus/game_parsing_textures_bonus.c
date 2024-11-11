@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_parsing_textures.c                            :+:      :+:    :+:   */
+/*   game_parsing_textures_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:09 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/10 02:19:04 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/11 02:56:11 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ char	*validate_path(char *str, t_data *data)
 			"EA", 2) && ft_strncmp(str, "WE", 2))
 		error_msg_2("Invalid configuration (NO | EA | SO | WE)", data);
 	if (str[2] != ' ')
-		error_msg_2("Error (NO SPACE BETWEEN PATH AND DIRECTION)",
-			data);
+		error_msg_2("Error (NO SPACE BETWEEN PATH AND DIRECTION)", data);
 	str += 3;
 	if (!(*str))
 		error_msg_2("Invalid configuration (EMPTY PATH)", data);
@@ -90,6 +89,7 @@ void	textures_check(t_data *game)
 	t[4].img = mlx_xpm_file_to_image(game->mlx_ptr, "./textures/door.xpm",
 			&t[4].width, &t[4].height);
 	no_image(game);
+	sprite_textures(game);
 	t[0].data = mlx_get_data_addr(t[0].img, &t[0].bpp, &t[0].size_line,
 			&t[0].endian);
 	t[1].data = mlx_get_data_addr(t[1].img, &t[1].bpp, &t[1].size_line,

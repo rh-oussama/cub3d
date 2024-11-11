@@ -74,7 +74,7 @@ void	ground_draw(t_data *data)
  *
 
 	* This function draws a sqaure representing the player
-		 at the specified position.
+			at the specified position.
  */
 void	player_draw(t_data *data, int xpos, int ypos)
 {
@@ -97,9 +97,9 @@ void	player_draw(t_data *data, int xpos, int ypos)
 /**
  * draw_line
 	- Draws a line from the player's position in the direction
-					 the player's angle.
+						the player's angle.
  *
-	* This function draws a line from the player's position in 
+	* This function draws a line from the player's position in
 				the direction of the player's angle.
  */
 void	draw_line(t_data *data, double xpos, double ypos)
