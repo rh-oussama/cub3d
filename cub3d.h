@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/11 03:41:48 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/11 08:04:24 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@
 // SPEED
 # define PLAYER_SPEED 1
 # define ROTATION_SPEED 2
+# define COLLISION_SPEED 2
 
 /* Colors */
 # define COLOR_RED 0xFF0000
