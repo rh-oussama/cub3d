@@ -6,7 +6,7 @@
 /*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 02:01:06 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/10 16:15:27 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/10 17:15:31 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,24 +68,4 @@ void	free_images(t_data *game)
 		mlx_destroy_image(game->mlx_ptr, game->img_2d.img);
 	if (game->img_3d.img)
 		mlx_destroy_image(game->mlx_ptr, game->img_3d.img);
-}
-
-int	exit_game(t_data *game)
-{
-	free_map(game);
-	free_new_map(game);
-	free_map_checker(game);
-	free_ceiling(game);
-	free_floor(game);
-	free_images(game);
-	free(game->no_texture);
-	free(game->so_texture);
-	free(game->we_texture);
-	free(game->ea_texture);
-	free(game->floor);
-	free(game->ceiling);
-	mlx_destroy_window(game->mlx_ptr, game->mlx_win);
-	mlx_destroy_display(game->mlx_ptr);
-	free(game->mlx_ptr);
-	exit(1);
 }

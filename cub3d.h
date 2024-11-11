@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rh <rh@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/10 09:39:17 by rh               ###   ########.fr       */
+/*   Updated: 2024/11/11 03:41:48 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# define MOUSE_SENSITIVITY 0.002
 
 // PI
 # define PI_180 3.141592653589793
@@ -177,6 +179,7 @@ typedef struct s_data
 	t_img		img_3d;
 	t_player	p;
 	t_texture	textures[5];
+	t_texture	sprite[8];
 }				t_data;
 
 /* Function Prototypes */
@@ -225,6 +228,8 @@ void			so(char *trimmed, t_data *data, int *flag);
 void			we(char *trimmed, t_data *data, int *flag);
 void			ea(char *trimmed, t_data *data, int *flag);
 char			*trim(t_data *data, int flag, int x, char *trimmed);
+void			no_image_2(t_data *game);
+void			norm(t_texture *t);
 
 // free
 void			free_images(t_data *game);
@@ -235,6 +240,10 @@ void			free_ceiling(t_data *game);
 void			free_floor(t_data *game);
 void			free_door(t_data *game);
 int				exit_game(t_data *game);
+
+// sprite
+int				sprite(t_data *data);
+void			sprite_textures(t_data *game);
 
 // Raycasting
 void			get_horizonntal(t_data *data, double angle, double *xy_step,

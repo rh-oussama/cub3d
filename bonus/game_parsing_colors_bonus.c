@@ -56,8 +56,7 @@ char	*validate_color(char *str, t_data *data)
 	if (ft_strncmp(str, "F ", 2) && ft_strncmp(str, "C ", 2))
 		error_msg_2("Invalid configuration (F | C)", data);
 	if (str[1] != ' ')
-		error_msg_2("Error (NO SPACE BETWEEN PATH AND DIRECTION)",
-			data);
+		error_msg_2("Error (NO SPACE BETWEEN PATH AND DIRECTION)", data);
 	str += 2;
 	if (!(*str))
 		error_msg_2("Invalid configuration (EMPTY PATH)", data);

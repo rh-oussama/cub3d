@@ -6,7 +6,7 @@
 /*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:16 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/10 03:02:41 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/10 17:16:01 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,24 @@ void	error(char *str)
 	exit(1);
 }
 
-void	error_msg(char *str, t_data *game)
+int	exit_game(t_data *game)
 {
-	write(2, str, ft_strlen(str));
-	write(2, "\n", 1);
-	exit_game(game);
+	free_map(game);
+	free_new_map(game);
+	free_map_checker(game);
+	free_ceiling(game);
+	free_floor(game);
+	free_images(game);
+	free(game->no_texture);
+	free(game->so_texture);
+	free(game->we_texture);
+	free(game->ea_texture);
+	free(game->floor);
+	free(game->ceiling);
+	mlx_destroy_window(game->mlx_ptr, game->mlx_win);
+	mlx_destroy_display(game->mlx_ptr);
+	free(game->mlx_ptr);
+	exit(0);
 }
 
 void	error_msg_2(char *str, t_data *game)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_move.c                                        :+:      :+:    :+:   */
+/*   game_move_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:26:53 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/10 02:19:04 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/11 03:41:42 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,19 @@ void	update_player_position(t_data *data)
 void	update_player_rotation(t_data *data)
 {
 	double	angle_increment;
+	int		mouse_x;
+	int		mouse_y;
+	int		delta_x;
 
 	angle_increment = (PI_180 / 180) * ROTATION_SPEED;
 	if (data->key.key_left == 1)
 		data->p.angle -= angle_increment;
 	if (data->key.key_right == 1)
 		data->p.angle += angle_increment;
+	mlx_mouse_get_pos(data->mlx_ptr, data->mlx_win, &mouse_x, &mouse_y);
+	delta_x = mouse_x - (WINDOW_WIDTH / 2);
+	data->p.angle += delta_x * MOUSE_SENSITIVITY;
 	data->p.angle = normalize_angle(data->p.angle);
+	mlx_mouse_move(data->mlx_ptr, data->mlx_win, WINDOW_WIDTH / 2, WINDOW_HEIGHT
+		/ 2);
 }

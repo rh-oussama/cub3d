@@ -41,6 +41,7 @@ BSRCS = bonus/gnl/get_next_line_utils_bonus.c \
 		bonus/game_parsing_map_helper3_bonus.c \
 		bonus/game_parsing_map2_bonus.c \
 		bonus/game_parsing_textures_bonus.c \
+		bonus/game_parsing_textures_2_bonus.c \
 		bonus/game_parsing_colors_bonus.c \
 		bonus/game_parsing_tools_bonus.c \
 		bonus/game_parsing_tools2_bonus.c \
@@ -50,6 +51,7 @@ BSRCS = bonus/gnl/get_next_line_utils_bonus.c \
 		bonus/game_wall_bonus.c \
 		bonus/exit_and_free_bonus.c \
 		bonus/exit_and_free2_bonus.c \
+		bonus/game_sprite.c \
 		bonus/main_bonus.c \
 
 BOBJS = $(BSRCS:.c=.o)
