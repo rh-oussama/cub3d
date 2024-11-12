@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_parsing_textures_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:09 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/11 02:56:11 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/12 09:27:29 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,57 +47,43 @@ void	get_textures(t_data *game)
 	game->ea_texture = validate_path(game->ea_texture, game);
 }
 
-void	no_image(t_data *game)
+void	load_textures(t_data *game, t_texture	*texture, \
+								char *tex_str, int idx)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < 5)
+	texture[idx].img = mlx_xpm_file_to_image(game->mlx_ptr, tex_str,
+			&texture[idx].width, &texture[idx].height);
+	if (texture[idx].img == NULL)
 	{
-		if (game->textures[i].img == NULL)
+		while (idx >= 0)
 		{
-			j = 0;
-			while (j < 5)
-			{
-				if (j != i)
-					mlx_destroy_image(game->mlx_ptr, game->textures[j].img);
-				j++;
-			}
-			mlx_destroy_window(game->mlx_ptr, game->mlx_win);
-			mlx_destroy_display(game->mlx_ptr);
-			free(game->mlx_ptr);
-			error_msg_2("Problem in textures", game);
+			mlx_destroy_image(game->mlx_ptr, game->textures[idx].img);
+			idx--;
 		}
-		i++;
+		mlx_destroy_window(game->mlx_ptr, game->mlx_win);
+		mlx_destroy_display(game->mlx_ptr);
+		free(game->mlx_ptr);
+		error_msg_2("Problem in textures", game);
 	}
+	texture[idx].data = mlx_get_data_addr(texture[idx].img,
+			&texture[idx].bpp, &texture[idx].size_line,
+			&texture[idx].endian);
 }
 
 void	textures_check(t_data *game)
 {
-	t_texture	*t;
-
-	t = game->textures;
-	t[0].img = mlx_xpm_file_to_image(game->mlx_ptr, game->no_texture,
-			&t[0].width, &t[0].height);
-	t[1].img = mlx_xpm_file_to_image(game->mlx_ptr, game->ea_texture,
-			&t[1].width, &t[1].height);
-	t[2].img = mlx_xpm_file_to_image(game->mlx_ptr, game->so_texture,
-			&t[2].width, &t[2].height);
-	t[3].img = mlx_xpm_file_to_image(game->mlx_ptr, game->we_texture,
-			&t[3].width, &t[3].height);
-	t[4].img = mlx_xpm_file_to_image(game->mlx_ptr, "./textures/door.xpm",
-			&t[4].width, &t[4].height);
-	no_image(game);
-	sprite_textures(game);
-	t[0].data = mlx_get_data_addr(t[0].img, &t[0].bpp, &t[0].size_line,
-			&t[0].endian);
-	t[1].data = mlx_get_data_addr(t[1].img, &t[1].bpp, &t[1].size_line,
-			&t[1].endian);
-	t[2].data = mlx_get_data_addr(t[2].img, &t[2].bpp, &t[2].size_line,
-			&t[2].endian);
-	t[3].data = mlx_get_data_addr(t[3].img, &t[3].bpp, &t[3].size_line,
-			&t[3].endian);
-	t[4].data = mlx_get_data_addr(t[4].img, &t[4].bpp, &t[4].size_line,
-			&t[4].endian);
+	//// wall texture
+	load_textures(game, game->textures, game->no_texture, 0);
+	load_textures(game, game->textures, game->ea_texture, 1);
+	load_textures(game, game->textures, game->so_texture, 2);
+	load_textures(game, game->textures, game->we_texture, 3);
+	load_textures(game, game->textures, "./textures/door.xpm", 4);
+	//// sprite_texture
+	load_textures(game, game->sprite, "./textures/star_sp/img1.xpm", 0);
+	load_textures(game, game->sprite, "./textures/star_sp/img2.xpm", 1);
+	load_textures(game, game->sprite, "./textures/star_sp/img3.xpm", 2);
+	load_textures(game, game->sprite, "./textures/star_sp/img4.xpm", 3);
+	load_textures(game, game->sprite, "./textures/star_sp/img5.xpm", 4);
+	load_textures(game, game->sprite, "./textures/star_sp/img6.xpm", 5);
+	load_textures(game, game->sprite, "./textures/star_sp/img7.xpm", 6);
+	load_textures(game, game->sprite, "./textures/star_sp/img8.xpm", 7);
 }

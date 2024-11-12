@@ -41,7 +41,6 @@ BSRCS = bonus/gnl/get_next_line_utils_bonus.c \
 		bonus/game_parsing_map_helper3_bonus.c \
 		bonus/game_parsing_map2_bonus.c \
 		bonus/game_parsing_textures_bonus.c \
-		bonus/game_parsing_textures_2_bonus.c \
 		bonus/game_parsing_colors_bonus.c \
 		bonus/game_parsing_tools_bonus.c \
 		bonus/game_parsing_tools2_bonus.c \
