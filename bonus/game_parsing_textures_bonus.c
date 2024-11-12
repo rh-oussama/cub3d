@@ -6,7 +6,7 @@
 /*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:09 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/12 09:27:29 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/12 09:45:25 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	textures_check(t_data *game)
 	load_textures(game, game->textures, game->we_texture, 3);
 	load_textures(game, game->textures, "./textures/door.xpm", 4);
 	//// sprite_texture
+	// TODO :: DESTROY WALL TEXTURE IF SPRITE FAIL
 	load_textures(game, game->sprite, "./textures/star_sp/img1.xpm", 0);
 	load_textures(game, game->sprite, "./textures/star_sp/img2.xpm", 1);
 	load_textures(game, game->sprite, "./textures/star_sp/img3.xpm", 2);
