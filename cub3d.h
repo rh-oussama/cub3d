@@ -6,7 +6,7 @@
 /*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/11 08:04:24 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/12 09:51:30 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ typedef struct s_data
 	t_img		img_2d;
 	t_img		img_3d;
 	t_player	p;
-	t_texture	textures[5];
+	t_texture	textures[6];
 	t_texture	sprite[8];
 }				t_data;
 
