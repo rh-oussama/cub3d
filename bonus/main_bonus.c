@@ -6,7 +6,7 @@
 /*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:45 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/12 20:14:49 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:40:38 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,23 @@ int	game_render(t_data *data)
 	update_player_position(data);
 	ray_draw(data);
 	draw_mini_map(data, 0, 0);
-	if (sprite(data) == 101)
-		data->key.key_k = 0;		
+	if (data->key.key_sp)
+	{
+		sprite(data, data->third, 14);
+		data->key.key_j = 0;
+	}
+	else if (data->key.key_w || data->key.key_a)
+	{
+		sprite(data, data->fourth, 122);
+		data->key.key_j = 0;
+	}
+	else if (data->key.key_j)
+	{
+		if ((sprite(data, data->second, 101) + 1) == 101)
+			data->key.key_j = 0;
+	}
+	else
+		sprite(data, data->first, 58);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img_3d.img, 0,
 		0);
 	return (0);
@@ -34,7 +49,9 @@ void	game_init(t_data *data)
 	data->key.key_s = 0;
 	data->key.key_d = 0;
 	data->key.key_w = 0;
-	data->key.key_k = 0;
+	data->key.key_j = 0;
+	data->key.key_sp = 0;
+	data->key.key_q = 0;
 	data->key.key_left = 0;
 	data->key.key_right = 0;
 	data->width = 0;
@@ -85,13 +102,16 @@ int	handle_mouse_move(int x, int y, t_data *data)
 
 	(void)y;
 	delta_x = x - (WINDOW_WIDTH / 2);
-	if (delta_x != 0)
+	if (delta_x != 0 && !(data->key.key_q % 2))
 	{
+		mlx_mouse_hide(data->mlx_ptr, data->mlx_win);
 		data->p.angle += delta_x * MOUSE_SENSITIVITY;
 		data->p.angle = normalize_angle(data->p.angle);
 		mlx_mouse_move(data->mlx_ptr, data->mlx_win, WINDOW_WIDTH / 2,
 			WINDOW_HEIGHT / 2);
 	}
+	else if (data->key.key_q % 2)
+		mlx_mouse_show(data->mlx_ptr, data->mlx_win);
 	return (0);
 }
 
@@ -107,7 +127,6 @@ int	main(int ac, char **av)
 	data.mlx_ptr = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT,
 			"cub3d");
-	mlx_mouse_hide(data.mlx_ptr, data.mlx_win);
 	init_image(&data);
 	game_render(&data);
 	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, key_pressed, &data);
