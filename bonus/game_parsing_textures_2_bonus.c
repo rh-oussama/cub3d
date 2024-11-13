@@ -6,7 +6,7 @@
 /*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 02:52:07 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/12 20:33:30 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/13 18:40:36 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ void	norm_2(t_data *game, int j)
 	}
 }
 
-void	no_image_2(t_data *game)
+void	no_image_2(t_data *game, int nbr)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < 102)
+	while (i < nbr)
 	{
 		if (game->first[i].img == NULL)
 		{
 			j = 0;
-			while (j < 102)
+			while (j < nbr)
 			{
 				if (j != i)
 					mlx_destroy_image(game->mlx_ptr, game->first[j].img);
@@ -48,12 +48,12 @@ void	no_image_2(t_data *game)
 	}
 }
 
-void	norm(t_texture *t)
+void	norm(t_texture *t, int nbr)
 {
 	int	i;
 
 	i = 0;
-	while (i < 102)
+	while (i < nbr)
 	{
 		t[i].data = mlx_get_data_addr(t[i].img, &t[i].bpp, &t[i].size_line,
 				&t[i].endian);
@@ -70,11 +70,11 @@ void	sprite_textures(t_data *game)
 
 	t = game->first;
 	i = 0;
-	while (i < 102)
+	while (i < 58)
 	{
 		name = NULL;
 		nbr = ft_itoa(i + 1);
-		name = ft_strjoin(name, "./textures/first/k");
+		name = ft_strjoin(name, "./textures/first/n");
 		name = ft_strjoin(name, nbr);
 		name = ft_strjoin(name, ".xpm");
 		t[i].img = mlx_xpm_file_to_image(game->mlx_ptr, name, &t[i].width,
@@ -83,6 +83,53 @@ void	sprite_textures(t_data *game)
 		free(name);
 		i++;
 	}
-	no_image_2(game);
-	norm(t);
+	norm(t, 58);
+	t = game->second;
+	i = 0;
+	while (i < 101)
+	{
+		name = NULL;
+		nbr = ft_itoa(i + 1);
+		name = ft_strjoin(name, "./textures/second/j");
+		name = ft_strjoin(name, nbr);
+		name = ft_strjoin(name, ".xpm");
+		t[i].img = mlx_xpm_file_to_image(game->mlx_ptr, name, &t[i].width,
+				&t[i].height);
+		free(nbr);
+		free(name);
+		i++;
+	}
+	norm(t, 101);
+	t = game->third;
+	i = 0;
+	while (i < 14)
+	{
+		name = NULL;
+		nbr = ft_itoa(i + 1);
+		name = ft_strjoin(name, "./textures/third/s");
+		name = ft_strjoin(name, nbr);
+		name = ft_strjoin(name, ".xpm");
+		t[i].img = mlx_xpm_file_to_image(game->mlx_ptr, name, &t[i].width,
+				&t[i].height);
+		free(nbr);
+		free(name);
+		i++;
+	}
+	norm(t, 14);
+	t = game->fourth;
+	i = 0;
+	while (i < 122)
+	{
+		name = NULL;
+		nbr = ft_itoa(i + 1);
+		name = ft_strjoin(name, "./textures/fourth/w");
+		name = ft_strjoin(name, nbr);
+		name = ft_strjoin(name, ".xpm");
+		t[i].img = mlx_xpm_file_to_image(game->mlx_ptr, name, &t[i].width,
+				&t[i].height);
+		free(nbr);
+		free(name);
+		i++;
+	}
+	norm(t, 122);
 }

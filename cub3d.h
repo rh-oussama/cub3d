@@ -6,7 +6,7 @@
 /*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/12 20:35:28 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:31:17 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 # define WINDOW_WIDTH 1280
 # define WINDOW_HEIGHT 720
-# define MINI_WIDTH 320
-# define MINI_HEIGHT 180
+# define MINI_WIDTH 250
+# define MINI_HEIGHT 150
 
 /*_______________________*/
 
@@ -112,7 +112,9 @@ typedef struct s_key
 	int			key_a;
 	int			key_s;
 	int			key_d;
-	int			key_k;
+	int 		key_j;
+	int			key_sp;
+	int			key_q;
 	int			key_left;
 	int			key_right;
 }				t_key;
@@ -140,11 +142,6 @@ typedef struct s_project
 	int			tex_size;
 	t_texture	*textures;
 }				t_project;
-
-typedef struct s_config
-{
-	/* data */
-}				t_config;
 
 typedef struct s_data
 {
@@ -181,10 +178,10 @@ typedef struct s_data
 	t_img		img_3d;
 	t_player	p;
 	t_texture	textures[6];
-	t_texture	first[102];
-	t_texture	second[8];
-	t_texture	third[8];
-	t_texture	fourth[8];
+	t_texture	first[58];
+	t_texture	second[101];
+	t_texture	third[14];
+	t_texture	fourth[122];
 }				t_data;
 
 /* Function Prototypes */
@@ -234,8 +231,6 @@ void			so(char *trimmed, t_data *data, int *flag);
 void			we(char *trimmed, t_data *data, int *flag);
 void			ea(char *trimmed, t_data *data, int *flag);
 char			*trim(t_data *data, int flag, int x, char *trimmed);
-void			no_image_2(t_data *game);
-void			norm(t_texture *t);
 
 // free
 void			free_images(t_data *game);
@@ -248,7 +243,7 @@ void			free_door(t_data *game);
 int				exit_game(t_data *game);
 
 // sprite
-int				sprite(t_data *data);
+int				sprite(t_data *data, t_texture *sprite, int frames);
 void			sprite_textures(t_data *game);
 
 // Raycasting

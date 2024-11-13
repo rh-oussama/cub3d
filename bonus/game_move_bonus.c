@@ -6,7 +6,7 @@
 /*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:26:53 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/12 20:09:33 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:40:28 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ int	key_pressed(int keysym, t_data *data)
 		data->key.key_a = 1;
 	else if (keysym == XK_d)
 		data->key.key_d = 1;
-	else if (keysym == XK_k)
-		data->key.key_k = 1;
+	else if (keysym == XK_j)
+		data->key.key_j = 1;
+	else if (keysym == XK_space)
+		data->key.key_sp = 1;
+	else if (keysym == XK_q)
+		data->key.key_q++;
 	else if (keysym == XK_Left)
 		data->key.key_left = 1;
 	else if (keysym == XK_Right)
@@ -45,6 +49,8 @@ int	key_released(int keysym, t_data *data)
 		data->key.key_a = 0;
 	else if (keysym == XK_d)
 		data->key.key_d = 0;
+	else if (keysym == XK_space)
+		data->key.key_sp = 0;
 	else if (keysym == XK_Left)
 		data->key.key_left = 0;
 	else if (keysym == XK_Right)
