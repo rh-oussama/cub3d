@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   game_path_checker_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:24 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/12 04:37:50 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:40:46 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	copy_map(t_data *game)
-{
-	int	i;
-
-	i = 0;
-	game->new_map = malloc((game->height + 1) * sizeof(char *));
-	while (game->map[i])
-	{
-		game->new_map[i] = ft_strdup(game->map[i]);
-		i++;
-	}
-	game->new_map[i] = NULL;
-}
 
 void	set_player_position(t_data *game, int row, int col, double angle)
 {
@@ -80,8 +66,8 @@ void	flood(char **str, int x, int y, t_data *game)
 void	check_map(t_data *game)
 {
 	get_player_position(game);
-	copy_map(game);
+	game->new_map = new_array(game->map);
 	flood(game->new_map, game->co_x, game->co_y, game);
 	if (check_path(game->new_map))
-		error_msg_2("invalid path in the map", game);
+		error(game);
 }

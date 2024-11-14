@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_parsing_map_helper2_bonus.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 23:35:28 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/12 04:37:23 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:38:21 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ea(char *trimmed, t_data *data, int *flag)
 char	*trim(t_data *data, int flag, int x, char *trimmed)
 {
 	if (flag > 6)
-		error_msg_2("Invalid configuration", data);
+		error(data);
 	trimmed = ft_strtrim(data->map_checker[x]);
 	return (trimmed);
 }

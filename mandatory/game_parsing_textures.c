@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_parsing_textures.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:09 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/13 20:08:47 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/14 15:16:39 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ char	*validate_path(char *str, t_data *data)
 
 	tmp = str;
 	if (!str)
-		error_msg_2("Invalid configuration (EMPTY)", data);
+		error(data);
 	if (ft_strncmp(str, "NO", 2) && ft_strncmp(str, "SO", 2) && ft_strncmp(str,
 			"EA", 2) && ft_strncmp(str, "WE", 2))
-		error_msg_2("Invalid configuration (NO | EA | SO | WE)", data);
+		error(data);
 	if (str[2] != ' ')
-		error_msg_2("Error (NO SPACE BETWEEN PATH AND DIRECTION)", data);
+		error(data);
 	str += 3;
 	if (!(*str))
-		error_msg_2("Invalid configuration (EMPTY PATH)", data);
+		error(data);
 	while (*str)
 	{
 		if (ft_isspace(*str) && *str != '\n')
-			error_msg_2("Invalid configuration (FOUND SPACE IN PATH)", data);
+			error(data);
 		str++;
 	}
 	path = ft_strdup(&(tmp[3]));
@@ -47,52 +47,22 @@ void	get_textures(t_data *game)
 	game->ea_texture = validate_path(game->ea_texture, game);
 }
 
-void	no_image(t_data *game)
+void	load_textures(t_data *game, t_texture	*texture, \
+								char *tex_str, int idx)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < 4)
-	{
-		if (game->textures[i].img == NULL)
-		{
-			j = 0;
-			while (j < 4)
-			{
-				if (j != i)
-					mlx_destroy_image(game->mlx_ptr, game->textures[j].img);
-				j++;
-			}
-			mlx_destroy_window(game->mlx_ptr, game->mlx_win);
-			mlx_destroy_display(game->mlx_ptr);
-			free(game->mlx_ptr);
-			error_msg_2("Problem in textures", game);
-		}
-		i++;
-	}
+	texture[idx].img = mlx_xpm_file_to_image(game->mlx_ptr, tex_str,
+			&texture[idx].width, &texture[idx].height);
+	if (texture[idx].img == NULL)
+		error(game);
+	texture[idx].data = mlx_get_data_addr(texture[idx].img,
+			&texture[idx].bpp, &texture[idx].size_line,
+			&texture[idx].endian);
 }
 
 void	textures_check(t_data *game)
 {
-	t_texture	*t;
-
-	t = game->textures;
-	t[0].img = mlx_xpm_file_to_image(game->mlx_ptr, game->no_texture,
-			&t[0].width, &t[0].height);
-	t[1].img = mlx_xpm_file_to_image(game->mlx_ptr, game->ea_texture,
-			&t[1].width, &t[1].height);
-	t[2].img = mlx_xpm_file_to_image(game->mlx_ptr, game->so_texture,
-			&t[2].width, &t[2].height);
-	t[3].img = mlx_xpm_file_to_image(game->mlx_ptr, game->we_texture,
-			&t[3].width, &t[3].height);
-	no_image(game);
-	t[0].data = mlx_get_data_addr(t[0].img, &t[0].bpp, &t[0].size_line,
-			&t[0].endian);
-	t[1].data = mlx_get_data_addr(t[1].img, &t[1].bpp, &t[1].size_line,
-			&t[1].endian);
-	t[2].data = mlx_get_data_addr(t[2].img, &t[2].bpp, &t[2].size_line,
-			&t[2].endian);
-	t[3].data = mlx_get_data_addr(t[3].img, &t[3].bpp, &t[3].size_line,
-			&t[3].endian);
+	load_textures(game, game->textures, game->no_texture, 0);
+	load_textures(game, game->textures, game->ea_texture, 1);
+	load_textures(game, game->textures, game->so_texture, 2);
+	load_textures(game, game->textures, game->we_texture, 3);	
 }
