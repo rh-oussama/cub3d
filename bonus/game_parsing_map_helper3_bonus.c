@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_parsing_map_helper3_bonus.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 23:40:12 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/12 06:32:20 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:38:23 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	checker(char *game, char c, t_data *data)
 		i++;
 	}
 	if (counter != 1)
-		error_msg_2("Invalid configuration", data);
+		error(data);
 }
 
 void	line_check(char *game, t_data *data, char *trimmed)
@@ -41,7 +41,7 @@ void	line_check(char *game, t_data *data, char *trimmed)
 			&& game[i] != 'D' && game[i] != '\n')
 		{
 			free(trimmed);
-			error_msg_2("Error", data);
+			error(data);
 		}
 		i++;
 	}

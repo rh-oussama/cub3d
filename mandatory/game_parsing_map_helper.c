@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_parsing_map_helper.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 18:11:12 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/10 02:19:04 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/14 15:20:51 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	count_lines(char **av)
 	str = NULL;
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-		error("There is no file with that name");
+		error(NULL);
 	str = get_next_line(fd);
 	if (str == NULL)
-		error("The file is empty");
+		error(NULL);
 	free(str);
 	w = 1;
 	while (1)
@@ -69,7 +69,7 @@ void	check_row_left_to_right(t_data *game, int row)
 			if (game->map[row][col] == '1')
 				break ;
 			else
-				error_msg_2("Map is not closed", game);
+				error(game);
 		}
 		col++;
 	}
@@ -87,7 +87,7 @@ void	check_row_right_to_left(t_data *game, int row)
 			if (game->map[row][col] == '1')
 				break ;
 			else
-				error_msg_2("Map is not closed", game);
+				error(game);
 		}
 		col--;
 	}

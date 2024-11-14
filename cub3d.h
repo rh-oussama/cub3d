@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/13 20:31:17 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:44:32 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,11 +177,11 @@ typedef struct s_data
 	t_img		img_2d;
 	t_img		img_3d;
 	t_player	p;
-	t_texture	textures[6];
-	t_texture	first[58];
-	t_texture	second[101];
-	t_texture	third[14];
-	t_texture	fourth[122];
+	t_texture	textures[6 + 1];
+	t_texture	first[58 + 1];
+	t_texture	second[101 + 1];
+	t_texture	third[14 + 1];
+	t_texture	fourth[122 + 1];
 }				t_data;
 
 /* Function Prototypes */
@@ -203,10 +203,8 @@ int				key_pressed(int keysym, t_data *data);
 int				key_released(int keysym, t_data *data);
 
 // Parsing
-void			error_msg(char *str, t_data *game);
-void			error(char *str);
+int	error(t_data *game);
 char			*ft_itoa(int n);
-void			error_msg_2(char *str, t_data *game);
 int				ft_atoi(char *str, t_data *game);
 int				ft_isalpha_num(int i);
 int				ft_is_num(int i);
@@ -244,7 +242,7 @@ int				exit_game(t_data *game);
 
 // sprite
 int				sprite(t_data *data, t_texture *sprite, int frames);
-void			sprite_textures(t_data *game);
+void				sprite_textures(t_data *game, t_texture *texture, char *path, int total);
 
 // Raycasting
 void			get_horizonntal(t_data *data, double angle, double *xy_step,
@@ -299,5 +297,14 @@ void			handle_vertical_wall_collision(t_data *data, double angle,
 					t_ray *ray);
 void			handle_horizontal_wall_collision(t_data *data, double angle,
 					t_ray *ray);
+
+
+void	destroy_textures(t_data *game, t_texture *text);
+void	free_2d_array(char **array);
+void	destroy_all_image(t_data *data);
+void	game_free(t_data *data);
+void	game_init_null(t_data *data);
+void	game_texture_init(t_texture *text, int count);
+void	game_init(t_data *data);
 
 #endif

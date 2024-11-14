@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_parsing_map2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 17:53:01 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/10 02:19:04 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/14 15:16:39 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	map(t_data *data, int x, char *trimmed)
 	free(trimmed);
 	if (!data->no_texture || !data->so_texture || !data->we_texture
 		|| !data->ea_texture || !data->floor || !data->ceiling)
-		error_msg_2("Missing configuration or order is wrong", data);
+		error(data);
 	height = allocation_size(data, x);
 	while (data->map_checker[x])
 	{

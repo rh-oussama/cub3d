@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_parsing_map_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:01 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/12 04:37:14 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/14 06:36:52 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	check_cub(char **av)
 		i++;
 	if (av[1][i - 1] != 'b' || av[1][i - 2] != 'u' || av[1][i - 3] != 'c'
 		|| av[1][i - 4] != '.')
-		error("Map name is not valid!");
+		error(NULL);
 }
 
 int	is_valid_character(char c)
@@ -44,7 +44,7 @@ void	validate_map_characters(t_data *game)
 		while (col < (int)ft_strlen(game->map[row]))
 		{
 			if (!is_valid_character(game->map[row][col]))
-				error_msg_2("Invalid map character", game);
+				error(game);
 			if (game->map[row][col] == ' ')
 				game->map[row][col] = 'X';
 			if (game->map[row][col] == 'S' || game->map[row][col] == 'N'
@@ -55,7 +55,7 @@ void	validate_map_characters(t_data *game)
 		row++;
 	}
 	if (player_count != 1)
-		error_msg_2("You need 1 player", game);
+		error(game);
 }
 
 void	get_width(t_data *data, int x)

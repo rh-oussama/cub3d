@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_path_checker.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:24 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/10 02:19:04 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/14 15:19:02 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,5 @@ void	check_map(t_data *game)
 	copy_map(game);
 	flood(game->new_map, game->co_x, game->co_y, game);
 	if (check_path(game->new_map))
-		error_msg_2("invalid path in the map", game);
+		error(game);
 }
