@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_parsing_tools_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:16 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/14 06:48:41 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/15 04:37:18 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 int	error(t_data *game)
 {
 	write(2, "Error\n", 6);
+	write(2, "You've made a mistake in the configuration file\n", 48);
+	write(2, "Respect the rules mentioned in the subject\n", 43);
+	write(2, "Try again\n", 10);
 	if (game)
 		game_free(game);
 	exit(1);
-	return 1;
+	return (1);
 }
 
 int	exit_game(t_data *game)
@@ -72,4 +75,31 @@ void	first_and_last_row(t_data *game)
 			error(game);
 		col++;
 	}
+}
+
+char	*validate_path(char *str, t_data *data)
+{
+	char	*path;
+	char	*tmp;
+
+	tmp = str;
+	if (!str)
+		error(data);
+	if (ft_strncmp(str, "NO", 2) && ft_strncmp(str, "SO", 2) && ft_strncmp(str,
+			"EA", 2) && ft_strncmp(str, "WE", 2))
+		error(data);
+	if (str[2] != ' ')
+		error(data);
+	str += 3;
+	if (!(*str))
+		error(data);
+	while (*str)
+	{
+		if (ft_isspace(*str) && *str != '\n')
+			error(data);
+		str++;
+	}
+	path = ft_strdup(&(tmp[3]));
+	free(tmp);
+	return (path);
 }

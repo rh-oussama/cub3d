@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_parsing_textures.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:09 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/14 15:16:39 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/15 03:46:52 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,14 @@ void	get_textures(t_data *game)
 	game->ea_texture = validate_path(game->ea_texture, game);
 }
 
-void	load_textures(t_data *game, t_texture	*texture, \
-								char *tex_str, int idx)
+void	load_textures(t_data *game, t_texture *texture, char *tex_str, int idx)
 {
 	texture[idx].img = mlx_xpm_file_to_image(game->mlx_ptr, tex_str,
 			&texture[idx].width, &texture[idx].height);
 	if (texture[idx].img == NULL)
 		error(game);
-	texture[idx].data = mlx_get_data_addr(texture[idx].img,
-			&texture[idx].bpp, &texture[idx].size_line,
-			&texture[idx].endian);
+	texture[idx].data = mlx_get_data_addr(texture[idx].img, &texture[idx].bpp,
+			&texture[idx].size_line, &texture[idx].endian);
 }
 
 void	textures_check(t_data *game)
@@ -64,5 +62,5 @@ void	textures_check(t_data *game)
 	load_textures(game, game->textures, game->no_texture, 0);
 	load_textures(game, game->textures, game->ea_texture, 1);
 	load_textures(game, game->textures, game->so_texture, 2);
-	load_textures(game, game->textures, game->we_texture, 3);	
+	load_textures(game, game->textures, game->we_texture, 3);
 }

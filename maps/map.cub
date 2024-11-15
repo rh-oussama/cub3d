@@ -1,7 +1,7 @@
-NO ./textures/north.xpm
-SO ./textures/south.xpm
-WE ./textures/west.xpm
-EA ./textures/east.xpm
+NO ./textures/direction/north.xpm
+SO ./textures/direction/south.xpm
+WE ./textures/direction/west.xpm
+EA ./textures/direction/east.xpm
 
 F 255,255,0
 C 255,0,0

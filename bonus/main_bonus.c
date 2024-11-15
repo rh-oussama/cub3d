@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:45 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/13 19:46:51 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/15 03:52:01 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,19 @@ int	game_render(t_data *data)
 	update_player_position(data);
 	ray_draw(data);
 	draw_mini_map(data, 0, 0);
-	if (data->key.key_sp)
-	{
-		sprite(data, data->third, 14);
-		data->key.key_j = 0;
-	}
-	else if (data->key.key_w || data->key.key_a)
-	{
-		sprite(data, data->fourth, 122);
-		data->key.key_j = 0;
-	}
-	else if (data->key.key_j)
+	if (data->key.key_j)
 	{
 		if ((sprite(data, data->second, 101) + 1) == 101)
 			data->key.key_j = 0;
 	}
+	else if (data->key.key_sp)
+	{
+		sprite(data, data->third, 14);
+		if (data->key.key_w)
+			move_player(data, data->p.angle);
+	}
+	else if (data->key.key_w || data->key.key_a)
+		sprite(data, data->fourth, 122);
 	else
 		sprite(data, data->first, 58);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img_3d.img, 0,

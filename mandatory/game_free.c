@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_free_bonus.c                                  :+:      :+:    :+:   */
+/*   game_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:03:57 by orhaddao          #+#    #+#             */
-/*   Updated: 2024/11/12 19:28:10 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/15 03:47:25 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,10 @@ void	free_2d_array(char **array)
 	}
 	free(array);
 }
+
 void	destroy_all_image(t_data *data)
 {
 	destroy_textures(data, data->textures);
-	destroy_textures(data, data->first);
-	destroy_textures(data, data->second);
-	destroy_textures(data, data->third);
-	destroy_textures(data, data->fourth);
 	if (data->img_2d.img)
 		mlx_destroy_image(data->mlx_ptr, data->img_2d.img);
 	if (data->img_3d.img)
@@ -63,7 +60,6 @@ void	game_free(t_data *data)
 	free_2d_array(data->map);
 	free_2d_array(data->map_checker);
 	free_2d_array(data->new_map);
-	free_2d_array(data->door);
 	destroy_all_image(data);
 	if (data->mlx_ptr && data->mlx_win)
 		mlx_destroy_window(data->mlx_ptr, data->mlx_win);

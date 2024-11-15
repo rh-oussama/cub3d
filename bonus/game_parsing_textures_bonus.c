@@ -3,41 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   game_parsing_textures_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:09 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/13 19:40:39 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/15 04:37:11 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-char	*validate_path(char *str, t_data *data)
-{
-	char	*path;
-	char	*tmp;
-
-	tmp = str;
-	if (!str)
-		error(data);
-	if (ft_strncmp(str, "NO", 2) && ft_strncmp(str, "SO", 2) && ft_strncmp(str,
-			"EA", 2) && ft_strncmp(str, "WE", 2))
-		error(data);
-	if (str[2] != ' ')
-		error(data);
-	str += 3;
-	if (!(*str))
-		error(data);
-	while (*str)
-	{
-		if (ft_isspace(*str) && *str != '\n')
-			error(data);
-		str++;
-	}
-	path = ft_strdup(&(tmp[3]));
-	free(tmp);
-	return (path);
-}
 
 void	get_textures(t_data *game)
 {
@@ -62,10 +35,8 @@ char	*get_sprit_path(char *base_path, int index)
 	if (!final_path)
 		return (NULL);
 	final_path = ft_strjoin(final_path, ".xpm");
-
 	return (final_path);
 }
-
 
 void	sprite_textures(t_data *game, t_texture *texture, char *path, int total)
 {
@@ -90,16 +61,14 @@ void	sprite_textures(t_data *game, t_texture *texture, char *path, int total)
 	}
 }
 
-void	load_textures(t_data *game, t_texture	*texture, \
-								char *tex_str, int idx)
+void	load_textures(t_data *game, t_texture *texture, char *tex_str, int idx)
 {
 	texture[idx].img = mlx_xpm_file_to_image(game->mlx_ptr, tex_str,
 			&texture[idx].width, &texture[idx].height);
 	if (texture[idx].img == NULL)
 		error(game);
-	texture[idx].data = mlx_get_data_addr(texture[idx].img,
-			&texture[idx].bpp, &texture[idx].size_line,
-			&texture[idx].endian);
+	texture[idx].data = mlx_get_data_addr(texture[idx].img, &texture[idx].bpp,
+			&texture[idx].size_line, &texture[idx].endian);
 }
 
 void	textures_check(t_data *game)
@@ -108,10 +77,8 @@ void	textures_check(t_data *game)
 	load_textures(game, game->textures, game->ea_texture, 1);
 	load_textures(game, game->textures, game->so_texture, 2);
 	load_textures(game, game->textures, game->we_texture, 3);
-	
 	load_textures(game, game->textures, "./textures/door.xpm", 4);
 	load_textures(game, game->textures, "./textures/ceiling.xpm", 5);
-	
 	sprite_textures(game, game->first, "./textures/first/n", 58);
 	sprite_textures(game, game->second, "./textures/second/j", 101);
 	sprite_textures(game, game->third, "./textures/third/s", 14);

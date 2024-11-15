@@ -53,7 +53,7 @@ void	draw_floor_ceilling(t_data *data, t_project *pro, int x)
 {
 	int	y;
 	int	tex_x;
-   	int	tex_y;
+	int	tex_y;
 	int	color;
 
 	y = 0;
