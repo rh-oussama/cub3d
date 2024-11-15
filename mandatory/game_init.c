@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_init_bonus.c                                  :+:      :+:    :+:   */
+/*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:07:48 by orhaddao          #+#    #+#             */
-/*   Updated: 2024/11/13 19:30:13 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/15 03:48:04 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	game_init_null(t_data *data)
 	data->map = NULL;
 	data->map_checker = NULL;
 	data->new_map = NULL;
-	data->door = NULL;
 	data->img_2d.img = NULL;
 	data->img_3d.img = NULL;
 }
@@ -62,16 +61,9 @@ void	game_init(t_data *data)
 	data->key.key_s = 0;
 	data->key.key_d = 0;
 	data->key.key_w = 0;
-	data->key.key_j = 0;
-	data->key.key_sp = 0;
-	data->key.key_q = 0;
 	data->key.key_left = 0;
 	data->key.key_right = 0;
 	data->width = 0;
 	game_init_null(data);
 	game_texture_init(data->textures, 6 + 1);
-	game_texture_init(data->first, 58 + 1);
-	game_texture_init(data->second, 101 + 1);
-	game_texture_init(data->third, 14 + 1);
-	game_texture_init(data->fourth, 122 + 1);
 }

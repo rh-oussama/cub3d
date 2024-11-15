@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_parsing_tools.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:16 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/14 15:18:55 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/15 04:19:03 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 int	error(t_data *game)
 {
 	write(2, "Error\n", 6);
+	write(2, "You've made a mistake in the configuration file\n", 48);
+	write(2, "Respect the rules mentioned in the subject\n", 43);
+	write(2, "Try again\n", 10);
 	if (game)
 		game_free(game);
 	exit(1);
-	return 1;
+	return (1);
 }
 
 int	exit_game(t_data *game)

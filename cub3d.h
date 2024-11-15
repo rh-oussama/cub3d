@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/13 19:44:32 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/15 04:37:41 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 /*______ For Linux _______*/
 
-# include <mlx.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <mlx.h>
 
 # define WINDOW_WIDTH 1280
 # define WINDOW_HEIGHT 720
@@ -112,7 +112,7 @@ typedef struct s_key
 	int			key_a;
 	int			key_s;
 	int			key_d;
-	int 		key_j;
+	int			key_j;
 	int			key_sp;
 	int			key_q;
 	int			key_left;
@@ -203,7 +203,7 @@ int				key_pressed(int keysym, t_data *data);
 int				key_released(int keysym, t_data *data);
 
 // Parsing
-int	error(t_data *game);
+int				error(t_data *game);
 char			*ft_itoa(int n);
 int				ft_atoi(char *str, t_data *game);
 int				ft_isalpha_num(int i);
@@ -224,6 +224,7 @@ void			is_map_closed(t_data *game);
 void			get_map(t_data *data, char **av);
 int				check_path(char **map);
 void			first_and_last_row(t_data *game);
+char			*validate_path(char *str, t_data *data);
 void			no(char *trimmed, t_data *data, int *flag);
 void			so(char *trimmed, t_data *data, int *flag);
 void			we(char *trimmed, t_data *data, int *flag);
@@ -231,18 +232,12 @@ void			ea(char *trimmed, t_data *data, int *flag);
 char			*trim(t_data *data, int flag, int x, char *trimmed);
 
 // free
-void			free_images(t_data *game);
-void			free_new_map(t_data *game);
-void			free_map_checker(t_data *game);
-void			free_map(t_data *game);
-void			free_ceiling(t_data *game);
-void			free_floor(t_data *game);
-void			free_door(t_data *game);
 int				exit_game(t_data *game);
 
 // sprite
 int				sprite(t_data *data, t_texture *sprite, int frames);
-void				sprite_textures(t_data *game, t_texture *texture, char *path, int total);
+void			sprite_textures(t_data *game, t_texture *texture, char *path,
+					int total);
 
 // Raycasting
 void			get_horizonntal(t_data *data, double angle, double *xy_step,
@@ -298,13 +293,12 @@ void			handle_vertical_wall_collision(t_data *data, double angle,
 void			handle_horizontal_wall_collision(t_data *data, double angle,
 					t_ray *ray);
 
-
-void	destroy_textures(t_data *game, t_texture *text);
-void	free_2d_array(char **array);
-void	destroy_all_image(t_data *data);
-void	game_free(t_data *data);
-void	game_init_null(t_data *data);
-void	game_texture_init(t_texture *text, int count);
-void	game_init(t_data *data);
+void			destroy_textures(t_data *game, t_texture *text);
+void			free_2d_array(char **array);
+void			destroy_all_image(t_data *data);
+void			game_free(t_data *data);
+void			game_init_null(t_data *data);
+void			game_texture_init(t_texture *text, int count);
+void			game_init(t_data *data);
 
 #endif

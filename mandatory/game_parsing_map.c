@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_parsing_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:01 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/14 15:19:35 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/15 03:44:24 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	map_parsing(t_data *game, char **av)
 	check_cub(av);
 	get_map(game, av);
 	map_configure(game, 0, 0, NULL);
+	if (!game->map)
+		error(game);
 	validate_map_characters(game);
 	is_map_closed(game);
 	first_and_last_row(game);

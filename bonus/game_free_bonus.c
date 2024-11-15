@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_free_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:03:57 by orhaddao          #+#    #+#             */
-/*   Updated: 2024/11/12 19:28:10 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/15 03:49:05 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	free_2d_array(char **array)
 	}
 	free(array);
 }
+
 void	destroy_all_image(t_data *data)
 {
 	destroy_textures(data, data->textures);

@@ -77,12 +77,11 @@ int	frame_draw(t_data *game, t_texture *sprite, int frame)
 	return (0);
 }
 
-
 int	sprite(t_data *data, t_texture *sprite, int frames)
 {
 	double			delta_time;
-	static int		frame = 0;	
-	static double	frame_timer = 0.00; 
+	static int		frame = 0;
+	static double	frame_timer = 0.00;
 
 	delta_time = 1.0 / 60.0;
 	frame_timer += delta_time;
