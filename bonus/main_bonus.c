@@ -6,7 +6,7 @@
 /*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:45 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/16 08:53:58 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:33:42 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ int	game_render(t_data *data)
 	update_player_position(data);
 	ray_draw(data);
 	draw_mini_map(data, 0, 0);
-	// if (data->key.key_j)
-	// {
-	// 	if ((sprite(data, data->second, 101) + 1) == 101)
-	// 		data->key.key_j = 0;
-	// }
-	// else if (data->key.key_sp)
-	// {
-	// 	sprite(data, data->third, 14);
-	// 	if (data->key.key_w)
-	// 		move_player(data, data->p.angle);
-	// }
-	// else if (data->key.key_w || data->key.key_a)
-	// 	sprite(data, data->fourth, 122);
-	// else
-	// 	sprite(data, data->first, 58);
+	if (data->key.key_j)
+	{
+		if ((sprite(data, data->second, 101) + 1) == 101)
+			data->key.key_j = 0;
+	}
+	else if (data->key.key_sp)
+	{
+		sprite(data, data->third, 14);
+		if (data->key.key_w)
+			move_player(data, data->p.angle);
+	}
+	else if (data->key.key_w || data->key.key_a)
+		sprite(data, data->fourth, 122);
+	else
+		sprite(data, data->first, 58);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img_3d.img, 0,
 		0);
 	return (0);
@@ -98,6 +98,7 @@ int	main(int ac, char **av)
 	data.mlx_ptr = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT,
 			"cub3d");
+	loading_bar(&data, 1);
 	init_image(&data);
 	game_render(&data);
 	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, key_pressed, &data);

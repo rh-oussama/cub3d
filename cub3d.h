@@ -6,7 +6,7 @@
 /*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/16 07:54:15 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:26:10 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,7 @@ typedef struct s_data
 	t_texture	second[101 + 1];
 	t_texture	third[14 + 1];
 	t_texture	fourth[122 + 1];
+	t_texture	loading_bar[5 + 1];
 }				t_data;
 
 /* Function Prototypes */
@@ -304,5 +305,5 @@ void			game_init_null(t_data *data);
 void			game_texture_init(t_texture *text, int count);
 void			game_init(t_data *data);
 char			*ft_strrchr(char *s, int c);
-
+void			loading_bar(t_data *game, int idx);
 #endif
