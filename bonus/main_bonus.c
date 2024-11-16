@@ -68,13 +68,15 @@ void	init_image(t_data *data)
 int	handle_mouse_move(int x, int y, t_data *data)
 {
 	int	delta_x;
+	int	delta_y;
 
-	(void)y;
+	delta_y =  y - (WINDOW_HEIGHT / 2);
 	delta_x = x - (WINDOW_WIDTH / 2);
 	if (delta_x != 0 && !(data->key.key_q % 2))
 	{
 		mlx_mouse_hide(data->mlx_ptr, data->mlx_win);
 		data->p.angle += delta_x * MOUSE_SENSITIVITY;
+		data->pr_info.project_y += -delta_y * 0.3;
 		data->p.angle = normalize_angle(data->p.angle);
 		mlx_mouse_move(data->mlx_ptr, data->mlx_win, WINDOW_WIDTH / 2,
 			WINDOW_HEIGHT / 2);
