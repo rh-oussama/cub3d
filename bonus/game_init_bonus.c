@@ -17,7 +17,7 @@ void	game_init_null(t_data *data)
 	data->mlx_ptr = NULL;
 	data->mlx_win = NULL;
 	data->door_tex = NULL;
-	data->ceiling_tex = NULL;	
+	data->ceiling_tex = NULL;
 	data->floor = NULL;
 	data->ceiling = NULL;
 	data->no_texture = NULL;

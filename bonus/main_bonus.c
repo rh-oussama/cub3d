@@ -70,7 +70,7 @@ int	handle_mouse_move(int x, int y, t_data *data)
 	int	delta_x;
 	int	delta_y;
 
-	delta_y =  y - (WINDOW_HEIGHT / 2);
+	delta_y = y - (WINDOW_HEIGHT / 2);
 	delta_x = x - (WINDOW_WIDTH / 2);
 	if (delta_x != 0 && !(data->key.key_q % 2))
 	{
