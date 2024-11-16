@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_free_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:03:57 by orhaddao          #+#    #+#             */
-/*   Updated: 2024/11/15 03:49:05 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:29:34 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	game_free(t_data *data)
 	free(data->so_texture);
 	free(data->we_texture);
 	free(data->ea_texture);
+	free(data->door_tex);
+	free(data->ceiling_tex);
 	free_2d_array(data->floor_parse);
 	free_2d_array(data->ceiling_parse);
 	free_2d_array(data->map);

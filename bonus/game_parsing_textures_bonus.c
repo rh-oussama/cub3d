@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   game_parsing_textures_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:09 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/15 04:37:11 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:49:33 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	get_textures(t_data *game)
-{
-	game->no_texture = validate_path(game->no_texture, game);
-	game->so_texture = validate_path(game->so_texture, game);
-	game->we_texture = validate_path(game->we_texture, game);
-	game->ea_texture = validate_path(game->ea_texture, game);
-}
 
 char	*get_sprit_path(char *base_path, int index)
 {
@@ -71,16 +63,45 @@ void	load_textures(t_data *game, t_texture *texture, char *tex_str, int idx)
 			&texture[idx].size_line, &texture[idx].endian);
 }
 
+void	load_door_ceiling(t_data *game, char *str)
+{
+	char	*path;
+	char	*tmp;
+
+	if (!game || !str)
+		return ;
+	tmp = ft_strdup(str);
+	if (!tmp)
+		return ;
+	path = ft_strrchr(tmp, '/');
+	if (!path)
+	{
+		game->door_tex = ft_strdup("./textures/door.xpm");
+		game->ceiling_tex = ft_strdup("./textures/ceiling.xpm");
+		free(tmp);
+		return ;
+	}
+	if (path)
+		path[1] = '\0';
+	game->door_tex = ft_strdup(tmp);
+	game->ceiling_tex = ft_strdup(tmp);
+	game->door_tex = ft_strjoin(game->door_tex, "door.xpm");
+	game->ceiling_tex = ft_strjoin(game->ceiling_tex, "ceiling.xpm");
+	free(tmp);
+}
+
 void	textures_check(t_data *game)
 {
+	printf("%ld", sizeof(t_data));
+	load_door_ceiling(game, game->no_texture);
 	load_textures(game, game->textures, game->no_texture, 0);
 	load_textures(game, game->textures, game->ea_texture, 1);
 	load_textures(game, game->textures, game->so_texture, 2);
 	load_textures(game, game->textures, game->we_texture, 3);
-	load_textures(game, game->textures, "./textures/door.xpm", 4);
-	load_textures(game, game->textures, "./textures/ceiling.xpm", 5);
-	sprite_textures(game, game->first, "./textures/first/n", 58);
-	sprite_textures(game, game->second, "./textures/second/j", 101);
-	sprite_textures(game, game->third, "./textures/third/s", 14);
-	sprite_textures(game, game->fourth, "./textures/fourth/w", 122);
+	load_textures(game, game->textures, game->door_tex, 4);
+	load_textures(game, game->textures, game->ceiling_tex, 5);
+	// sprite_textures(game, game->first, "./textures/first/n", 58);
+	// sprite_textures(game, game->second, "./textures/second/j", 101);
+	// sprite_textures(game, game->third, "./textures/third/s", 14);
+	// sprite_textures(game, game->fourth, "./textures/fourth/w", 122);
 }

@@ -6,7 +6,7 @@
 /*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:05:40 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/13 19:13:03 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:32:20 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,20 @@ int	ft_isalpha_num(int i)
 int	ft_is_num(int i)
 {
 	return ('0' <= i && i <= '9');
+}
+
+char	*ft_strrchr(char *s, int c)
+{
+	size_t	i;
+
+	i = ft_strlen(s);
+	while (i > 0)
+	{
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i--;
+	}
+	if (s[i] == (char)c)
+		return ((char *)&s[i]);
+	return (NULL);
 }
