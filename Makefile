@@ -1,8 +1,8 @@
 NAME = cub3D
 NAME_BONUS = cub3D_bonus
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -I.
-LIBS = -lmlx -lXext -lX11 -lm
+CFLAGS = -Wall -Wextra -Werror  -pg -g3 -I.
+LIBS = -lmlx -lXext -lX11 -lm  -pg
 RM = rm -rf
 SRC =	mandatory/gnl/get_next_line.c \
 		mandatory/gnl/get_next_line_utils.c \
