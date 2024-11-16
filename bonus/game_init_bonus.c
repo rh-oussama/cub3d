@@ -6,7 +6,7 @@
 /*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:07:48 by orhaddao          #+#    #+#             */
-/*   Updated: 2024/11/16 08:50:36 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:23:58 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,5 @@ void	game_init(t_data *data)
 	game_texture_init(data->second, 101 + 1);
 	game_texture_init(data->third, 14 + 1);
 	game_texture_init(data->fourth, 122 + 1);
+	game_texture_init(data->loading_bar, 5 + 1);
 }

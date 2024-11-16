@@ -6,7 +6,7 @@
 /*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:03:57 by orhaddao          #+#    #+#             */
-/*   Updated: 2024/11/16 07:29:34 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:24:40 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	destroy_all_image(t_data *data)
 	destroy_textures(data, data->second);
 	destroy_textures(data, data->third);
 	destroy_textures(data, data->fourth);
+	destroy_textures(data, data->loading_bar);
 	if (data->img_2d.img)
 		mlx_destroy_image(data->mlx_ptr, data->img_2d.img);
 	if (data->img_3d.img)

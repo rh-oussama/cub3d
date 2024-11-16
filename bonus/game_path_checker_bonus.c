@@ -6,11 +6,19 @@
 /*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:24 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/13 19:40:46 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:39:30 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	loading_bar(t_data *game, int idx)
+{
+	if (!game->loading_bar[0].img)
+		sprite_textures(game, game->loading_bar, "./textures/loading_bar/n", 5);
+	mlx_put_image_to_window(game->mlx_ptr, game->mlx_win, \
+	game->loading_bar[idx - 1].img, 0, 0);
+}
 
 void	set_player_position(t_data *game, int row, int col, double angle)
 {
