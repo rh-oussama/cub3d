@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_wall_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 09:31:58 by rh                #+#    #+#             */
-/*   Updated: 2024/11/13 20:26:23 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/16 08:47:34 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	draw_wall_helper(t_data *data, t_ray *ray)
 	pro = &(data->pr_info);
 	pro->proj_plane = (WINDOW_WIDTH / 2) / tan(FIELD_OF_VIEW_ANGLE / 2);
 	pro->wall_height = (TILE_SIZE / ray->distance) * pro->proj_plane;
-	pro->wall_top = (WINDOW_HEIGHT / 2) - (pro->wall_height / 2);
+	pro->wall_top = (data->pr_info.project_y) - (pro->wall_height / 2);
 	if (ray->hit_horizontal)
 		pro->hit_point = ray->x;
 	else
@@ -64,7 +64,7 @@ void	draw_floor_ceilling(t_data *data, t_project *pro, int x)
 		color = get_pixel_col(&data->textures[5], tex_x, tex_y);
 		set_pixel_color(&data->img_3d, x, y++, color);
 	}
-	y += (int)pro->wall_height;
+	y = (int)pro->wall_top + (int)pro->wall_height;
 	while (y < WINDOW_HEIGHT)
 		set_pixel_color(&data->img_3d, x, y++, data->floor_color);
 }

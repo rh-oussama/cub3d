@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/15 04:37:41 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:54:15 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ typedef struct s_project
 	int			tex_x;
 	int			tex_y;
 	int			tex_size;
+	double		project_y;
 	t_texture	*textures;
 }				t_project;
 
@@ -161,6 +162,8 @@ typedef struct s_data
 	char		**map_checker;
 	char		**new_map;
 	char		**door;
+	char		*door_tex;
+	char		*ceiling_tex;
 
 	int			floor_color;
 	int			ceiling_color;
@@ -300,5 +303,6 @@ void			game_free(t_data *data);
 void			game_init_null(t_data *data);
 void			game_texture_init(t_texture *text, int count);
 void			game_init(t_data *data);
+char			*ft_strrchr(char *s, int c);
 
 #endif

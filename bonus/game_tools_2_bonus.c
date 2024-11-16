@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_tools_2_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 09:32:08 by rh                #+#    #+#             */
-/*   Updated: 2024/11/12 04:39:05 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/16 07:51:37 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,12 @@ char	**new_array(char **array)
 	}
 	n_arr[i] = NULL;
 	return (n_arr);
+}
+
+void	get_textures(t_data *game)
+{
+	game->no_texture = validate_path(game->no_texture, game);
+	game->so_texture = validate_path(game->so_texture, game);
+	game->we_texture = validate_path(game->we_texture, game);
+	game->ea_texture = validate_path(game->ea_texture, game);
 }

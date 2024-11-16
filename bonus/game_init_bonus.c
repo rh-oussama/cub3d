@@ -6,7 +6,7 @@
 /*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:07:48 by orhaddao          #+#    #+#             */
-/*   Updated: 2024/11/13 19:30:13 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/16 08:50:36 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	game_init_null(t_data *data)
 {
 	data->mlx_ptr = NULL;
 	data->mlx_win = NULL;
+	data->door_tex = NULL;
+	data->ceiling_tex = NULL;	
 	data->floor = NULL;
 	data->ceiling = NULL;
 	data->no_texture = NULL;
@@ -57,6 +59,7 @@ void	game_init(t_data *data)
 {
 	data->img_3d.width = WINDOW_WIDTH;
 	data->img_3d.height = WINDOW_HEIGHT;
+	data->pr_info.project_y = WINDOW_HEIGHT / 2;
 	data->p.r = 2;
 	data->key.key_a = 0;
 	data->key.key_s = 0;
