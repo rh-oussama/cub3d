@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:45 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/16 12:33:42 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/17 07:07:52 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	game_render(t_data *data)
 		if (data->key.key_w)
 			move_player(data, data->p.angle);
 	}
-	else if (data->key.key_w || data->key.key_a)
+	else if (data->key.key_w || data->key.key_s)
 		sprite(data, data->fourth, 122);
 	else
 		sprite(data, data->first, 58);
@@ -72,9 +72,9 @@ int	handle_mouse_move(int x, int y, t_data *data)
 
 	delta_y = y - (WINDOW_HEIGHT / 2);
 	delta_x = x - (WINDOW_WIDTH / 2);
-	if (delta_x != 0 && !(data->key.key_q % 2))
+	mlx_mouse_hide(data->mlx_ptr, data->mlx_win);
+	if ((delta_y || delta_x) && !(data->key.key_q % 2))
 	{
-		mlx_mouse_hide(data->mlx_ptr, data->mlx_win);
 		data->p.angle += delta_x * MOUSE_SENSITIVITY;
 		data->pr_info.project_y += -delta_y * 0.3;
 		data->p.angle = normalize_angle(data->p.angle);
@@ -94,13 +94,10 @@ int	main(int ac, char **av)
 		error(NULL);
 	game_init(&data);
 	map_parsing(&data, av);
-	get_player_position(&data);
 	data.mlx_ptr = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT,
 			"cub3d");
-	loading_bar(&data, 1);
 	init_image(&data);
-	game_render(&data);
 	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, key_pressed, &data);
 	mlx_hook(data.mlx_win, KeyRelease, KeyReleaseMask, key_released, &data);
 	mlx_hook(data.mlx_win, MotionNotify, PointerMotionMask, handle_mouse_move,
