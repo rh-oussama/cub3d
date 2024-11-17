@@ -6,7 +6,7 @@
 /*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 03:25:33 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/13 20:36:51 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/17 11:46:53 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	sprite(t_data *data, t_texture *sprite, int frames)
 
 	delta_time = 1.0 / 60.0;
 	frame_timer += delta_time;
-	if (frame_timer >= 0.06)
+	if (frame_timer >= 0.06 || frame == 0)
 	{
 		frame = (frame + 1) % frames;
 		frame_timer = 0.0;

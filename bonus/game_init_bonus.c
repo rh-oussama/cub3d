@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:07:48 by orhaddao          #+#    #+#             */
-/*   Updated: 2024/11/16 12:23:58 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/17 11:25:57 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void	game_init(t_data *data)
 	data->width = 0;
 	game_init_null(data);
 	game_texture_init(data->textures, 6 + 1);
-	game_texture_init(data->first, 58 + 1);
+	game_texture_init(data->first, 43 + 1);
 	game_texture_init(data->second, 101 + 1);
 	game_texture_init(data->third, 14 + 1);
-	game_texture_init(data->fourth, 122 + 1);
+	game_texture_init(data->fourth, 31 + 1);
 	game_texture_init(data->loading_bar, 5 + 1);
 }

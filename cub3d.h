@@ -6,7 +6,7 @@
 /*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/17 07:16:32 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/17 11:25:41 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,10 +181,10 @@ typedef struct s_data
 	t_img		img_3d;
 	t_player	p;
 	t_texture	textures[6 + 1];
-	t_texture	first[58 + 1];
+	t_texture	first[43 + 1];
 	t_texture	second[101 + 1];
 	t_texture	third[14 + 1];
-	t_texture	fourth[122 + 1];
+	t_texture	fourth[31 + 1];
 	t_texture	loading_bar[5 + 1];
 }				t_data;
 
