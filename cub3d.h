@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/16 12:26:10 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/17 07:16:32 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,7 +207,7 @@ int				key_pressed(int keysym, t_data *data);
 int				key_released(int keysym, t_data *data);
 
 // Parsing
-int				error(t_data *game);
+void			error(t_data *game);
 char			*ft_itoa(int n);
 int				ft_atoi(char *str, t_data *game);
 int				ft_isalpha_num(int i);

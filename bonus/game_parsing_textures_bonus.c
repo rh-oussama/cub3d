@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_parsing_textures_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:09 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/16 12:38:14 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/17 06:05:38 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	load_door_ceiling(t_data *game, char *str)
 
 void	textures_check(t_data *game)
 {
+	loading_bar(game, 1);
 	load_door_ceiling(game, game->no_texture);
 	load_textures(game, game->textures, game->no_texture, 0);
 	load_textures(game, game->textures, game->ea_texture, 1);
@@ -104,7 +105,7 @@ void	textures_check(t_data *game)
 	loading_bar(game, 3);
 	sprite_textures(game, game->second, "./textures/second/j", 101);
 	loading_bar(game, 4);
-	sprite_textures(game, game->third, "./textures/third/s", 14);
 	sprite_textures(game, game->fourth, "./textures/fourth/w", 122);
 	loading_bar(game, 5);
+	sprite_textures(game, game->third, "./textures/third/s", 14);
 }

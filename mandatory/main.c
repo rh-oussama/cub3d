@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:45 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/14 15:21:54 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/17 07:05:19 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	main(int ac, char **av)
 		error(NULL);
 	game_init(&data);
 	map_parsing(&data, av);
-	get_player_position(&data);
 	data.mlx_ptr = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT,
 			"cub3d");
