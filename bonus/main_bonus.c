@@ -6,7 +6,7 @@
 /*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:45 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/17 07:07:52 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/17 11:47:26 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	game_render(t_data *data)
 			move_player(data, data->p.angle);
 	}
 	else if (data->key.key_w || data->key.key_s)
-		sprite(data, data->fourth, 122);
+		sprite(data, data->fourth, 31);
 	else
-		sprite(data, data->first, 58);
+		sprite(data, data->first, 43);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img_3d.img, 0,
 		0);
 	return (0);
