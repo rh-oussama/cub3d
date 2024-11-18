@@ -91,7 +91,7 @@ int	separate_dist(t_data *data)
 		xy[0] = floor((data->p.x + cos(data->p.angle) * xy[2]) / TILE_SIZE);
 		xy[1] = floor((data->p.y + sin(data->p.angle) * xy[2]) / TILE_SIZE);
 		type = data->door[(int)xy[1]][(int)xy[0]];
-		if (type == '0' || type == '0')
+		if (type == '0' || type == 'O')
 			i++;
 		xy[2]--;
 	}
