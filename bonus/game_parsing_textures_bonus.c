@@ -6,7 +6,7 @@
 /*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:09 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/17 11:25:53 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/18 06:06:17 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	textures_check(t_data *game)
 	loading_bar(game, 3);
 	sprite_textures(game, game->second, "./textures/second/j", 101);
 	loading_bar(game, 4);
-	sprite_textures(game, game->fourth, "./textures/fourth/w", 31);
-	loading_bar(game, 5);
 	sprite_textures(game, game->third, "./textures/third/s", 14);
+	loading_bar(game, 5);
+	sprite_textures(game, game->fourth, "./textures/fourth/w", 31);
 }
