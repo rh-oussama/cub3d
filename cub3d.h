@@ -306,4 +306,6 @@ void			game_texture_init(t_texture *text, int count);
 void			game_init(t_data *data);
 char			*ft_strrchr(char *s, int c);
 void			loading_bar(t_data *game, int idx);
+int				separate_dist(t_data *data);
+
 #endif

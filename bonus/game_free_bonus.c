@@ -77,3 +77,23 @@ void	game_free(t_data *data)
 		free(data->mlx_ptr);
 	}
 }
+
+int	separate_dist(t_data *data)
+{
+	int		xy[3];
+	char	type;
+	int		i;
+
+	i = 0;
+	xy[2] = 35;
+	while (xy[2] > 0)
+	{
+		xy[0] = floor((data->p.x + cos(data->p.angle) * xy[2]) / TILE_SIZE);
+		xy[1] = floor((data->p.y + sin(data->p.angle) * xy[2]) / TILE_SIZE);
+		type = data->door[(int)xy[1]][(int)xy[0]];
+		if (type == '0' || type == '0')
+			i++;
+		xy[2]--;
+	}
+	return (i);
+}
