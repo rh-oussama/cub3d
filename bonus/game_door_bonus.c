@@ -32,25 +32,25 @@ int	handle_door_interaction(t_data *data, int x, int y, char type)
 
 void	door_mechanism(t_data *data)
 {
+	int		xy[3];
 	char	type;
-	int		dist;
-	int		x;
-	int		y;
+	int		i;
 
-	dist = 35;
-	while (dist > 0)
+	i = separate_dist(data);
+	xy[2] = 35;
+	while (xy[2] > 0)
 	{
-		x = floor((data->p.x + cos(data->p.angle) * dist) / TILE_SIZE);
-		y = floor((data->p.y + sin(data->p.angle) * dist) / TILE_SIZE);
-		type = data->door[(int)y][(int)x];
-		if (handle_door_interaction(data, x, y, type))
+		xy[0] = floor((data->p.x + cos(data->p.angle) * xy[2]) / TILE_SIZE);
+		xy[1] = floor((data->p.y + sin(data->p.angle) * xy[2]) / TILE_SIZE);
+		type = data->door[(int)xy[1]][(int)xy[0]];
+		if (i > 5 && handle_door_interaction(data, xy[0], xy[1], type))
 		{
 			ray_draw(data);
 			ground_draw(data);
 			draw_mini_map(data, 0, 0);
 			return ;
 		}
-		dist--;
+		xy[2]--;
 	}
 }
 
