@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:07:48 by orhaddao          #+#    #+#             */
-/*   Updated: 2024/11/17 11:25:57 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/18 11:55:21 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,21 @@ void	game_init(t_data *data)
 	game_texture_init(data->third, 14 + 1);
 	game_texture_init(data->fourth, 31 + 1);
 	game_texture_init(data->loading_bar, 5 + 1);
+}
+
+void	draw_mini_map_helper(t_data *data, int *xy, int start_x, int start_y)
+{
+	double	distance;
+	int		color;
+
+	distance = pow(xy[0] - (MINI_WIDTH / 2), 2) + pow(xy[1] - (MINI_HEIGHT / 2),
+			2);
+	if (distance <= pow((MINI_HEIGHT / 2), 2))
+	{
+		if (distance >= pow((MINI_HEIGHT / 2) - 2, 2))
+			color = COLOR_WHITE;
+		else
+			color = get_pixel_color(data, start_x + xy[0], start_y + xy[1]);
+		set_pixel_color(&data->img_3d, xy[0], xy[1], color);
+	}
 }
