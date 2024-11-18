@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:59:13 by oussama           #+#    #+#             */
-/*   Updated: 2024/11/18 06:21:13 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/18 11:55:51 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define WINDOW_WIDTH 1280
 # define WINDOW_HEIGHT 720
-# define MINI_WIDTH 250
+# define MINI_WIDTH 175
 # define MINI_HEIGHT 150
 
 /*_______________________*/
@@ -42,10 +42,10 @@
 # define PI_360 6.2831853072
 
 # define SCALE 0.5
-# define SAFE_DISTANCE 5
+# define SAFE_DISTANCE 2
 
 /* TILE  */
-# define TILE_SIZE 32
+# define TILE_SIZE 16
 
 /* FOV && RAYS */
 # define FIELD_OF_VIEW_ANGLE 1.04719755
@@ -57,10 +57,11 @@
 # define COLLISION_SPEED 2
 
 /* Colors */
+# define COLOR_GRAY 0x808080
+# define COLOR_BLUE 0x0021FF
+# define COLOR_WHITE 0xFFFFFF
 # define COLOR_RED 0xFF0000
 # define COLOR_GREEN 0x00FF00
-# define COLOR_BLUE 0x0000FF
-# define COLOR_WHITE 0xFFFFFF
 # define COLOR_BLACK 0x000000
 # define COLOR_YELLOW 0xFFFF00
 # define COLOR_CYAN 0x00FFFF
@@ -307,5 +308,6 @@ void			game_init(t_data *data);
 char			*ft_strrchr(char *s, int c);
 void			loading_bar(t_data *game, int idx);
 int				separate_dist(t_data *data);
-
+void			draw_mini_map_helper(t_data *data, int *xy, \
+int start_x, int start_y);
 #endif

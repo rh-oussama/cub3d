@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_mini_map_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:23:16 by rh                #+#    #+#             */
-/*   Updated: 2024/11/12 04:37:05 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/18 11:54:44 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,15 @@ void	fill_tail(t_data *data, int x, int y, int color)
 	int	j;
 
 	i = 0;
-	while (i < TILE_SIZE - 1)
+	while (i < TILE_SIZE)
 	{
 		j = 0;
-		while (j < TILE_SIZE - 1)
+		while (j < TILE_SIZE)
 		{
-			set_pixel_color(&(data->img_2d), x + j, y + i, color);
+			if (i == TILE_SIZE - 1 || j == TILE_SIZE - 1)
+				set_pixel_color(&(data->img_2d), x + j, y + i, COLOR_GRAY);
+			else
+				set_pixel_color(&(data->img_2d), x + j, y + i, color);
 			j++;
 		}
 		i++;
@@ -54,7 +57,7 @@ void	ground_draw(t_data *data)
 		while (data->map[y][x])
 		{
 			if (data->map[y][x] == '1')
-				fill_tail(data, x * TILE_SIZE, y * TILE_SIZE, COLOR_GREEN);
+				fill_tail(data, x * TILE_SIZE, y * TILE_SIZE, COLOR_BLUE);
 			else if (data->door && data->door[y][x] == 'O')
 				fill_tail(data, x * TILE_SIZE, y * TILE_SIZE, COLOR_CYAN);
 			else if (data->map[y][x] == '0' || data->map[y][x] == 'W'
@@ -126,22 +129,23 @@ void	draw_mini_map(t_data *data, int x, int y)
 {
 	int	start_x;
 	int	start_y;
-	int	color;
+	int	xy[2];
 
+	xy[0] = x;
+	xy[1] = y;
 	start_x = (int)data->p.x - (MINI_WIDTH / 2);
 	start_y = (int)data->p.y - (MINI_HEIGHT / 2);
-	y = 0;
-	while (y < MINI_HEIGHT)
+	xy[1] = 0;
+	while (xy[1] < MINI_HEIGHT)
 	{
-		x = 0;
-		while (x < MINI_WIDTH)
+		xy[0] = 0;
+		while (xy[0] < MINI_WIDTH)
 		{
-			color = get_pixel_color(data, start_x + x, start_y + y);
-			set_pixel_color(&data->img_3d, x, y, color);
-			x++;
+			draw_mini_map_helper(data, xy, start_x, start_y);
+			xy[0]++;
 		}
-		y++;
+		xy[1]++;
 	}
-	player_draw(data, MINI_WIDTH / 2, MINI_HEIGHT / 2);
-	draw_line(data, MINI_WIDTH / 2, MINI_HEIGHT / 2);
+	player_draw(data, (MINI_WIDTH / 2), (MINI_HEIGHT / 2));
+	draw_line(data, (MINI_WIDTH / 2), (MINI_HEIGHT / 2));
 }

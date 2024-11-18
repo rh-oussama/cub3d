@@ -6,7 +6,7 @@
 /*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:03:57 by orhaddao          #+#    #+#             */
-/*   Updated: 2024/11/16 12:24:40 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/18 10:52:04 by orhaddao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	separate_dist(t_data *data)
 	int		i;
 
 	i = 0;
-	xy[2] = 35;
+	xy[2] = TILE_SIZE;
 	while (xy[2] > 0)
 	{
 		xy[0] = floor((data->p.x + cos(data->p.angle) * xy[2]) / TILE_SIZE);
