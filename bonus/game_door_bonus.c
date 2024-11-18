@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_door_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orhaddao <orhaddao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 20:36:39 by rh                #+#    #+#             */
-/*   Updated: 2024/11/18 11:00:18 by orhaddao         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:09:45 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	door_mechanism(t_data *data)
 		xy[0] = floor((data->p.x + cos(data->p.angle) * xy[2]) / TILE_SIZE);
 		xy[1] = floor((data->p.y + sin(data->p.angle) * xy[2]) / TILE_SIZE);
 		type = data->door[(int)xy[1]][(int)xy[0]];
-		if (i >= 2 && handle_door_interaction(data, xy[0], xy[1], type))
+		if (i >= 3 && handle_door_interaction(data, xy[0], xy[1], type))
 		{
 			ray_draw(data);
 			ground_draw(data);
