@@ -6,7 +6,7 @@
 /*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:06:16 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/17 07:16:47 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/21 10:02:21 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	ft_atoi(char *str, t_data *game)
 		{
 			flag = 1;
 			res = res * 10 + (str[i] - 48);
+			if (res > 255)
+				error(game);
 		}
 		i++;
 	}
