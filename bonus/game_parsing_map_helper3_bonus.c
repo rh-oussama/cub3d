@@ -6,7 +6,7 @@
 /*   By: alamaoui <alamaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 23:40:12 by alamaoui          #+#    #+#             */
-/*   Updated: 2024/11/15 03:45:55 by alamaoui         ###   ########.fr       */
+/*   Updated: 2024/11/21 09:59:29 by alamaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ void	line_check(char *game, t_data *data, char *trimmed)
 	i = 0;
 	while (game[i])
 	{
-		if (game[i] != ' ' && game[i] != '1' && game[i] != '0' && game[i] != 'S'
-			&& game[i] != 'N' && game[i] != 'E' && game[i] != 'W'
-			&& game[i] != 'D' && game[i] != '\n')
+		if (game[i] != ' ' && game[i] != '\n')
 		{
 			free(trimmed);
 			error(data);
